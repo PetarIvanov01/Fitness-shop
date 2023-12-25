@@ -35,7 +35,7 @@ export default function TopOffers() {
 
     const [offers, setOffers] = useState(mockData);
 
-    const handlePrevClick = (e) => {
+    const handlePrevClick = () => {
         setOffers(prevOffers => {
 
             const lastVisibleIndex = prevOffers.findIndex((offer) => offer.visible);
@@ -49,7 +49,7 @@ export default function TopOffers() {
         })
     };
 
-    const handleNextClick = (e) => {
+    const handleNextClick = () => {
         setOffers(prevOffers => {
             const lastVisibleIndex = prevOffers.findIndex((offer) => offer.visible);
 
@@ -63,7 +63,7 @@ export default function TopOffers() {
     };
 
     return (
-        <article className="relative mt-4 py-4 flex items-center justify-center w-9/12 max-w-[540px] max-sm:min-w-[330px]
+        <article className="relative mt-4 py-4 flex items-center justify-center w-9/12 max-w-[640px] max-sm:min-w-[330px]
          opacity-95 bg-stone-950
          rounded-xl self-end 
          ">

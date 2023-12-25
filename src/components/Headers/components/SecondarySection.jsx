@@ -1,3 +1,4 @@
+import { useState } from "react"
 import moon from "../../../assets/theme/moon.svg"
 import sun from "../../../assets/theme/sun.svg"
 /*
@@ -10,11 +11,16 @@ import sun from "../../../assets/theme/sun.svg"
 */
 export default function SecondarySection() {
 
+    const [theme, setTheme] = useState(false);
+
+    const handleThemeChange = () => {
+        setTheme(prev => !prev);
+    };
 
     return (
         <section className="flex justify-end items-center h-10 bg-stone-950 px-8">
-            <button className="text-xs md:text-base rounded-md w-5 bg-white text-stone-300 hover:bg-stone-500">
-                <img className="w-auto" src={sun} alt="" />
+            <button onClick={handleThemeChange} className="rounded-md w-5 bg-[#D2C6BF] hover:bg-stone-300">
+                <img className="w-auto" src={theme ? moon : sun} alt={theme ? 'moon' : 'sun'} />
             </button>
         </section>
 
