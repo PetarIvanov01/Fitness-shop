@@ -1,5 +1,4 @@
-export default function OfferCards({ img, alt, visible }) {
-
+export default function OfferCards({ imgPath, alt, visible }) {
 
     return (
         <div
@@ -8,7 +7,7 @@ export default function OfferCards({ img, alt, visible }) {
                 } transition-transform duration-500 ease-in-out
            relative flex flex-col w-auto max-sm:size-44 items-center`}
         >
-            <img className="h-48 w-52" src={img} alt={alt} />
+            <img className="h-48 w-52" src={imgPath} alt={alt} />
 
             {visible && <button className=" max-sm:px-2 max-sm:py-1 max-sm:text-xs text-slate-100
                 px-5 py-1 rounded-full bg-[#212121] hover:scale-105">
@@ -16,5 +15,5 @@ export default function OfferCards({ img, alt, visible }) {
             </button>
             }
         </div>
-    )
-} 
+    );
+};
