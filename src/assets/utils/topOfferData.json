@@ -1,0 +1,20 @@
+[
+  {
+    "imgPath": "/fitness/benchpress.png",
+    "alt": "benchpress",
+    "key": 1,
+    "visible": false
+  },
+  {
+    "imgPath": "/fitness/smith.png",
+    "alt": "smith",
+    "key": 2,
+    "visible": true
+  },
+  {
+    "imgPath": "/fitness/legpress.png",
+    "alt": "legpress",
+    "key": 3,
+    "visible": false
+  }
+]

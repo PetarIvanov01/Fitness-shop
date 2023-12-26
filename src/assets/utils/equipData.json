@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "imgPath": "/categories/machines.png",
+        "alt": "Machines",
+        "buttonText": "Machines"
+    },
+    {
+        "id": 2,
+        "imgPath": "/categories/cardio.png",
+        "alt": "Cardio",
+        "buttonText": "Cardio"
+    },
+    {
+        "id": 3,
+        "imgPath": "/categories/free-weights.png",
+        "alt": "Free Weights",
+        "buttonText": "Free Weights"
+    }
+]
