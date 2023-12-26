@@ -1,39 +1,17 @@
 import prev from "../../../assets/controllers/prev.svg";
 import next from "../../../assets/controllers/next.svg";
 
-import bp from "../../../assets/fitness/benchpress.png";
-import smith from "../../../assets/fitness/smith.png";
-import legpress from "../../../assets/fitness/legpress.png";
-
 import OfferCards from "./components/OffersCards";
 import ControlOfferButton from "./components/ControlOfferButton";
+import topOfferData from "../../../assets/utils/topOfferData.json";
+import resolveImgPaths from "../../../utils/resolveImgPaths";
+
 import { useState } from "react";
-
-const mockData = [
-    {
-        img: bp,
-        alt: 'benchpress',
-        key: 1,
-        visible: false
-    },
-    {
-        img: smith,
-        alt: 'smith',
-        key: 2,
-        visible: true
-    },
-    {
-        img: legpress,
-        alt: 'legpres',
-        key: 3,
-        visible: false
-
-    }
-];
 
 export default function TopOffers() {
 
-    const [offers, setOffers] = useState(mockData);
+    const resolvedTopOffersData = resolveImgPaths(topOfferData);
+    const [offers, setOffers] = useState(resolvedTopOffersData);
 
     const handlePrevClick = () => {
         setOffers(prevOffers => {
@@ -63,22 +41,26 @@ export default function TopOffers() {
     };
 
     return (
-        <article className="relative mt-4 py-4 flex items-center justify-center w-9/12 max-w-[640px] max-sm:min-w-[330px]
+        <section className="flex px-2 flex-col min-h-12 ">
+
+            <article className="relative mt-4 py-4 flex items-center justify-center w-9/12 max-w-[640px] max-sm:min-w-[330px]
          opacity-95 bg-stone-950
          rounded-xl self-end 
          ">
+                <ControlOfferButton handler={handlePrevClick} icon={prev} alt={'prev'} />
 
-            <ControlOfferButton handler={handlePrevClick} icon={prev} alt={'prev'} />
+                <h1 className="absolute z-10 text-[2em] max-md:text-[1.5em] top-0 font-bold text-center text-stone-200 mb-6">
+                    Top Offers for the Week!
+                </h1>
 
-            <h1 className="absolute z-10 text-3xl max-sm:text-xl top-0 font-bold text-center text-stone-200 mb-6">
-                Top Offers for the Week!
-            </h1>
+                {offers.map((i) => <OfferCards key={i.key} {...i} />)}
 
-            {offers.map((i) => <OfferCards key={i.key} {...i} />)}
+                <ControlOfferButton handler={handleNextClick} icon={next} alt={'next'} />
 
-            <ControlOfferButton handler={handleNextClick} icon={next} alt={'next'} />
+            </article>
 
-        </article>
+            <hr className="my-4 border-t-2 border-black" />
+        </section>
     );
 };
 
