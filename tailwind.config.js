@@ -8,6 +8,7 @@ export default {
   theme: {
     fontFamily: {
       'sans': ['"Roboto","sans-serif"'],
+      'alegreya' : ["'Alegreya Sans'", "sans-serif"]
     },
     extend: {
       keyframes: {
