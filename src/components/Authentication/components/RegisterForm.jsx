@@ -9,7 +9,6 @@ const initialState = {
     lastName: '',
     email: '',
     phoneNumber: '',
-    email: '',
     password: '',
     "re-password": ''
 };
