@@ -5,7 +5,7 @@ import TopOffers from "./TopOffer/TopOffer";
 export default function Main() {
 
     return (
-        <main className="h-full">
+        <section >
 
             <TopOffers />
 
@@ -13,6 +13,6 @@ export default function Main() {
 
             <OtherItems />
             
-        </main>
+        </section>
     );
 };

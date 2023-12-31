@@ -67,7 +67,7 @@ export default function OtherItems() {
     return (
         <section className="bg-stone-950 w-9/12 
         max-w-[640px] min-h-[300px]
-        my-[6em] p-5 mx-2 rounded-xl opacity-95">
+        mt-[6em] p-5 mx-2 rounded-xl opacity-95">
 
             <header className="text-center border-solid border-b-2 border-white">
                 <h1 className="text-[2em] max-md:text-[1.5em] text-white font-bold">
