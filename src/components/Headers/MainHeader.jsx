@@ -2,10 +2,12 @@ import { useState } from "react";
 import AsideHeader from "./AsideHeader";
 import MainSection from "./components/MainSection";
 import SecondarySection from "./components/SecondarySection";
+import useCloseSection from "../../hooks/useCloseSection";
 
 export default function Header() {
 
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
+    const { ref } = useCloseSection(setIsVisible);
 
     const handleAsideVisible = () => {
         setIsVisible(prev => !prev);
@@ -17,12 +19,11 @@ export default function Header() {
 
             <SecondarySection />
 
-            <div className="relative">
-                <MainSection handleAsideVisible={handleAsideVisible}/>
-
-                <AsideHeader visible={isVisible} />
+            <div ref={ref} className="relative">
+                <MainSection handleAsideVisible={handleAsideVisible} />
+                <AsideHeader visible={isVisible} setter={setIsVisible} />
             </div>
-        </header>
 
-    )
-}
+        </header>
+    );
+};
