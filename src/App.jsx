@@ -5,14 +5,13 @@ import Router from "./components/Routes/Router";
 export default function App() {
 
     return (
-        <div className="min-h-screen flex flex-col bg-fitnes-img bg-cover bg-no-repeat bg-center">
+        <div className="flex flex-col h-screen bg-fitnes-img bg-cover bg-no-repeat bg-center">
 
             <Header />
 
             <Router />
 
             <Footer />
-
         </div>
     );
 };
