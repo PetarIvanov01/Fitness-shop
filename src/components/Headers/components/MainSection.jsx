@@ -15,7 +15,7 @@ export default function MainSection({ handleAsideVisible }) {
                 <img className="w-auto" src={menu} alt="menu" />
             </button>
 
-            <div className="cursor-pointer w-16 absolute left-1/2 transform -translate-x-1/2">
+            <div className="cursor-pointer w-16 absolute left-1/2 -translate-x-1/2">
                 <Link to="/"><img src={logo} alt="logo" className="h-full" /></Link>
             </div>
 
