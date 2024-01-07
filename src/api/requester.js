@@ -1,3 +1,5 @@
+import { getFromBrowserStorage } from "./services/storage";
+
 const HOST = "http://localhost:5000/api/v1";
 async function request(url, option) {
 
@@ -9,36 +11,31 @@ async function request(url, option) {
             throw error;
         };
         return response.json();
+        
     } catch (error) {
-        console.log(error);
         throw error;
     };
 };
 
 
 function createOptions(method = 'GET', data) {
-    try {
-        const option = {
-            method,
-            headers: {}
-        };
-
-        // const user = getUserData();
-        // if (user !== null) {
-        //     option.headers['Authorization'] = user.token;
-        // };
-
-        if (data !== undefined) {
-            option.headers['Content-Type'] = 'application/json';
-            option.body = JSON.stringify(data);
-        };
-
-        return option;
-
-
-    } catch (error) {
-
+    const option = {
+        method,
+        headers: {}
     };
+
+    const user = getFromBrowserStorage('user');
+
+    if (user !== null) {
+        option.headers['Authorization'] = user.token;
+    };
+
+    if (data !== undefined) {
+        option.headers['Content-Type'] = 'application/json';
+        option.body = JSON.stringify(data);
+    };
+
+    return option;
 };
 
 export async function get(url) {
