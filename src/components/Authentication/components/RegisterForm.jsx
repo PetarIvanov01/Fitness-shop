@@ -3,6 +3,7 @@ import Input from "./Tags/Input";
 import Button from "./Tags/Button";
 import Heading from "./Tags/Heading";
 import useForm from "../../../hooks/useForm";
+import { sendUserRegistration } from "../../../api/services/user";
 
 const initialState = {
     firstName: '',
@@ -14,9 +15,24 @@ const initialState = {
 };
 
 export default function RegsiterForm() {
-    const onSubmit = (values) => {
-        //Todo add submit logic
-    }
+    const onSubmit = async (values) => {
+        try {
+
+            const body = {
+                firstName: values.firstName,
+                lastName: values.lastName,
+                email: values.email,
+                phoneNumber: values.phoneNumber,
+                password: values.password,
+
+            };
+            await sendUserRegistration(body);
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    };
 
     const { values, handleChangeValues, handleSubmitForm } = useForm(initialState, onSubmit);
 
@@ -73,7 +89,7 @@ export default function RegsiterForm() {
                         placeholder={'example@email.com'}
                         type={'email'}
                         title="Please provide valid email address"
-                         />
+                    />
                 </div>
 
                 <div className="w-full">
