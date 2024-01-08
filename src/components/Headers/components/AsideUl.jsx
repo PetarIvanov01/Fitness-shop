@@ -29,4 +29,4 @@ export default function AsideUl({
             </li>)}
         </ul>
     )
-}
+};

@@ -4,9 +4,6 @@ import menu from "../../../assets/menu.svg";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 import useStore from "../../../zustand/store";
-/*
-Todo: Depending on the user status show the right Icon(login/logout)
-*/
 export default function MainSection({ handleAsideVisible }) {
 
     const user = useStore((state) => state.user);
