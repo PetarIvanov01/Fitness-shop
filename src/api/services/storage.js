@@ -12,8 +12,7 @@ export const getFromBrowserStorage = (key) => {
 
 export const setToBrowserStorage = (key, value) => {
     if (key && value) {
-        const { payload } = value;
-        storage.setItem(key, JSON.stringify(payload));
+        storage.setItem(key, JSON.stringify(value));
     }
     return null;
 }
