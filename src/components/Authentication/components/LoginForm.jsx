@@ -3,6 +3,7 @@ import Input from "./Tags/Input";
 import Button from "./Tags/Button";
 import Heading from "./Tags/Heading";
 import useForm from "../../../hooks/useForm";
+import { sendUserLogin } from "../../../api/services/user";
 
 const initialState = {
     email: '',
@@ -10,8 +11,19 @@ const initialState = {
 }
 export default function LoginForm() {
 
-    const onSubmit = (values) => {
-        //Todo add submit logic for login
+    const onSubmit = async (values) => {
+        try {
+
+            const body = {
+                email: values.email,
+                password: values.password,
+            };
+            await sendUserLogin(body);
+
+        } catch (error) {
+            console.error(error);
+            throw error;
+        };
     }
 
     const { values, handleChangeValues, handleSubmitForm } = useForm(initialState, onSubmit);
