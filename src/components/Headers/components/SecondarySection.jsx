@@ -23,6 +23,5 @@ export default function SecondarySection() {
                 <img className="w-auto" src={theme ? moon : sun} alt={theme ? 'moon' : 'sun'} />
             </button>
         </section>
-
     )
-}
+};

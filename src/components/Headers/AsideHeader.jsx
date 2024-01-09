@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMdLogIn } from "react-icons/io";
-import { BiLogOutCircle } from "react-icons/bi"
-import AsideUl from "./components/AsideUl";
 import { GrLinkNext } from "react-icons/gr";
+import { BiLogOutCircle } from "react-icons/bi"
 
-/*
- Todo: Depending on the user status show logout button;
-*/
-export default function AsideHeader({ visible }) {
+import AsideUl from "./components/AsideUl";
+
+export default function AsideHeader({
+    visible,
+    onClickClose,
+    user
+}) {
 
     const [isVisible, setVisible] = useState(false);
 
@@ -27,21 +29,31 @@ export default function AsideHeader({ visible }) {
             <h2 className="mb-8 font-bold uppercase max-sm:text-xs md:text-xl text-slate-300 ">
                 Products
             </h2>
-            
-            <Link to={'/catalog'} className="flex items-center gap-2 px-4 py-2 mb-2 text-xs md:text-base max-sm:px-2 rounded-md bg-stone-700 text-stone-300 hover:bg-stone-500">
-                Catalog <GrLinkNext/>
+
+            <Link onClick={onClickClose} to={'/catalog'} className="flex items-center gap-2 px-4 py-2 mb-2 text-xs md:text-base max-sm:px-2 rounded-md bg-stone-700 text-stone-300 hover:bg-stone-500">
+                Catalog <GrLinkNext />
             </Link>
 
             <button onClick={handleVisibility} className="px-4 py-2 mb-2 text-xs md:text-base max-sm:px-2 rounded-md bg-stone-700 text-stone-300 hover:bg-stone-500">
                 + Categories
             </button>
 
-            
-          <AsideUl isVisible={isVisible}/>
+            <AsideUl onClickClose={onClickClose} isVisible={isVisible} />
 
-            <Link to={'/login'}>
+            <Link onClick={onClickClose} to={'/login'}>
                 <IoMdLogIn className="absolute bottom-5 right-5 size-6 cursor-pointer" />
             </Link>
+
+
+            {user ?
+                <Link onClick={onClickClose} to={'/logout'} className="block ml-auto size-8">
+                    <BiLogOutCircle className="absolute bottom-5 right-5 size-6 cursor-pointer" />
+                </Link>
+                :
+                <Link onClick={onClickClose} to={'/login'} className="block ml-auto size-8">
+                    <IoMdLogIn className="absolute bottom-5 right-5 size-6 cursor-pointer" />
+                </Link>
+            }
 
         </aside>
     );
