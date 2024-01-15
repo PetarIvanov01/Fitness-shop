@@ -40,11 +40,6 @@ export default function AsideHeader({
 
             <AsideUl onClickClose={onClickClose} isVisible={isVisible} />
 
-            <Link onClick={onClickClose} to={'/login'}>
-                <IoMdLogIn className="absolute bottom-5 right-5 size-6 cursor-pointer" />
-            </Link>
-
-
             {user ?
                 <Link onClick={onClickClose} to={'/logout'} className="block ml-auto size-8">
                     <BiLogOutCircle className="absolute bottom-5 right-5 size-6 cursor-pointer" />
