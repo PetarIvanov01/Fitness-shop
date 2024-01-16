@@ -4,12 +4,16 @@ import Button from "./Tags/Button";
 import Heading from "./Tags/Heading";
 import useForm from "../../../hooks/useForm";
 import { sendUserLogin } from "../../../api/services/user";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const initialState = {
     email: '',
     password: ''
 }
 export default function LoginForm() {
+
+    const navigate = useNavigate();
 
     const onSubmit = async (values) => {
         try {
@@ -19,6 +23,10 @@ export default function LoginForm() {
                 password: values.password,
             };
             await sendUserLogin(body);
+
+            toast("You are logged in!");
+            
+            navigate('/');
 
         } catch (error) {
             console.error(error);

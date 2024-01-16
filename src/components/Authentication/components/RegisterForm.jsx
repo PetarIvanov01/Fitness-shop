@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import Label from "./Tags/Label";
 import Input from "./Tags/Input";
 import Button from "./Tags/Button";
@@ -15,7 +17,9 @@ const initialState = {
 };
 
 export default function RegsiterForm() {
-    
+
+    const navigate = useNavigate();
+
     const onSubmit = async (values) => {
         try {
 
@@ -28,6 +32,8 @@ export default function RegsiterForm() {
 
             };
             await sendUserRegistration(body);
+            toast("Successfull registration!");
+            navigate('/');
 
         } catch (error) {
             console.error(error);
