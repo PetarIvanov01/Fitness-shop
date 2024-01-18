@@ -4,6 +4,8 @@ import AuthenticationSection from "../Authentication/AuthenticationSection";
 import Catalog from "../Catalog/Catalog";
 import { IsGuest, IsAuthenticatedUser } from "./Guards/AuthGuard";
 import Logout from "../Authentication/components/Logout";
+import Cart from "../Cart/Cart";
+import CheckUserCart from "./Guards/CartGuard";
 
 export default function Router() {
 
@@ -11,6 +13,10 @@ export default function Router() {
         <div className="flex-1 overflow-auto py-6">
             <Routes>
                 <Route path="/" element={<Main />} />
+
+                <Route element={<CheckUserCart />}>
+                    <Route path="/cart" element={<Cart />} />
+                </Route>
 
                 <Route element={<IsGuest />}>
                     <Route path="/login" element={<AuthenticationSection />} />
