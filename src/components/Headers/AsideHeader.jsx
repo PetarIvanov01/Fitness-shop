@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { FaShoppingCart } from "react-icons/fa"
 import { IoMdLogIn } from "react-icons/io";
 import { GrLinkNext } from "react-icons/gr";
 import { BiLogOutCircle } from "react-icons/bi"
@@ -40,16 +42,23 @@ export default function AsideHeader({
 
             <AsideUl onClickClose={onClickClose} isVisible={isVisible} />
 
-            {user ?
-                <Link onClick={onClickClose} to={'/logout'} className="block ml-auto size-8">
-                    <BiLogOutCircle className="absolute bottom-5 right-5 size-6 cursor-pointer" />
+            <div className="absolute bottom-5 right-5 flex flex-col gap-2 ">
+                <Link onClick={onClickClose} to={'/cart'}>
+                    <FaShoppingCart className="size-6" />
                 </Link>
-                :
-                <Link onClick={onClickClose} to={'/login'} className="block ml-auto size-8">
-                    <IoMdLogIn className="absolute bottom-5 right-5 size-6 cursor-pointer" />
-                </Link>
-            }
+
+                {user ?
+                    <Link onClick={onClickClose} to={'/logout'} >
+                        <BiLogOutCircle className="size-6" />
+                    </Link>
+                    :
+                    <Link onClick={onClickClose} to={'/login'} >
+                        <IoMdLogIn className="size-6" />
+                    </Link>
+                }
+            </div>
 
         </aside>
     );
 };
+
