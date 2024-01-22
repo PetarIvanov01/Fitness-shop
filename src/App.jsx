@@ -1,6 +1,7 @@
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Headers/MainHeader";
 import Router from "./components/Routes/Router";
+import ToasterWithStyles from "./components/Toaster";
 
 export default function App() {
 
@@ -12,6 +13,8 @@ export default function App() {
             <Router />
 
             <Footer />
+
+            <ToasterWithStyles />
         </div>
     );
 };
