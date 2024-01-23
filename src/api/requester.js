@@ -2,7 +2,6 @@ import { getFromBrowserStorage } from "./services/storage";
 
 const HOST = "http://localhost:5000/api/v1";
 async function request(url, option) {
-
     try {
         const response = await fetch(HOST + url, option);
 
@@ -11,23 +10,28 @@ async function request(url, option) {
             throw error;
         };
         return response.json();
-        
+
     } catch (error) {
         throw error;
     };
 };
 
 
-function createOptions(method = 'GET', data) {
+function createOptions(method = 'GET', data, signal) {
     const option = {
         method,
-        headers: {}
+        headers: {},
+        signal
     };
 
     const user = getFromBrowserStorage('user');
 
     if (user !== null) {
         option.headers['Authorization'] = user.token;
+    };
+
+    if (signal) {
+        option.signal = signal;
     };
 
     if (data !== undefined) {
@@ -38,8 +42,8 @@ function createOptions(method = 'GET', data) {
     return option;
 };
 
-export async function get(url) {
-    return await request(url, createOptions());
+export async function get(url, signal) {
+    return await request(url, createOptions('GET', undefined, signal));
 };
 
 export async function post(url, data) {
