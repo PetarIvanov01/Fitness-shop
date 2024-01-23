@@ -5,9 +5,9 @@ const endpoints = {
     getAll: '/catalog'
 }
 
-export const getCatalog = async (category) => {
+export const getCatalog = async (category, signal) => {
     if (category) {
-        return await methods.get(endpoints.getByCategory(category));
+        return await methods.get(endpoints.getByCategory(category), signal);
     }
-    return await methods.get(endpoints.getAll);
+    return await methods.get(endpoints.getAll, signal);
 };
