@@ -38,16 +38,16 @@ function createOptions(method = 'GET', data, signal) {
         option.headers['Content-Type'] = 'application/json';
         option.body = JSON.stringify(data);
     };
-
+    
     return option;
 };
 
-export async function get(url, signal) {
-    return await request(url, createOptions('GET', undefined, signal));
+export async function get(url, data, signal) {
+    return await request(url, createOptions('GET', data, signal));
 };
 
-export async function post(url, data) {
-    return await request(url, createOptions('post', data));
+export async function post(url, data, signal) {
+    return await request(url, createOptions('post', data, signal));
 };
 
 export async function put(url, data) {
