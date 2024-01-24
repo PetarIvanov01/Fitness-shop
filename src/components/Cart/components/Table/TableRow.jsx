@@ -1,16 +1,20 @@
-export default function TableRow() {
+export default function TableRow({
+    image,
+    price,
+    title
+}) {
 
     return (
         <tr className="border-b max-sm:text-[0.7em]">
             <td className="flex p-2 items-center">
                 <div className="p-2">
                     <img className="size-24"
-                        src="https://pulsegymshop.bg/image/cache/catalog/products/active-gym/New%20Pics/Elliptical-black-60x60.png"
-                        alt="Product 1" />
+                        src={`http://localhost:5000/uploads/` + image}
+                        alt={title} />
                 </div>
 
                 <div>
-                    Elliptical Machine 
+                    {title}
                 </div>
             </td>
 
@@ -21,7 +25,7 @@ export default function TableRow() {
             </td>
             <td className="p-2 text-center">
                 <div>
-                    299.32 $
+                    {price} $
                 </div>
 
             </td>
