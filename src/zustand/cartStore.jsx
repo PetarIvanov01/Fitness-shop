@@ -1,20 +1,16 @@
 import Cookies from "js-cookie";
+import { getCart } from "../api/services/catalog";
 
 const COOKIE_NAME = "cart-cookie";
 const COOKIE_OPTIONS = { expires: 1, sameSite: 'Strict', path: '/' };
 
 const cartStore = (set) => ({
-    cart: (() => {
-        const currentCookieData = Cookies.get(COOKIE_NAME);
-        if (currentCookieData !== undefined) return JSON.parse(currentCookieData);
-    })(),
-
+    cart: [],
     addCartDataToCookies: (cartItemId) => {
         const currentCookieData = Cookies.get(COOKIE_NAME);
 
         if (currentCookieData === undefined) {
             Cookies.set(COOKIE_NAME, JSON.stringify([cartItemId]), COOKIE_OPTIONS);
-            set({ cart: new Set([cartItemId]) });
             return;
         }
 
@@ -22,7 +18,6 @@ const cartStore = (set) => ({
         const setOfCookieData = new Set(parsedCookieData);
 
         if (setOfCookieData.has(cartItemId)) {
-            set({ cart: setOfCookieData })
             return;
         };
 
@@ -30,7 +25,24 @@ const cartStore = (set) => ({
 
         const stringifiedCookieData = JSON.stringify([...setOfCookieData]);
         Cookies.set("cart-cookie", stringifiedCookieData, COOKIE_OPTIONS);
-        set({ cart: setOfCookieData });
+    },
+    fetchCartData: async (signal) => {
+        const currentCookieData = Cookies.get(COOKIE_NAME);
+
+        if (currentCookieData === undefined) return;
+
+        try {
+            const data = await getCart({ ids: currentCookieData }, signal);
+            set({ cart: data });
+        } catch (error) {
+            // console.log(error);
+            // throw error;
+        }
+
+    },
+    clearCartData: () => {
+        Cookies.remove(COOKIE_NAME);
+        set({ cart: [] });
     }
 })
 
