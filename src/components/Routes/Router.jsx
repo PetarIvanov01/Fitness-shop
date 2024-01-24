@@ -5,7 +5,6 @@ import Catalog from "../Catalog/Catalog";
 import { IsGuest, IsAuthenticatedUser } from "./Guards/AuthGuard";
 import Logout from "../Authentication/components/Logout";
 import Cart from "../Cart/Cart";
-import CheckUserCart from "./Guards/CartGuard";
 
 export default function Router() {
 
@@ -14,9 +13,7 @@ export default function Router() {
             <Routes>
                 <Route path="/" element={<Main />} />
 
-                <Route element={<CheckUserCart />}>
-                    <Route path="/cart" element={<Cart />} />
-                </Route>
+                <Route path="/cart" element={<Cart />} />
 
                 <Route element={<IsGuest />}>
                     <Route path="/login" element={<AuthenticationSection />} />
