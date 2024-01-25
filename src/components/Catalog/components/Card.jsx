@@ -1,15 +1,25 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Card({
+    product_id,
     title,
     image,
     price,
     onClickAddCookieData
 }) {
 
+    const navigate = useNavigate();
+
+    const onClickRedirectToProduct = () => {
+        navigate(`/product/${product_id}`);
+    }
+
     return (
         <div className="relative flex flex-col justify-between items-center w-fit
         bg-[#456789] opacity-95 p-4 rounded-lg shadow-lg">
-            <div className="min-w-60 h-40 max-sm:w-40  
-            relative overflow-hidden rounded-lg mb-2 cursor-pointer">
+            <div onClick={onClickRedirectToProduct}
+                className="min-w-60 h-40 max-sm:w-40  
+            relative overflow-hidden rounded-lg mb-2 cursor-pointer bg-white">
                 <img
                     className="w-full h-full object-cover 
                     transition-transform duration-300 transform hover:scale-110 rounded-lg"
