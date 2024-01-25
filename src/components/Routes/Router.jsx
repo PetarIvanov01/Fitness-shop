@@ -1,10 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import Main from "../Main/Main";
-import AuthenticationSection from "../Authentication/AuthenticationSection";
-import Catalog from "../Catalog/Catalog";
 import { IsGuest, IsAuthenticatedUser } from "./Guards/AuthGuard";
-import Logout from "../Authentication/components/Logout";
+
+import Main from "../Main/Main";
+import Catalog from "../Catalog/Catalog";
 import Cart from "../Cart/Cart";
+import ProductView from "../Product/ProductView";
+import AuthenticationSection from "../Authentication/AuthenticationSection";
+import Logout from "../Authentication/components/Logout";
 
 export default function Router() {
 
@@ -25,6 +27,8 @@ export default function Router() {
                 </Route>
 
                 <Route path="/catalog" element={<Catalog />} />
+
+                <Route path="/product/:productId" element={<ProductView />} />
             </Routes>
         </div>
     );
