@@ -1,6 +1,6 @@
-import { useState } from "react"
-import moon from "../../../assets/theme/moon.svg"
-import sun from "../../../assets/theme/sun.svg"
+import { useState } from 'react';
+import moon from '../../../assets/theme/moon.svg';
+import sun from '../../../assets/theme/sun.svg';
 /*
     TODO: Implement theme change 
     - Add state to manage the current theme (light/dark).
@@ -10,18 +10,24 @@ import sun from "../../../assets/theme/sun.svg"
     - Consider using localStorage or a state management library to persist the theme preference.
 */
 export default function SecondarySection() {
-
     const [theme, setTheme] = useState(false);
 
     const handleThemeChange = () => {
-        setTheme(prev => !prev);
+        setTheme((prev) => !prev);
     };
 
     return (
-        <section className="flex justify-end items-center h-10 bg-stone-950 px-8">
-            <button onClick={handleThemeChange} className="rounded-md w-5 bg-[#D2C6BF] hover:bg-stone-300">
-                <img className="w-auto" src={theme ? moon : sun} alt={theme ? 'moon' : 'sun'} />
+        <section className="flex h-10 items-center justify-end bg-stone-950 px-8">
+            <button
+                onClick={handleThemeChange}
+                className="w-5 rounded-md bg-[#D2C6BF] hover:bg-stone-300"
+            >
+                <img
+                    className="w-auto"
+                    src={theme ? moon : sun}
+                    alt={theme ? 'moon' : 'sun'}
+                />
             </button>
         </section>
-    )
-};
+    );
+}

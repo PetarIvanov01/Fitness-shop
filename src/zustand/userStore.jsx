@@ -1,9 +1,7 @@
-import { getFromBrowserStorage } from "../api/services/storage";
-
+import { getFromBrowserStorage } from '../api/services/storage';
 
 const userSlice = (set) => ({
-    user: getFromBrowserStorage('user')
-})
-
+    user: getFromBrowserStorage('user'),
+});
 
 export default userSlice;

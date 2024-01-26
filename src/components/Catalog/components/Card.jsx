@@ -1,44 +1,50 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Card({
     product_id,
     title,
     image,
     price,
-    onClickAddCookieData
+    onClickAddCookieData,
 }) {
-
     const navigate = useNavigate();
 
     const onClickRedirectToProduct = () => {
         navigate(`/product/${product_id}`);
-    }
+    };
 
     return (
-        <div className="relative flex flex-col justify-between items-center w-fit
-        bg-[#456789] opacity-95 p-4 rounded-lg shadow-lg">
-            <div onClick={onClickRedirectToProduct}
-                className="min-w-60 h-40 max-sm:w-40  
-            relative overflow-hidden rounded-lg mb-2 cursor-pointer bg-white">
+        <div
+            className="relative flex w-fit flex-col items-center justify-between
+        rounded-lg bg-[#456789] p-4 opacity-95 shadow-lg"
+        >
+            <div
+                onClick={onClickRedirectToProduct}
+                className="relative mb-2 h-40  
+            min-w-60 cursor-pointer overflow-hidden rounded-lg bg-white max-sm:w-40"
+            >
                 <img
-                    className="w-full h-full object-cover 
-                    transition-transform duration-300 transform hover:scale-110 rounded-lg"
+                    className="h-full w-full transform 
+                    rounded-lg object-cover transition-transform duration-300 hover:scale-110"
                     src={`http://localhost:5000/uploads/` + image}
                     alt={title}
                 />
             </div>
 
-            <div className="text-white text-wrap font-bold text-xl text-center max-w-32">
+            <div className="max-w-32 text-wrap text-center text-xl font-bold text-white">
                 {title}
             </div>
 
             <div className="flex flex-col items-center gap-2 text-white">
                 <p className="text-lg">Price: ${price}</p>
-                <button onClick={onClickAddCookieData} className="bg-blue-500 hover:bg-blue-700 text-white 
-                font-bold py-2 px-4 rounded border border-blue-900 ">
+                <button
+                    onClick={onClickAddCookieData}
+                    className="rounded border border-blue-900 
+                bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 "
+                >
                     Add to Cart
                 </button>
             </div>
-        </div >
+        </div>
     );
-};
+}

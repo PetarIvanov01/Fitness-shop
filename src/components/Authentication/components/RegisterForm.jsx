@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
-import Label from "./Tags/Label";
-import Input from "./Tags/Input";
-import Button from "./Tags/Button";
-import Heading from "./Tags/Heading";
-import useForm from "../../../hooks/useForm";
-import { sendUserRegistration } from "../../../api/services/user";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+import Label from './Tags/Label';
+import Input from './Tags/Input';
+import Button from './Tags/Button';
+import Heading from './Tags/Heading';
+import useForm from '../../../hooks/useForm';
+import { sendUserRegistration } from '../../../api/services/user';
 
 const initialState = {
     firstName: '',
@@ -13,43 +13,43 @@ const initialState = {
     email: '',
     phoneNumber: '',
     password: '',
-    "re-password": ''
+    're-password': '',
 };
 
 export default function RegsiterForm() {
-
     const navigate = useNavigate();
 
     const onSubmit = async (values) => {
         try {
-
             const body = {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 email: values.email,
                 phoneNumber: values.phoneNumber,
                 password: values.password,
-
             };
             await sendUserRegistration(body);
-            toast("Successfull registration!");
+            toast('Successfull registration!');
             navigate('/');
-
         } catch (error) {
             console.error(error);
             throw error;
         }
     };
 
-    const { values, handleChangeValues, handleSubmitForm } = useForm(initialState, onSubmit);
+    const { values, handleChangeValues, handleSubmitForm } = useForm(
+        initialState,
+        onSubmit
+    );
 
     return (
-        <div className="pt-10 self-center flex flex-col text-white">
-
+        <div className="flex flex-col self-center pt-10 text-white">
             <Heading text={'Create a Profile'} />
 
-            <form onSubmit={handleSubmitForm} className="flex flex-col w-full gap-2 font-alegreya font-medium">
-
+            <form
+                onSubmit={handleSubmitForm}
+                className="flex w-full flex-col gap-2 font-alegreya font-medium"
+            >
                 <div className="w-full">
                     <Label htmlFor={'firstName'} text={'First name'} />
                     <Input
@@ -58,7 +58,8 @@ export default function RegsiterForm() {
                         id={'firstName'}
                         name={'firstName'}
                         placeholder={'First name...'}
-                        type={'text'} />
+                        type={'text'}
+                    />
                 </div>
 
                 <div className="w-full">
@@ -69,7 +70,8 @@ export default function RegsiterForm() {
                         id={'lastName'}
                         name={'lastName'}
                         placeholder={'Last name...'}
-                        type={'text'} />
+                        type={'text'}
+                    />
                 </div>
 
                 <div className="w-full">
@@ -107,22 +109,24 @@ export default function RegsiterForm() {
                         id={'password'}
                         name={'password'}
                         placeholder={'Password...'}
-                        type={'password'} />
+                        type={'password'}
+                    />
                 </div>
 
                 <div className="w-full">
                     <Label htmlFor={'re-password'} text={'Password'} />
                     <Input
                         handler={handleChangeValues}
-                        value={values["re-password"]}
+                        value={values['re-password']}
                         id={'re-password'}
                         name={'re-password'}
                         placeholder={'Repeat password...'}
-                        type={'password'} />
+                        type={'password'}
+                    />
                 </div>
 
                 <Button text={'Sign Up'} />
             </form>
         </div>
     );
-};
+}

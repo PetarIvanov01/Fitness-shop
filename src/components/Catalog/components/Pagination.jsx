@@ -1,10 +1,8 @@
-import { GrLinkNext, GrLinkPrevious } from "react-icons/gr"
+import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr';
 
 export default function Pagination() {
-
     return (
-        <div className="flex justify-end pb-1 mt-auto">
-
+        <div className="mt-auto flex justify-end pb-1">
             <div className="flex gap-2">
                 <button className="size-6">
                     <GrLinkPrevious className="size-full text-white" />
@@ -16,7 +14,6 @@ export default function Pagination() {
                     <GrLinkNext className="size-full text-white" />
                 </button>
             </div>
-
-        </div >
-    )
+        </div>
+    );
 }

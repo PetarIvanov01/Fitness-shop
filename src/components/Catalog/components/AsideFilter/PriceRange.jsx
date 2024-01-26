@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 const RANGES = {
     start: 0,
     end: 1000,
-    step: 10
+    step: 10,
 };
 
 export default function PriceRange() {
     const [totalPrice, setPrice] = useState({
         start: RANGES.start,
-        end: RANGES.end
+        end: RANGES.end,
     });
 
     const handleStartPriceChange = (event) => {
@@ -21,12 +21,12 @@ export default function PriceRange() {
 
     return (
         <div className="mb-4 ">
-            <p className="text-white mb-2">Price Range</p>
-            <div className="flex justify-between mt-2 text-white">
+            <p className="mb-2 text-white">Price Range</p>
+            <div className="mt-2 flex justify-between text-white">
                 <span>From: ${totalPrice.start}</span>
                 <span>To: ${totalPrice.end}</span>
             </div>
-            <div className="flex gap-2 mt-2">
+            <div className="mt-2 flex gap-2">
                 <input
                     name="start"
                     type="range"
@@ -49,6 +49,5 @@ export default function PriceRange() {
                 />
             </div>
         </div>
-    )
+    );
 }
-

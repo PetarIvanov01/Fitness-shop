@@ -1,25 +1,25 @@
-import { setUserInStore } from "../../zustand/authExternal";
-import * as methods from "../requester"
-import { removeFromBrowserStorage, setToBrowserStorage } from "./storage";
+import { setUserInStore } from '../../zustand/authExternal';
+import * as methods from '../requester';
+import { removeFromBrowserStorage, setToBrowserStorage } from './storage';
 
 const endpoints = {
     register: '/user/sign-up',
     login: '/user/sign-in',
-    logout: '/user/logout'
-}
+    logout: '/user/logout',
+};
 
 export const sendUserRegistration = async (userData) => {
     const user = await methods.post(endpoints.register, userData);
     syncUserState(user);
     return null;
-}
+};
 
 export const sendUserLogin = async (userData) => {
     const user = await methods.post(endpoints.login, userData);
 
     syncUserState(user);
     return null;
-}
+};
 
 export const sendUserLogout = async () => {
     /* 
@@ -28,10 +28,9 @@ export const sendUserLogout = async () => {
     */
     setUserInStore(null);
     return removeFromBrowserStorage('user');
-}
+};
 
 function syncUserState(user) {
-
     if (user) {
         const { payload } = user;
         setUserInStore(payload);

@@ -1,7 +1,7 @@
-import Cookies from "js-cookie";
-import { getCart } from "../api/services/catalog";
+import Cookies from 'js-cookie';
+import { getCart } from '../api/services/catalog';
 
-const COOKIE_NAME = "cart-cookie";
+const COOKIE_NAME = 'cart-cookie';
 const COOKIE_OPTIONS = { expires: 1, sameSite: 'Strict', path: '/' };
 
 const cartStore = (set) => ({
@@ -10,7 +10,11 @@ const cartStore = (set) => ({
         const currentCookieData = Cookies.get(COOKIE_NAME);
 
         if (currentCookieData === undefined) {
-            Cookies.set(COOKIE_NAME, JSON.stringify([cartItemId]), COOKIE_OPTIONS);
+            Cookies.set(
+                COOKIE_NAME,
+                JSON.stringify([cartItemId]),
+                COOKIE_OPTIONS
+            );
             return;
         }
 
@@ -19,12 +23,12 @@ const cartStore = (set) => ({
 
         if (setOfCookieData.has(cartItemId)) {
             return;
-        };
+        }
 
         setOfCookieData.add(cartItemId);
 
         const stringifiedCookieData = JSON.stringify([...setOfCookieData]);
-        Cookies.set("cart-cookie", stringifiedCookieData, COOKIE_OPTIONS);
+        Cookies.set('cart-cookie', stringifiedCookieData, COOKIE_OPTIONS);
     },
     fetchCartData: async (signal) => {
         const currentCookieData = Cookies.get(COOKIE_NAME);
@@ -38,12 +42,11 @@ const cartStore = (set) => ({
             // console.log(error);
             // throw error;
         }
-
     },
     clearCartData: () => {
         Cookies.remove(COOKIE_NAME);
         set({ cart: [] });
-    }
-})
+    },
+});
 
 export default cartStore;

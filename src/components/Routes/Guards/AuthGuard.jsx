@@ -1,8 +1,7 @@
-import { Navigate, Outlet } from "react-router-dom"
-import useStore from "../../../zustand/store"
+import { Navigate, Outlet } from 'react-router-dom';
+import useStore from '../../../zustand/store';
 
 export function IsGuest() {
-
     const user = useStore((state) => state.user);
 
     if (user && user.id) {
@@ -12,9 +11,7 @@ export function IsGuest() {
     return <Outlet />;
 }
 
-
 export function IsAuthenticatedUser() {
-
     const user = useStore((state) => state.user);
 
     if (user && user.id) {

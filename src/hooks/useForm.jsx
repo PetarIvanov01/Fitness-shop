@@ -1,15 +1,12 @@
-import { useState } from "react"
+import { useState } from 'react';
 
-export default function useForm(
-    intialState = {},
-    onSubmit
-) {
+export default function useForm(intialState = {}, onSubmit) {
     const [values, setValues] = useState(intialState);
 
     const handleChangeValues = (e) => {
-        setValues(prev => ({
+        setValues((prev) => ({
             ...prev,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         }));
     };
 
@@ -21,6 +18,6 @@ export default function useForm(
     return {
         values,
         handleChangeValues,
-        handleSubmitForm
-    }
+        handleSubmitForm,
+    };
 }
