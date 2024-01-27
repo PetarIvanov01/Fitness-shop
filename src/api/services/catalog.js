@@ -4,6 +4,7 @@ const endpoints = {
     getByCategory: (category) => `/catalog?category=${category}`,
     getAll: '/catalog',
     getCart: '/cart',
+    getById: (id) => `/catalog/${id}`,
 };
 
 export const getCatalog = async (category, signal) => {
@@ -22,5 +23,5 @@ export const getCart = async (ids, signal) => {
 };
 
 export const getProduct = async (productId, signal) => {
-    return [];
+    return await methods.get(endpoints.getById(productId), undefined, signal);
 };
