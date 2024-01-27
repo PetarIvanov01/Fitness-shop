@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import resolveServerImg from '../../../utils/resolveServerImg';
 
 export default function Card({
     product_id,
@@ -7,6 +8,7 @@ export default function Card({
     price,
     onClickAddCookieData,
 }) {
+    const resolvedImage = resolveServerImg(image);
     const navigate = useNavigate();
 
     const onClickRedirectToProduct = () => {
@@ -26,7 +28,7 @@ export default function Card({
                 <img
                     className="h-full w-full transform 
                     rounded-lg object-cover transition-transform duration-300 hover:scale-110"
-                    src={`http://localhost:5000/uploads/` + image}
+                    src={resolvedImage}
                     alt={title}
                 />
             </div>
