@@ -44,7 +44,7 @@ const cartStore = (set) => ({
         }
     },
     clearCartData: () => {
-        Cookies.remove(COOKIE_NAME);
+        Cookies.remove(COOKIE_NAME, COOKIE_OPTIONS);
         set({ cart: [] });
     },
 });

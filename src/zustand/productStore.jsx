@@ -5,8 +5,8 @@ const productSlice = (set) => ({
     productLoading: true,
     fetchProduct: async (productId, signal) => {
         try {
-            // const data = await getProduct(productId, signal);
-            set({ items: [], isLoading: false });
+            const data = await getProduct(productId, signal);
+            set({ product: data, productLoading: false });
         } catch (error) {
             // Todo implement error handling
             // console.log(error);
