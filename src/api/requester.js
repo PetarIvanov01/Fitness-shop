@@ -1,4 +1,5 @@
 import { getFromBrowserStorage } from './services/storage';
+import { handleRefreshingToken } from './services/user';
 
 const HOST = 'http://localhost:5000/api/v1';
 async function request(url, option) {
@@ -7,9 +8,22 @@ async function request(url, option) {
 
         if (response.ok === false) {
             const error = await response.json();
+            if (
+                response.status === 400 &&
+                error.type === 'UnauthorizedError' &&
+                error.message.includes('expired')
+            ) {
+                await handleRefreshingToken(HOST);
+                const data = JSON.parse(option.body);
+                return await request(
+                    url,
+                    createOptions(option.method, data, option.signal)
+                );
+            }
             throw error;
         }
-        return response.json();
+
+        return await response.json();
     } catch (error) {
         throw error;
     }
@@ -20,6 +34,7 @@ function createOptions(method = 'GET', data, signal) {
         method,
         headers: {},
         signal,
+        credentials: 'include',
     };
 
     const user = getFromBrowserStorage('user');
