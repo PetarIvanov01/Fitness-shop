@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { MdClear } from 'react-icons/md';
 import resolveServerImg from '../../../../utils/resolveServerImg';
-export default function TableRow({ image, price, title, quantity = 1 }) {
+import { Link } from 'react-router-dom';
+export default function TableRow({
+    image,
+    price,
+    title,
+    quantity = 1,
+    product_id,
+}) {
     const resolvedImage = resolveServerImg(image);
     const [trackedQuantity, setQuantity] = useState(quantity);
 
@@ -11,11 +18,20 @@ export default function TableRow({ image, price, title, quantity = 1 }) {
     return (
         <tr className="border-b max-sm:text-[0.7em]">
             <td className="flex items-center p-2">
-                <div className="p-2">
-                    <img className="size-24" src={resolvedImage} alt={title} />
+                <div className="p-2 ">
+                    <img
+                        className="size-24 bg-white"
+                        src={resolvedImage}
+                        alt={title}
+                    />
                 </div>
 
-                <div>{title}</div>
+                <Link
+                    className="text-blue-300 hover:underline"
+                    to={`/product/${product_id}`}
+                >
+                    {title}
+                </Link>
             </td>
 
             <td className="p-2 text-center">

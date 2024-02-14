@@ -3,9 +3,10 @@ import useStore from '../../../../zustand/store';
 
 export default function CartHeader() {
     const user = useStore((state) => state.user);
+
     return (
         <header className="flex w-full flex-col items-center gap-2 bg-slate-800 p-4 text-center opacity-90">
-            {user.id ? (
+            {user?.id ? (
                 <p className="text-green-500 ">
                     Welcome back, Petar! Ready to make your purchase?
                 </p>
