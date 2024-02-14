@@ -6,8 +6,13 @@ const endpoints = {
     register: '/user/sign-up',
     login: '/user/sign-in',
     logout: '/user/logout',
+    refresh: '/user/refreshtoken',
 };
-
+export const refreshToken = async () => {
+    const res = await methods.post(endpoints.refresh);
+    console.log(res);
+    return null;
+};
 export const sendUserRegistration = async (userData) => {
     const user = await methods.post(endpoints.register, userData);
     syncUserState(user);
@@ -22,10 +27,7 @@ export const sendUserLogin = async (userData) => {
 };
 
 export const sendUserLogout = async () => {
-    /* 
-    TODO: send logout req when its ready on the server 
-     await methods.get(endpoints.logout);
-    */
+    await methods.post(endpoints.logout);
     setUserInStore(null);
     return removeFromBrowserStorage('user');
 };
@@ -38,4 +40,24 @@ function syncUserState(user) {
     }
 
     return null;
+}
+
+export async function handleRefreshingToken(HOST) {
+    try {
+        const endpoint = HOST + endpoints.refresh;
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            credentials: 'include',
+        });
+        if (response.status === 401) {
+            setUserInStore(null);
+            removeFromBrowserStorage('user');
+            return;
+        }
+        const data = await response.json();
+
+        syncUserState(data);
+    } catch (error) {
+        throw error;
+    }
 }
