@@ -1,50 +1,60 @@
-
 const filters = [
     [
-        "category", {
+        'category',
+        {
             title: 'Category',
             options: [
                 {
-                    value: 'All Categories'
+                    label: '',
+                    value: 'All Categories',
                 },
                 {
-                    value: 'Machines'
+                    label: 'machines',
+                    value: 'Machines',
                 },
                 {
-                    value: 'Weights'
+                    label: 'free-weights',
+                    value: 'Free-weights',
                 },
                 {
-                    value: 'Cardio'
-                }
-            ]
-        }
+                    label: 'cardio',
+                    value: 'Cardio',
+                },
+            ],
+        },
     ],
     [
-        "rating", {
+        'rating',
+        {
             title: 'Rating',
             options: [
                 {
-                    value: 'All Ratings'
+                    label: '',
+                    value: 'All Ratings',
                 },
                 {
-                    value: '5'
-                }
-            ]
-        }
+                    label: '5',
+                    value: '5',
+                },
+            ],
+        },
     ],
     [
-        "brand", {
+        'brand',
+        {
             title: 'Brand',
             options: [
                 {
-                    value: 'All Brands'
+                    label: '',
+                    value: 'All Brands',
                 },
                 {
-                    value: 'Brand1'
-                }
-            ]
-        }
-    ]
-]
+                    label: 'brand1',
+                    value: 'Brand1',
+                },
+            ],
+        },
+    ],
+];
 
 export default filters;
