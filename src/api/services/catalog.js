@@ -1,16 +1,16 @@
 import * as methods from '../requester';
 
 const endpoints = {
-    getByCategory: (category) => `/catalog?category=${category}`,
+    getByCategory: (category) => `/catalog?${category}`,
     getAll: '/catalog',
     getCart: '/cart',
     getById: (id) => `/catalog/${id}`,
 };
 
-export const getCatalog = async (category, signal) => {
-    if (category) {
+export const getCatalog = async (queryString, signal) => {
+    if (queryString) {
         return await methods.get(
-            endpoints.getByCategory(category),
+            endpoints.getByCategory(queryString),
             undefined,
             signal
         );
