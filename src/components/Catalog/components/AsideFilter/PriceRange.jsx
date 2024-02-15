@@ -1,49 +1,46 @@
-import React, { useState } from 'react';
-const RANGES = {
-    start: 0,
-    end: 1000,
-    step: 10,
-};
+import { RANGES } from '../../../../utils/priceRangeConstants';
 
-export default function PriceRange() {
-    const [totalPrice, setPrice] = useState({
-        start: RANGES.start,
-        end: RANGES.end,
-    });
-
+export default function PriceRange({
+    totalPrice,
+    setPrice,
+    invalidPriceRange,
+}) {
     const handleStartPriceChange = (event) => {
-        setPrice((prev) => ({ ...prev, start: event.target.value }));
+        setPrice((prev) => ({ ...prev, from: Number(event.target.value) }));
     };
 
     const handleEndPriceChange = (event) => {
-        setPrice((prev) => ({ ...prev, end: event.target.value }));
+        setPrice((prev) => ({ ...prev, to: Number(event.target.value) }));
     };
-
     return (
         <div className="mb-4 ">
             <p className="mb-2 text-white">Price Range</p>
             <div className="mt-2 flex justify-between text-white">
-                <span>From: ${totalPrice.start}</span>
-                <span>To: ${totalPrice.end}</span>
+                <span className={`${invalidPriceRange && 'text-red-500'}`}>
+                    From: ${totalPrice.from}
+                </span>
+                <span className={`${invalidPriceRange && 'text-red-500'}`}>
+                    To: ${totalPrice.to}
+                </span>
             </div>
             <div className="mt-2 flex gap-2">
                 <input
-                    name="start"
+                    name="from"
                     type="range"
-                    min={RANGES.start}
-                    max={RANGES.end}
+                    min={RANGES.from}
+                    max={RANGES.to}
                     step={RANGES.step}
-                    value={totalPrice.start}
+                    value={totalPrice.from}
                     onChange={handleStartPriceChange}
                     className="w-full bg-gray-800 text-white"
                 />
                 <input
-                    name="end"
+                    name="to"
                     type="range"
-                    min={RANGES.start}
-                    max={RANGES.end}
+                    min={RANGES.from}
+                    max={RANGES.to}
                     step={RANGES.step}
-                    value={totalPrice.end}
+                    value={totalPrice.to}
                     onChange={handleEndPriceChange}
                     className="w-full bg-gray-800 text-white"
                 />
