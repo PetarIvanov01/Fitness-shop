@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FaShoppingCart } from 'react-icons/fa';
-import { IoMdLogIn } from 'react-icons/io';
+import { FaRegUserCircle, FaShoppingCart } from 'react-icons/fa';
 import { GrLinkNext } from 'react-icons/gr';
 import { BiLogOutCircle } from 'react-icons/bi';
 
@@ -54,7 +53,7 @@ export default function AsideHeader({ visible, onClickClose, user }) {
                     </Link>
                 ) : (
                     <Link onClick={onClickClose} to={'/login'}>
-                        <IoMdLogIn className="size-6" />
+                        <FaRegUserCircle className="size-6" />
                     </Link>
                 )}
 
