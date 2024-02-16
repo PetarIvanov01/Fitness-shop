@@ -37,9 +37,6 @@ export default function usePriceRange() {
             debouncedValues.to !== undefined
         ) {
             if (!invalidPriceRange) {
-                console.log(debouncedValues.from);
-                console.log(debouncedValues.to);
-
                 handleQueryChange(debouncedValues);
             }
         }

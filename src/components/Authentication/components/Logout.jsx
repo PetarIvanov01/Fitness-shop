@@ -12,7 +12,7 @@ export default function Logout() {
             clearCartData();
             toast('You are logged out!');
         });
-    }, []);
+    }, [clearCartData]);
 
     return <Navigate to={'/'} />;
 }
