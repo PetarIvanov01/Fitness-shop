@@ -20,7 +20,7 @@ export default function MainSection({
                 <img className="w-auto" src={menu} alt="menu" />
             </button>
 
-            <div className="absolute left-1/2 w-16 -translate-x-1/2 cursor-pointer">
+            <div className="absolute left-1/2 w-16 -translate-x-1/2  cursor-pointer hover:scale-110">
                 <Link onClick={onClickClose} to="/">
                     <img src={logo} alt="logo" className="h-full" />
                 </Link>
@@ -29,18 +29,26 @@ export default function MainSection({
             <div className="flex items-center gap-3 ">
                 <div className="relative">
                     <Link onClick={onClickClose} to={'/cart'}>
-                        <FaShoppingCart className="size-6" />
+                        <FaShoppingCart className="size-6 hover:scale-110" />
                     </Link>
                     <span className="absolute right-[2em] top-[1em] rounded-full bg-red-500 px-[5px] py-[0.5px] text-center text-[0.7em] text-white">
                         {cartLenght}
                     </span>
                 </div>
                 {user ? (
-                    <Link onClick={onClickClose} to={'/logout'}>
+                    <Link
+                        className="hover:scale-110"
+                        onClick={onClickClose}
+                        to={'/logout'}
+                    >
                         <BiLogOutCircle className="size-6" />
                     </Link>
                 ) : (
-                    <Link onClick={onClickClose} to={'/login'}>
+                    <Link
+                        className="hover:scale-110"
+                        onClick={onClickClose}
+                        to={'/login'}
+                    >
                         <FaRegUserCircle className="size-6" />
                     </Link>
                 )}
