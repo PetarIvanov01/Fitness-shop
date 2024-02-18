@@ -7,22 +7,19 @@ export default function useForm(
 ) {
     const [values, setValues] = useState(intialState);
     const [error, setError] = useState({
+        isVisible: true,
         requestErr: null,
     });
 
     const handleChangeValues = (e) => {
-        // const keys = Object.keys(error);
+        const keys = Object.keys(error);
 
-        setError((state) => ({
-            requestErr: state.requestErr,
-        }));
-
-        // if (keys.length !== 1) {
-        //     setError((state) => {
-        //         const { [e.target.name]: _, ...rest } = state;
-        //         return { ...rest, requestErr: null };
-        //     });
-        // }
+        if (keys.length !== 1) {
+            setError((state) => {
+                const { [e.target.name]: _, ...rest } = state;
+                return { ...rest, requestErr: null, isVisible: false };
+            });
+        }
 
         setValues((prev) => ({
             ...prev,
@@ -44,8 +41,12 @@ export default function useForm(
         const errorMessage = validation(key, values[key]);
 
         if (errorMessage) {
-            setError((state) => ({ ...state, [key]: errorMessage }));
+            setError((state) => ({
+                ...state,
+                [key]: errorMessage,
+            }));
         }
+        setError((state) => ({ ...state, isVisible: true }));
     };
 
     return {
