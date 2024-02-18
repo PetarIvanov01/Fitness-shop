@@ -47,6 +47,7 @@ export default function RegsiterForm() {
         handleSubmitForm,
     } = useForm(initialState, onSubmit, registerFieldValidation);
 
+    const visibleError = error.isVisible;
     return (
         <div className="flex w-full flex-col self-start pt-10 text-white">
             <Heading text={'Create a Profile'} />
@@ -65,9 +66,9 @@ export default function RegsiterForm() {
                         name={'firstName'}
                         placeholder={'First name...'}
                         type={'text'}
-                        error={!!error?.firstName}
+                        error={!!error.firstName}
                     />
-                    <ErrorLabel error={error?.firstName} />
+                    {visibleError && <ErrorLabel error={error.firstName} />}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -80,9 +81,9 @@ export default function RegsiterForm() {
                         name={'lastName'}
                         placeholder={'Last name...'}
                         type={'text'}
-                        error={!!error?.lastName}
+                        error={!!error.lastName}
                     />
-                    <ErrorLabel error={error?.lastName} />
+                    {visibleError && <ErrorLabel error={error.lastName} />}
                 </div>
 
                 <div className=" h-16 max-w-96">
@@ -97,9 +98,9 @@ export default function RegsiterForm() {
                         type={'tel'}
                         pattern="\+[0-9]{3} [0-9]{2} [0-9]{3} [0-9]{4}"
                         title="Please provide valid phone number"
-                        error={!!error?.phoneNumber}
+                        error={!!error.phoneNumber}
                     />
-                    <ErrorLabel error={error?.phoneNumber} />
+                    {visibleError && <ErrorLabel error={error.phoneNumber} />}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -113,9 +114,9 @@ export default function RegsiterForm() {
                         placeholder={'example@email.com'}
                         type={'email'}
                         title="Please provide valid email address"
-                        error={!!error?.email}
+                        error={!!error.email}
                     />
-                    <ErrorLabel error={error?.email} />
+                    {visibleError && <ErrorLabel error={error.email} />}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -128,9 +129,9 @@ export default function RegsiterForm() {
                         name={'password'}
                         placeholder={'Password...'}
                         type={'password'}
-                        error={!!error?.password}
+                        error={!!error.password}
                     />
-                    <ErrorLabel error={error?.password} />
+                    {visibleError && <ErrorLabel error={error.password} />}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -145,7 +146,9 @@ export default function RegsiterForm() {
                         type={'password'}
                         error={!!error['re-password']}
                     />
-                    <ErrorLabel error={error['re-password']} />
+                    {visibleError && (
+                        <ErrorLabel error={error['re-password']} />
+                    )}
                 </div>
 
                 <Button text={'Sign Up'} />
