@@ -32,7 +32,9 @@ export default function useForm(
         try {
             await onSubmit(values);
         } catch (error) {
-            throw error;
+            if (error.message) {
+                setError((state) => ({ ...state, requestErr: error.message }));
+            }
         }
     };
 
@@ -40,13 +42,15 @@ export default function useForm(
         const key = e.target.name;
         const errorMessage = validation(key, values[key]);
 
-        if (errorMessage) {
-            setError((state) => ({
-                ...state,
-                [key]: errorMessage,
-            }));
-        }
-        setError((state) => ({ ...state, isVisible: true }));
+        setError((state) => {
+            const obj = { ...state };
+
+            if (errorMessage) {
+                obj[key] = errorMessage;
+            }
+
+            return { ...obj, isVisible: true };
+        });
     };
 
     return {
