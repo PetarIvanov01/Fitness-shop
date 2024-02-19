@@ -34,6 +34,7 @@ export default function Catalog() {
 
                 <div className="relative ml-1 flex w-full flex-col border-l border-white px-2 pt-1">
                     <SortBy />
+                    <hr className="mt-2 border-white" />
 
                     {isLoading ? <Spinner /> : <ItemsSection data={items} />}
 
