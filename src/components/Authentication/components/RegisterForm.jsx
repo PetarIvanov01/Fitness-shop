@@ -23,18 +23,24 @@ export default function RegsiterForm() {
 
     const onSubmit = async (values) => {
         try {
+            if (values.password !== values['re-password']) {
+                throw new Error("Password doesn't matched!");
+            }
             const body = {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 email: values.email,
                 phoneNumber: values.phoneNumber,
                 password: values.password,
+                rePassword: values['re-password'],
             };
             await sendUserRegistration(body);
             toast('Successfull registration!');
             navigate('/');
         } catch (error) {
-            console.error(error);
+            if (error.errors) {
+                throw error.errors;
+            }
             throw error;
         }
     };
@@ -48,6 +54,8 @@ export default function RegsiterForm() {
     } = useForm(initialState, onSubmit, registerFieldValidation);
 
     const visibleError = error.isVisible;
+    const requestErr = error.requestErr;
+
     return (
         <div className="flex w-full flex-col self-start pt-10 text-white">
             <Heading text={'Create a Profile'} />
@@ -129,7 +137,7 @@ export default function RegsiterForm() {
                         name={'password'}
                         placeholder={'Password...'}
                         type={'password'}
-                        error={!!error.password}
+                        error={!!error.password || requestErr}
                     />
                     {visibleError && <ErrorLabel error={error.password} />}
                 </div>
@@ -144,14 +152,16 @@ export default function RegsiterForm() {
                         name={'re-password'}
                         placeholder={'Repeat password...'}
                         type={'password'}
-                        error={!!error['re-password']}
+                        error={!!error['re-password'] || requestErr}
                     />
                     {visibleError && (
                         <ErrorLabel error={error['re-password']} />
                     )}
                 </div>
-
-                <Button text={'Sign Up'} />
+                <div className="flex items-center gap-x-32">
+                    <Button text={'Sign Up'} />
+                    <p className="text-lg text-red-500">{requestErr}</p>
+                </div>
             </form>
         </div>
     );
