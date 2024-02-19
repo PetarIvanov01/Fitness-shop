@@ -13,6 +13,9 @@ export default function useQuery() {
                         prev.delete(key);
                         return prev;
                     }
+                    if (key === 'category' && prev.has('page')) {
+                        prev.delete('page');
+                    }
                     prev.set(key, queryObj[key]);
 
                     return prev;
@@ -22,7 +25,7 @@ export default function useQuery() {
         [setQueries]
     );
 
-    const clearQueries = () => {
+    const clearQueries = useCallback(() => {
         setQueries((prev) => {
             const keyArr = Array.from(prev.keys());
 
@@ -33,7 +36,7 @@ export default function useQuery() {
 
             return prev;
         });
-    };
+    }, []);
     const queryObj = Object.fromEntries(urlQueryParams);
 
     return {
