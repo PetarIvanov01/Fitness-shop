@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useQuery from '../../../hooks/useQuery';
 
 export default function SortBy() {
     const { queryObj, handleQueryChange } = useQuery();
     const [selectedOption, setSelectedOption] = useState(() => {
-        if (queryObj['sort_by'] === 'desc') {
+        if (queryObj.sort_by === 'desc') {
             return 'desc';
         }
         return 'asc';
     });
+
+    useEffect(() => {
+        setSelectedOption(queryObj.sort_by || '');
+    }, [queryObj.sort_by]);
 
     const onSelectChangeQuery = (e) => {
         const queryParam = e.target.id;
@@ -37,8 +41,6 @@ export default function SortBy() {
                     </select>
                 </div>
             </section>
-
-            <hr className="mt-2 border-white" />
         </section>
     );
 }
