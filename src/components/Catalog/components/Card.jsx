@@ -7,12 +7,13 @@ export default function Card({
     image,
     price,
     onClickAddCookieData,
+    type,
 }) {
     const resolvedImage = resolveServerImg(image);
     const navigate = useNavigate();
 
     const onClickRedirectToProduct = () => {
-        navigate(`/product/${product_id}`);
+        navigate(`/${type}/${product_id}`);
     };
 
     return (
