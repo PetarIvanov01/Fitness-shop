@@ -8,11 +8,16 @@ export default function ItemsSection({ data }) {
     const addCartDataToCookies = useStore(
         (state) => state.addCartDataToCookies
     );
+    const setCartItemIntoStore = useStore(
+        (state) => state.setCartItemIntoStore
+    );
 
-    const onClickAddCookieData = ({ id, name }) => {
+    const onClickAddItemToCart = (item) => {
         return () => {
-            addCartDataToCookies(id);
-            toast.success(`Item-${name}: Added to Cart`, {
+            setCartItemIntoStore(item);
+            addCartDataToCookies(item.product_id);
+
+            toast.success(`Item-${item.title}: Added to Cart`, {
                 position: 'top-right',
                 duration: 2000,
                 action: {
@@ -31,10 +36,7 @@ export default function ItemsSection({ data }) {
                 <Card
                     key={products.product_id}
                     {...products}
-                    onClickAddCookieData={onClickAddCookieData({
-                        id: products.product_id,
-                        name: products.title,
-                    })}
+                    onClickAddCookieData={onClickAddItemToCart(products)}
                 />
             ))}
         </section>
