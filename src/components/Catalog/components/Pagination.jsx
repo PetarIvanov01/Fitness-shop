@@ -30,7 +30,7 @@ export default function Pagination() {
     };
 
     return (
-        <div className="mt-auto flex justify-end gap-2 pb-1">
+        <div className="mt-auto flex gap-2 self-end pb-1">
             <button onClick={handlePrev} className="size-6">
                 <GrLinkPrevious className="size-full text-white" />
             </button>
