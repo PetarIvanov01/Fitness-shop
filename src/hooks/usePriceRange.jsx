@@ -40,7 +40,7 @@ export default function usePriceRange() {
                 handleQueryChange(debouncedValues);
             }
         }
-    }, [debouncedValues.from, debouncedValues.to]);
+    }, [debouncedValues, invalidPriceRange, handleQueryChange]);
 
     return {
         totalPrice,

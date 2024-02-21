@@ -36,7 +36,7 @@ export default function useQuery() {
 
             return prev;
         });
-    }, []);
+    }, [setQueries]);
     const queryObj = Object.fromEntries(urlQueryParams);
 
     return {

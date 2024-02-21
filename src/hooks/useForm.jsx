@@ -16,6 +16,7 @@ export default function useForm(
 
         if (keys.length !== 1) {
             setError((state) => {
+                /*eslint no-unused-vars: "off"*/
                 const { [e.target.name]: _, ...rest } = state;
                 return { ...rest, requestErr: null, isVisible: false };
             });

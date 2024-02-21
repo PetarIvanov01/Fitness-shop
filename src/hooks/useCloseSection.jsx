@@ -13,7 +13,7 @@ export default function useCloseSection(setterFnc) {
         window.addEventListener('click', handleClickOutside);
 
         return () => window.removeEventListener('click', handleClickOutside);
-    }, []);
+    }, [setterFnc]);
 
     return {
         ref,
