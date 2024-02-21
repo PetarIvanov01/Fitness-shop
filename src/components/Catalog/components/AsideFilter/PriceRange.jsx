@@ -13,8 +13,8 @@ export default function PriceRange({
         setPrice((prev) => ({ ...prev, to: Number(event.target.value) }));
     };
     return (
-        <div className="mb-4 ">
-            <p className="mb-2 text-white">Price Range</p>
+        <div className="pb-2">
+            <p className="text-white">Price Range</p>
             <div className="mt-2 flex justify-between text-white">
                 <span className={`${invalidPriceRange && 'text-red-500'}`}>
                     From: ${totalPrice.from}

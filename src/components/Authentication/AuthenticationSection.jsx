@@ -21,7 +21,7 @@ export default function AuthenticationSection() {
     };
 
     return (
-        <section className="my-20 flex  flex-col bg-slate-900 px-10 py-8 opacity-95 max-sm:text-[0.8em] ">
+        <section className="my-20 flex  flex-col bg-slate-900 bg-opacity-95 px-10 py-8 max-sm:text-[0.8em] ">
             <header>
                 <h1 className="border-b-2 uppercase text-white ">
                     Join the Market

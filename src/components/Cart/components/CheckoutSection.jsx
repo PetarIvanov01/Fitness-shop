@@ -22,7 +22,7 @@ export default function CheckoutSection() {
 
     return (
         <section className="self-end p-4">
-            <div className="flex flex-col gap-2 rounded-md bg-slate-800 px-4 py-2">
+            <div className="flex flex-col gap-2 rounded-md bg-slate-900 bg-opacity-50 px-4 py-2">
                 <p className="text-lg font-bold text-white">
                     Total Price: $ {totalPrice.toFixed(2)}
                 </p>

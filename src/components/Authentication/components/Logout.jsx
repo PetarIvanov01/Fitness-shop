@@ -8,7 +8,7 @@ export default function Logout() {
     const clearCartData = useStore((state) => state.clearCartData);
 
     useEffect(() => {
-        sendUserLogout().then((e) => {
+        sendUserLogout().then(() => {
             clearCartData();
             toast('You are logged out!');
         });

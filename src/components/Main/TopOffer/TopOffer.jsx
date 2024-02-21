@@ -53,10 +53,11 @@ export default function TopOffers() {
     return (
         <section className="flex min-h-12 flex-col px-2 ">
             <article
-                className="relative mt-4 flex w-9/12 max-w-[640px] items-center justify-center self-end rounded-xl
-         bg-stone-950 py-4
-         opacity-95 max-sm:min-w-[330px] 
-         "
+                className="relative mt-4 flex w-9/12 max-w-[640px] items-center 
+                justify-center self-end rounded-xl
+                bg-stone-950 bg-opacity-95
+                py-4 max-sm:min-w-[330px] 
+                "
             >
                 <ControlOfferButton
                     handler={handlePrevClick}
