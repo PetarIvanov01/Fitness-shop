@@ -12,7 +12,7 @@ export default function CartHeader() {
                 </p>
             ) : (
                 <p className="text-orange-300">
-                    You don't have an account, and the purchase cannot be
+                    You don&apos;t have an account, and the purchase cannot be
                     performed. Please{' '}
                     <Link to={'/login'} className="underline">
                         Log In
