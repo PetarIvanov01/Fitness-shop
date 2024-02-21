@@ -56,13 +56,13 @@ export default function OtherItems() {
         }, 10 * 1000);
 
         return () => clearInterval(interval);
-    }, [fitnessItems.length]);
+    }, []);
 
     return (
         <section
             className="mx-2 mt-[6em] 
         min-h-[300px] w-9/12
-        max-w-[640px] rounded-xl bg-stone-950 p-5 opacity-95"
+        max-w-[640px] rounded-xl bg-stone-950 bg-opacity-95 p-5"
         >
             <header className="border-b-2 border-solid border-white text-center">
                 <h1 className="text-[2em] font-bold text-white max-md:text-[1.5em]">
