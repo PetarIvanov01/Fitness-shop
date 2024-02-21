@@ -5,13 +5,17 @@ export default function useFetch(cb, args = null) {
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
-        cb(args)
-            .then((data) => {
-                setData(data);
-                setLoading(true);
-            })
-            .catch((err) => console.log(err));
-    }, [args]);
+        const abortController = new AbortController();
+
+        cb(args, abortController.signal).then((data) => {
+            setData(data);
+            setLoading(true);
+        });
+
+        return () => {
+            abortController.abort();
+        };
+    }, [args, cb]);
 
     return { data, isLoading };
 }
