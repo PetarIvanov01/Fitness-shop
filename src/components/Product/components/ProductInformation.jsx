@@ -3,10 +3,9 @@ import useStore from '../../../zustand/store';
 import resolveServerImg from '../../../utils/resolveServerImg';
 import { toast } from 'sonner';
 
-export default function ProductInformation() {
+export default function ProductInformation({ product }) {
     const navigate = useNavigate();
 
-    const product = useStore((state) => state.product);
     const addCartDataToCookies = useStore(
         (state) => state.addCartDataToCookies
     );
@@ -28,7 +27,7 @@ export default function ProductInformation() {
     };
 
     return (
-        <div className="flex w-full flex-col">
+        <div className="relative flex w-full flex-col">
             <div className="flex flex-col items-center gap-2">
                 <h1 className="pb-2 text-2xl font-bold">{product.title}</h1>
 
@@ -36,7 +35,7 @@ export default function ProductInformation() {
                     <img
                         src={image}
                         alt={product.title}
-                        className="w-full rounded-lg bg-white shadow-lg"
+                        className="h-[260px] w-full rounded-lg bg-white shadow-lg max-sm:h-[200px]"
                     />
                 </div>
             </div>
