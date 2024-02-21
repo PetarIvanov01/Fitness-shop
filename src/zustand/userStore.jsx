@@ -1,6 +1,6 @@
 import { getFromBrowserStorage } from '../api/services/storage';
 
-const userSlice = (set) => ({
+const userSlice = () => ({
     user: getFromBrowserStorage('user'),
 });
 
