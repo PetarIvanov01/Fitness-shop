@@ -1,7 +1,7 @@
 import { setUserInStore } from '../../zustand/authExternal';
 import * as methods from '../requester';
 import { removeFromBrowserStorage, setToBrowserStorage } from './storage';
-
+/*eslint no-useless-catch: "off"*/
 const endpoints = {
     register: '/user/sign-up',
     login: '/user/sign-in',

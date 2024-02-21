@@ -1,7 +1,9 @@
+/*eslint no-useless-catch: "off"*/
 import { getFromBrowserStorage } from './services/storage';
 import { handleRefreshingToken } from './services/user';
 
 const HOST = 'http://localhost:5000/api/v1';
+
 async function request(url, option) {
     try {
         const response = await fetch(HOST + url, option);
