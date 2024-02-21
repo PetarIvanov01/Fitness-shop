@@ -17,9 +17,12 @@ export default function AsideFilters({ clearQueries }) {
         }));
         clearQueries();
     };
+    const asideMediaQueries = 'max-[600px]:self-center max-[600px]:border-none';
     return (
-        <aside className="h-[50%] max-w-[250px] bg-gray-900 px-2 pt-1 opacity-95 shadow-md">
-            <div className="flex flex-col pb-2 ">
+        <aside
+            className={`flex h-[50%] max-w-[250px] flex-col gap-1 border-r border-white px-2 pt-1 shadow-md ${asideMediaQueries}`}
+        >
+            <div className="flex flex-col">
                 <div className="mb-4 flex justify-between border-b">
                     <p className="font-bold text-white">Filter</p>
                     <button
