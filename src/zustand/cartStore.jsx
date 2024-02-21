@@ -20,7 +20,6 @@ const cartStore = (set) => ({
             return 0;
         }
     })(),
-
     cart: [],
     addCartDataToCookies: (cartItemId) => {
         const currentCookieData = Cookies.get(COOKIE_NAME);
@@ -52,17 +51,24 @@ const cartStore = (set) => ({
 
         if (currentCookieData === undefined) return;
 
-        try {
-            const data = await getCart({ ids: currentCookieData }, signal);
-            set({ cart: data });
-        } catch (error) {
-            // console.log(error);
-            // throw error;
-        }
+        const data = await getCart({ ids: currentCookieData }, signal);
+        set({ cart: data });
     },
     clearCartData: () => {
         Cookies.remove(COOKIE_NAME, COOKIE_OPTIONS);
         set({ cart: [], length: 0 });
+    },
+    setCartItemIntoStore: (item) => {
+        set(({ cart }) => {
+            const exist = cart.some((e) => e.product_id === item.product_id);
+            if (exist) return { cart };
+
+            const newCart = [...cart, item];
+
+            return {
+                cart: newCart,
+            };
+        });
     },
 });
 
