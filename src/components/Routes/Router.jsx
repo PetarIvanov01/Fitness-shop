@@ -10,7 +10,7 @@ import Logout from '../Authentication/components/Logout';
 
 export default function Router() {
     return (
-        <div className="flex-1 overflow-auto py-6">
+        <div className="flex min-h-screen flex-col py-6">
             <Routes>
                 <Route path="/" element={<Main />} />
 
@@ -30,7 +30,10 @@ export default function Router() {
 
                 <Route path="/catalog" element={<Catalog />} />
 
-                <Route path="/product/:productId" element={<ProductView />} />
+                <Route
+                    path="/:categoryType/:productId"
+                    element={<ProductView />}
+                />
             </Routes>
         </div>
     );
