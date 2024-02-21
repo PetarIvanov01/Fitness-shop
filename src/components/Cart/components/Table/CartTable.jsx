@@ -10,12 +10,14 @@ export default function TableCart() {
     useEffect(() => {
         const abortController = new AbortController();
 
-        fetchCartData(abortController.signal);
+        if (cartItems.length === 0) {
+            fetchCartData(abortController.signal);
+        }
 
         return () => {
             abortController.abort();
         };
-    }, []);
+    }, [fetchCartData, cartItems.length]);
 
     return (
         <div className="grow px-4">
