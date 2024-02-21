@@ -1,7 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import resolveServerImg from '../../../utils/resolveServerImg';
+import RelatedProduct from './Product';
+import { getCatalog } from '../../../api/services/catalog';
+import { useParams } from 'react-router-dom';
+import useFetch from '../../../hooks/useFetch';
 
 export default function RelatedProducts() {
+    const { categoryType } = useParams();
+    const queryString = `category=${categoryType}&perPage=3`;
+
+    const { data } = useFetch(getCatalog, queryString);
+    const relatedItems = data.result;
+
     return (
         <div className="flex flex-col items-center gap-3 pt-8">
             <header className="rounded-xl bg-stone-950 p-2">
@@ -11,46 +20,18 @@ export default function RelatedProducts() {
             </header>
 
             <div className="flex flex-wrap justify-center gap-8">
-                <div className="flex flex-col items-center ">
-                    <img
-                        src="https://pulsegymshop.bg/image/cache/catalog/products/active-gym/s368-(1)-black-621x424h.png"
-                        alt="Related Product 2"
-                        className=" max-h-32 w-32 rounded-lg bg-white shadow-lg"
-                    />
-                    <Link
-                        to="/related-product2"
-                        className="mt-2 block text-white underline transition duration-300 hover:text-gray-300"
-                    >
-                        View Product
-                    </Link>
-                </div>
-
-                <div className="flex flex-col items-center">
-                    <img
-                        src="https://pulsegymshop.bg/image/cache/catalog/products/active-gym/s368-(1)-black-621x424h.png"
-                        alt="Related Product 2"
-                        className="max-h-32 w-32 rounded-lg bg-white shadow-lg"
-                    />
-                    <Link
-                        to="/related-product2"
-                        className="mt-2 block text-white underline transition duration-300 hover:text-gray-300"
-                    >
-                        View Product
-                    </Link>
-                </div>
-                <div className="flex flex-col items-center">
-                    <img
-                        src="https://pulsegymshop.bg/image/cache/catalog/products/active-gym/s368-(1)-black-621x424h.png"
-                        alt="Related Product 2"
-                        className="max-h-32 w-32 rounded-lg bg-white shadow-lg"
-                    />
-                    <Link
-                        to="/related-product2"
-                        className="mt-2 block text-white underline transition duration-300 hover:text-gray-300"
-                    >
-                        View Product
-                    </Link>
-                </div>
+                {relatedItems &&
+                    relatedItems.map((pr) => {
+                        const image = resolveServerImg(pr.image);
+                        return (
+                            <RelatedProduct
+                                key={pr.product_id}
+                                id={pr.product_id}
+                                title={pr.title}
+                                image={image}
+                            />
+                        );
+                    })}
             </div>
         </div>
     );
