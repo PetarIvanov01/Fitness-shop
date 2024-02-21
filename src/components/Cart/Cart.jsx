@@ -9,12 +9,12 @@ export default function Cart() {
         <div className="h-auto font-alegreya">
             <CartHeader />
 
-            <section className="flex max-h-full flex-col gap-8 bg-slate-800 text-white opacity-95">
+            <section className="flex max-h-full flex-col gap-8 bg-slate-800 bg-opacity-95 text-white">
                 <TableCart />
 
                 <CheckoutSection />
 
-                <div className="rounded-md bg-slate-800 p-4">
+                <div className="rounded-md bg-slate-800 bg-opacity-85 p-4">
                     <h2 className="mb-4 text-2xl font-bold">
                         Continue Shopping
                     </h2>
