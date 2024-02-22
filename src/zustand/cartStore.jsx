@@ -51,7 +51,8 @@ const cartStore = (set) => ({
 
         if (currentCookieData === undefined) return;
 
-        const data = await getCart({ ids: currentCookieData }, signal);
+        const data = await getCart(null, signal);
+
         set({ cart: data });
     },
     clearCartData: () => {
