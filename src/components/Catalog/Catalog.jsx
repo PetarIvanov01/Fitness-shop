@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useStore from '../../zustand/store';
 
 import SortBy from './components/SortBy';
@@ -8,35 +7,26 @@ import ItemsSection from './ItemsSection';
 import Spinner from '../Spinner';
 import createQueryString from '../../utils/createQueryString';
 import useQuery from '../../hooks/useQuery';
+import useFetch from '../../hooks/useFetch';
 
 export default function Catalog() {
-    const items = useStore((state) => state.items);
-    const isLoading = useStore((state) => state.isLoading);
-    const fetchItems = useStore((state) => state.fetch);
+    const callCatalogSetStore = useStore((state) => state.callCatalogSetStore);
 
     const { queryObj, clearQueries } = useQuery();
     const querieString = createQueryString(queryObj);
 
-    useEffect(() => {
-        const abortController = new AbortController();
-
-        fetchItems(querieString, abortController.signal);
-
-        return () => {
-            abortController.abort();
-        };
-    }, [querieString]);
+    const { data, isLoading } = useFetch(callCatalogSetStore, querieString);
 
     return (
-        <section className="mx-1 h-full overflow-x-auto rounded-lg bg-gray-900 px-3 pt-10 font-alegreya opacity-95">
-            <div className="flex h-full flex-grow">
+        <section className="mx-1 flex flex-1 rounded-lg bg-gray-900 bg-opacity-95 px-3 pt-10 font-alegreya">
+            <div className="flex flex-1 max-[600px]:flex-col">
                 <AsideFilters clearQueries={clearQueries} />
 
-                <div className="relative ml-1 flex w-full flex-col border-l border-white px-2 pt-1">
+                <div className="relative ml-1 flex w-full flex-col  px-2 pt-1">
                     <SortBy />
                     <hr className="mt-2 border-white" />
 
-                    {isLoading ? <Spinner /> : <ItemsSection data={items} />}
+                    {isLoading ? <ItemsSection data={data} /> : <Spinner />}
 
                     <Pagination />
                 </div>
