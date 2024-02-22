@@ -44,7 +44,7 @@ export default {
                 'blue-c': '#36454F',
             },
             backgroundImage: {
-                'fitnes-img': "url('/src/assets/background.jpg')",
+                'fitnes-img': "url('/src/assets/backgroundCompres-min.jpg')",
             },
         },
     },
