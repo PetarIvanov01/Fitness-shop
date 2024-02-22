@@ -18,8 +18,8 @@ export const getCatalog = async (queryString, signal) => {
     return await methods.get(endpoints.getAll, undefined, signal);
 };
 
-export const getCart = async (ids, signal) => {
-    return await methods.post(endpoints.getCart, ids, signal);
+export const getCart = async (data = null, signal) => {
+    return await methods.get(endpoints.getCart, data, signal);
 };
 
 export const getProduct = async (productId, signal) => {
