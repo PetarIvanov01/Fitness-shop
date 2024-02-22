@@ -42,8 +42,8 @@ export default function Card({
                 <p className="text-lg">Price: ${price}</p>
                 <button
                     onClick={onClickAddCookieData}
-                    className="rounded border border-blue-900 
-                bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 "
+                    className="rounded bg-blue-500 
+                px-4 py-2 font-bold text-white ring ring-blue-900 hover:bg-blue-700 "
                 >
                     Add to Cart
                 </button>
