@@ -7,10 +7,12 @@ export default function useFetch(cb, args = null) {
     useEffect(() => {
         const abortController = new AbortController();
 
-        cb(args, abortController.signal).then((data) => {
-            setData(data);
-            setLoading(true);
-        });
+        if (args) {
+            cb(args, abortController.signal).then((data) => {
+                setData(data);
+                setLoading(true);
+            });
+        }
 
         return () => {
             abortController.abort();
