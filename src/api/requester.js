@@ -48,12 +48,10 @@ function createOptions(method = 'GET', data, signal) {
     if (signal) {
         option.signal = signal;
     }
-
-    if (data !== undefined) {
+    if (data) {
         option.headers['Content-Type'] = 'application/json';
         option.body = JSON.stringify(data);
     }
-
     return option;
 }
 
