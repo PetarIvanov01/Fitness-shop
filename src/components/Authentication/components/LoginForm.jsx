@@ -26,12 +26,14 @@ export default function LoginForm() {
 
             navigate('/');
         } catch (error) {
-            console.error(error);
+            if (error.errors) {
+                throw error.errors;
+            }
             throw error;
         }
     };
 
-    const { values, handleChangeValues, handleSubmitForm } = useForm(
+    const { values, handleChangeValues, handleSubmitForm, error } = useForm(
         initialState,
         onSubmit
     );
@@ -39,7 +41,6 @@ export default function LoginForm() {
     return (
         <div className="flex w-1/2 flex-col items-center px-6 text-white ">
             <Heading text={'Registered User'} />
-
             <form
                 onSubmit={handleSubmitForm}
                 className="flex w-full flex-col gap-2 font-alegreya font-medium"
@@ -54,6 +55,7 @@ export default function LoginForm() {
                         placeholder={'Email address...'}
                         type={'email'}
                         title="Please provide valid email address"
+                        error={!!error.email || error.requestErr}
                     />
                 </div>
 
@@ -66,10 +68,13 @@ export default function LoginForm() {
                         name={'password'}
                         placeholder={'Password...'}
                         type={'password'}
+                        error={!!error.password || error.requestErr}
                     />
                 </div>
-
-                <Button text={'Sign In'} />
+                <div className="flex items-center gap-x-32">
+                    <Button text={'Sign In'} />
+                    <p className="text-lg text-red-500">{error.requestErr}</p>
+                </div>
             </form>
         </div>
     );
