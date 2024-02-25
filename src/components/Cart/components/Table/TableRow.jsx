@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { RiSubtractFill } from 'react-icons/ri';
 import { MdClear } from 'react-icons/md';
+import { FiPlus } from 'react-icons/fi';
 import resolveServerImg from '../../../../utils/resolveServerImg';
 import { Link } from 'react-router-dom';
+
 export default function TableRow({
     image,
     price,
@@ -15,6 +18,7 @@ export default function TableRow({
     const onChangeQuantity = (e) => {
         setQuantity(e.target.value);
     };
+
     return (
         <tr className="border-b max-sm:text-[0.7em]">
             <td className="flex items-center p-2">
@@ -36,7 +40,8 @@ export default function TableRow({
 
             <td className="p-2 text-center">
                 <div className="flex items-center justify-center gap-2">
-                    <MdClear className="cursor-pointer hover:scale-105 hover:text-black" />
+                    <RiSubtractFill className="cursor-pointer hover:scale-105 hover:text-black" />
+                    <FiPlus className="cursor-pointer hover:scale-105 hover:text-black" />
                     <input
                         onChange={onChangeQuantity}
                         className="w-12 appearance-none border bg-inherit px-4 py-2 text-center"
@@ -45,7 +50,10 @@ export default function TableRow({
                 </div>
             </td>
             <td className="p-2 text-center">
-                <div>{price} $</div>
+                <div className="flex items-center justify-center">
+                    <div>{price} $</div>
+                    <MdClear className=" cursor-pointer hover:scale-105 hover:text-black" />
+                </div>
             </td>
         </tr>
     );
