@@ -16,7 +16,10 @@ async function request(url, option) {
                 error.message.includes('expired')
             ) {
                 await handleRefreshingToken(HOST);
-                const data = JSON.parse(option.body);
+                let data;
+                if (option.body) {
+                    data = JSON.parse(option.body);
+                }
                 return await request(
                     url,
                     createOptions(option.method, data, option.signal)
