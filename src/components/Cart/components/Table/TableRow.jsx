@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { RiSubtractFill } from 'react-icons/ri';
 import { MdClear } from 'react-icons/md';
 import { FiPlus } from 'react-icons/fi';
 import resolveServerImg from '../../../../utils/resolveServerImg';
 import { Link } from 'react-router-dom';
+import useStore from '../../../../zustand/store';
 
 export default function TableRow({
     image,
@@ -13,10 +13,28 @@ export default function TableRow({
     product_id,
 }) {
     const resolvedImage = resolveServerImg(image);
-    const [trackedQuantity, setQuantity] = useState(quantity);
+    const priceForAllProducts = Number(price) * Number(quantity);
 
-    const onChangeQuantity = (e) => {
-        setQuantity(e.target.value);
+    const removeCartItem = useStore((state) => state.removeCartItem);
+    const addCartItemIntoStore = useStore(
+        (state) => state.addCartItemIntoStore
+    );
+    const clearCartItem = useStore((state) => state.clearCartItem);
+
+    const onClickRemoveProductFromCart = (productId) => {
+        return () => {
+            removeCartItem(productId);
+        };
+    };
+    const onClickAddProductToCart = (product) => {
+        return () => {
+            addCartItemIntoStore(product);
+        };
+    };
+    const onClickClearTheProduct = (product_id) => {
+        return () => {
+            clearCartItem(product_id);
+        };
     };
 
     return (
@@ -40,19 +58,34 @@ export default function TableRow({
 
             <td className="p-2 text-center">
                 <div className="flex items-center justify-center gap-2">
-                    <RiSubtractFill className="cursor-pointer hover:scale-105 hover:text-black" />
-                    <FiPlus className="cursor-pointer hover:scale-105 hover:text-black" />
-                    <input
-                        onChange={onChangeQuantity}
-                        className="w-12 appearance-none border bg-inherit px-4 py-2 text-center"
-                        value={trackedQuantity}
+                    <RiSubtractFill
+                        onClick={onClickRemoveProductFromCart(product_id)}
+                        className="cursor-pointer ring-white hover:scale-105 hover:text-black hover:ring-1"
                     />
+                    <FiPlus
+                        onClick={onClickAddProductToCart({
+                            image,
+                            price,
+                            title,
+                            quantity,
+                            product_id,
+                        })}
+                        className="cursor-pointer ring-white hover:scale-105 hover:text-black hover:ring-1"
+                    />
+                    <span className="w-8 appearance-none border bg-inherit px-2 py-1 text-center">
+                        {quantity}
+                    </span>
                 </div>
             </td>
             <td className="p-2 text-center">
                 <div className="flex items-center justify-center">
-                    <div>{price} $</div>
-                    <MdClear className=" cursor-pointer hover:scale-105 hover:text-black" />
+                    <div className="ml-auto">
+                        {priceForAllProducts.toFixed(2)} $
+                    </div>
+                    <MdClear
+                        onClick={onClickClearTheProduct(product_id)}
+                        className="ml-auto cursor-pointer ring-white hover:scale-105 hover:text-black hover:ring-1"
+                    />
                 </div>
             </td>
         </tr>
