@@ -5,7 +5,7 @@ export default function EquipCategories() {
         <section className="bg-stone-950 bg-opacity-95 py-4">
             <header className="text-center">
                 <h1 className="text-[2em] font-bold text-white max-md:text-[1.5em]">
-                    Shop Equipment
+                    Explore Fitness Equipment
                 </h1>
             </header>
 
