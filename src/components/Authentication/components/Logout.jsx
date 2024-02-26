@@ -5,14 +5,14 @@ import { toast } from 'sonner';
 import useStore from '../../../zustand/store';
 
 export default function Logout() {
-    const clearCartData = useStore((state) => state.clearCartData);
+    const clearCartItem = useStore((state) => state.clearCartItem);
 
     useEffect(() => {
         sendUserLogout().then(() => {
-            clearCartData();
+            clearCartItem();
             toast('You are logged out!');
         });
-    }, [clearCartData]);
+    }, [clearCartItem]);
 
     return <Navigate to={'/'} />;
 }
