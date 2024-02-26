@@ -10,7 +10,7 @@ export default function ItemCard({
         <div
             className={`flex size-full animate-slide-up flex-col ${active ? 'block animate-fade-in' : 'hidden animate-fade-out'}`}
         >
-            <h2 className="mb-4 text-center text-[1.2em] font-bold text-slate-600">
+            <h2 className="mb-4 text-center text-[1.2em] font-bold text-slate-400">
                 {title}
             </h2>
 
@@ -20,7 +20,7 @@ export default function ItemCard({
                 </div>
 
                 <div className="flex flex-1 flex-col justify-between">
-                    <p className="text-gray-500 max-md:text-[0.75em]">
+                    <p className="text-slate-400 max-md:text-[0.75em]">
                         {description}
                     </p>
 
