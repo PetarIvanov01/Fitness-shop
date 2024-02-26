@@ -6,17 +6,17 @@ import { toast } from 'sonner';
 export default function ProductInformation({ product }) {
     const navigate = useNavigate();
 
-    const addCartDataToCookies = useStore(
-        (state) => state.addCartDataToCookies
+    const addCartItemIntoStore = useStore(
+        (state) => state.addCartItemIntoStore
     );
 
     const image = resolveServerImg(product.image);
 
     const onAddToCartHandler = () => {
-        addCartDataToCookies(product.product_id);
+        addCartItemIntoStore(product);
         toast.success(`Item-${product.title}: Added to Cart`, {
-            position: 'top-right',
-            duration: 2000,
+            position: 'top-left',
+            duration: 800,
             action: {
                 label: 'Go to Cart',
                 onClick: () => {
