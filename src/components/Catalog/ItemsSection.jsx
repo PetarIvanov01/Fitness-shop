@@ -5,21 +5,18 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ItemsSection({ data }) {
     const navigate = useNavigate();
-    const addCartDataToCookies = useStore(
-        (state) => state.addCartDataToCookies
-    );
-    const setCartItemIntoStore = useStore(
-        (state) => state.setCartItemIntoStore
+
+    const addCartItemIntoStore = useStore(
+        (state) => state.addCartItemIntoStore
     );
 
     const onClickAddItemToCart = (item) => {
         return () => {
-            setCartItemIntoStore(item);
-            addCartDataToCookies(item.product_id);
+            addCartItemIntoStore(item);
 
             toast.success(`Item-${item.title}: Added to Cart`, {
-                position: 'top-right',
-                duration: 2000,
+                position: 'top-left',
+                duration: 1000,
                 action: {
                     label: 'Go to Cart',
                     onClick: () => {
