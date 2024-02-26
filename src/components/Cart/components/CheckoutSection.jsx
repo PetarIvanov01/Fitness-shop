@@ -6,7 +6,7 @@ import useStore from '../../../zustand/store';
 export default function CheckoutSection() {
     const user = useStore((state) => state.user);
     const cart = useStore((state) => state.cart);
-    const clearCartData = useStore((state) => state.clearCartData);
+    const clearCartItem = useStore((state) => state.clearCartItem);
 
     const styleForUserCheckout = user
         ? 'bg-green-500 hover:bg-green-600'
@@ -16,9 +16,15 @@ export default function CheckoutSection() {
         if (cart.length === 0) return 0;
 
         return cart.reduce((prev, curr) => {
-            return prev + Number(curr.price);
+            return prev + Number(curr.price) * Number(curr.quantity);
         }, 0);
     }, [cart]);
+
+    const onClickClearCart = () => {
+        return () => {
+            clearCartItem();
+        };
+    };
 
     return (
         <section className="self-end p-4">
@@ -32,7 +38,7 @@ export default function CheckoutSection() {
                     Checkout <GrLinkNext />
                 </button>
                 <button
-                    onClick={clearCartData}
+                    onClick={onClickClearCart()}
                     className="flex items-center justify-center gap-2 rounded-md bg-red-500 py-2 text-white transition duration-300 hover:bg-red-600"
                 >
                     Clear Cart <BsFillCartXFill />
