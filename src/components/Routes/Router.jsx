@@ -7,6 +7,7 @@ import Cart from '../Cart/Cart';
 import ProductView from '../Product/ProductView';
 import AuthenticationSection from '../Authentication/AuthenticationSection';
 import Logout from '../Authentication/components/Logout';
+import ProfileView from '../Profile/ProfileView';
 
 export default function Router() {
     return (
@@ -14,6 +15,7 @@ export default function Router() {
             <Routes>
                 <Route path="/" element={<Main />} />
 
+                <Route path="/profile/:userId" element={<ProfileView />} />
                 <Route path="/cart" element={<Cart />} />
 
                 <Route element={<IsGuest />}>
