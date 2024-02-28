@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import useStore from '../../../../zustand/store';
+import useStore from '../../../zustand/store';
 
 export default function CartHeader() {
     const user = useStore((state) => state.user);
