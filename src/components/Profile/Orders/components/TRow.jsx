@@ -4,7 +4,6 @@ const STATUS_COLORS = {
     'In Process': 'text-orange-500',
 };
 export default function TRow({
-    id,
     createdAt,
     order_id,
     quantity,
@@ -14,7 +13,7 @@ export default function TRow({
     const statusColor = STATUS_COLORS[status];
 
     return (
-        <tr key={id} className="border-b max-sm:text-[0.7em]">
+        <tr className="border-b max-sm:text-[0.7em]">
             <td className="p-2 text-center">
                 <span>{createdAt}</span>
             </td>
