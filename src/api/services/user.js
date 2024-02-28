@@ -3,6 +3,8 @@ import * as methods from '../requester';
 import { removeFromBrowserStorage, setToBrowserStorage } from './storage';
 /*eslint no-useless-catch: "off"*/
 const endpoints = {
+    getUser: (userId) => `/user/${userId}`,
+    updateUser: (userId) => `/user/${userId}`,
     register: '/user/sign-up',
     login: '/user/sign-in',
     logout: '/user/logout',
@@ -13,6 +15,15 @@ export const refreshToken = async () => {
     console.log(res);
     return null;
 };
+
+export const getUserInformation = async (userId, signal) => {
+    return await methods.get(endpoints.getUser(userId), null, signal);
+};
+
+export const updateUserInformation = async (userId, data, signal) => {
+    return await methods.put(endpoints.updateUser(userId), data, signal);
+};
+
 export const sendUserRegistration = async (userData) => {
     const user = await methods.post(endpoints.register, userData);
     syncUserState(user);
