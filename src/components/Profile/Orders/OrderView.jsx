@@ -59,13 +59,15 @@ export default function OrderView() {
                 <div className="mt-5 flex w-full border-collapse flex-col items-center justify-center overflow-hidden text-white">
                     <table className="w-full">
                         <thead className="border-b max-sm:text-[0.7em]">
-                            <th className="p-2">Date</th>
-                            <th className="p-2">Order ID</th>
-                            <th className="p-2">Product Quantity</th>
-                            <th className="p-2">Total Price</th>
-                            <th className="p-2">Status</th>
+                            <tr>
+                                <th className="p-2">Date</th>
+                                <th className="p-2">Order ID</th>
+                                <th className="p-2">Product Quantity</th>
+                                <th className="p-2">Total Price</th>
+                                <th className="p-2">Status</th>
+                            </tr>
                         </thead>
-                        <tbody className="">
+                        <tbody>
                             {mockOrders.map((order) => (
                                 <TRow key={order.order_id} {...order} />
                             ))}
