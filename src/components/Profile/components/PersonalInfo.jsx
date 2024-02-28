@@ -1,14 +1,15 @@
+import { memo } from 'react';
 import Input from './Input';
 import Paragraph from './Paragraph';
 
-export default function PersonalInfo({
+const PersonalInfo = memo(function PersonalInfo({
     isEditing,
-    fullName,
+    firstName,
+    lastName,
     email,
     phoneNumber,
+    handleOnChange,
 }) {
-    const [firstName, lastName] = fullName ? fullName.split(' ') : ['', ''];
-
     return (
         <div className="flex flex-col items-center py-6">
             <h2 className="pb-4 text-2xl font-semibold text-gray-300">
@@ -17,21 +18,42 @@ export default function PersonalInfo({
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-8 ">
                 <div>
                     <Paragraph>First Name:</Paragraph>
-                    <Input isEdit={isEditing} value={firstName} />
+                    <Input
+                        name={'firstName'}
+                        isEdit={isEditing}
+                        value={firstName}
+                        handleOnChange={handleOnChange}
+                    />
                 </div>
                 <div>
                     <Paragraph>Last Name:</Paragraph>
-                    <Input isEdit={isEditing} value={lastName} />
+                    <Input
+                        name={'lastName'}
+                        isEdit={isEditing}
+                        value={lastName}
+                        handleOnChange={handleOnChange}
+                    />
                 </div>
                 <div>
                     <Paragraph>Email:</Paragraph>
-                    <Input isEdit={isEditing} value={email} />
+                    <Input
+                        name={'email'}
+                        isEdit={isEditing}
+                        value={email}
+                        handleOnChange={handleOnChange}
+                    />
                 </div>
                 <div>
                     <Paragraph>Phone Number:</Paragraph>
-                    <Input isEdit={isEditing} value={phoneNumber} />
+                    <Input
+                        name={'phoneNumber'}
+                        isEdit={isEditing}
+                        value={phoneNumber}
+                        handleOnChange={handleOnChange}
+                    />
                 </div>
             </div>
         </div>
     );
-}
+});
+export default PersonalInfo;
