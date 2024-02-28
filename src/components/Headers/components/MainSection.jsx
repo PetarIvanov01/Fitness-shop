@@ -36,13 +36,22 @@ export default function MainSection({
                     </span>
                 </div>
                 {user ? (
-                    <Link
-                        className="hover:scale-110"
-                        onClick={onClickClose}
-                        to={'/logout'}
-                    >
-                        <BiLogOutCircle className="size-6" />
-                    </Link>
+                    <>
+                        <Link
+                            className="hover:scale-110"
+                            onClick={onClickClose}
+                            to={`/profile/${user.id}`}
+                        >
+                            <FaRegUserCircle className="size-6" />
+                        </Link>
+                        <Link
+                            className="hover:scale-110"
+                            onClick={onClickClose}
+                            to={'/logout'}
+                        >
+                            <BiLogOutCircle className="size-7" />
+                        </Link>
+                    </>
                 ) : (
                     <Link
                         className="hover:scale-110"
