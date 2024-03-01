@@ -15,7 +15,10 @@ export default function Router() {
             <Routes>
                 <Route path="/" element={<Main />} />
 
-                <Route path="/profile/:userId" element={<ProfileView />} />
+                <Route element={<IsAuthenticatedUser />}>
+                    <Route path="/profile/:userId" element={<ProfileView />} />
+                </Route>
+
                 <Route path="/cart" element={<Cart />} />
 
                 <Route element={<IsGuest />}>
