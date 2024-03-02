@@ -56,7 +56,7 @@ export default function OrderView() {
             <div
                 className={`grid transition-[grid-template-rows] duration-500 ${visibilityStyle}`}
             >
-                <div className="mt-5 flex w-full border-collapse flex-col items-center justify-center overflow-hidden text-white">
+                <div className="mt-5 flex w-full flex-col items-center justify-center overflow-hidden text-white">
                     <table className="w-full">
                         <thead className="border-b max-sm:text-[0.7em]">
                             <tr>
