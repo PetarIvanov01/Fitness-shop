@@ -8,10 +8,12 @@ import ProductView from '../Product/ProductView';
 import AuthenticationSection from '../Authentication/AuthenticationSection';
 import Logout from '../Authentication/components/Logout';
 import ProfileView from '../Profile/ProfileView';
+import CheckoutView from '../Checkout/CheckoutView';
+import ValidateProductViewRoute from './Guards/ValidateProductViewRoute';
 
 export default function Router() {
     return (
-        <div className="flex min-h-screen flex-col py-6">
+        <div className="flex min-h-screen flex-col">
             <Routes>
                 <Route path="/" element={<Main />} />
 
@@ -19,7 +21,17 @@ export default function Router() {
                     <Route path="/profile/:userId" element={<ProfileView />} />
                 </Route>
 
+                <Route path="/catalog" element={<Catalog />} />
+
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/cart/checkout" element={<CheckoutView />} />
+
+                <Route element={<ValidateProductViewRoute />}>
+                    <Route
+                        path="/:categoryType/:productId"
+                        element={<ProductView />}
+                    />
+                </Route>
 
                 <Route element={<IsGuest />}>
                     <Route path="/login" element={<AuthenticationSection />} />
@@ -32,13 +44,6 @@ export default function Router() {
                 <Route element={<IsAuthenticatedUser />}>
                     <Route path="/logout" element={<Logout />} />
                 </Route>
-
-                <Route path="/catalog" element={<Catalog />} />
-
-                <Route
-                    path="/:categoryType/:productId"
-                    element={<ProductView />}
-                />
             </Routes>
         </div>
     );
