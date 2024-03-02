@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useMemo } from 'react';
 import { GrLinkNext } from 'react-icons/gr';
 import { BsFillCartXFill } from 'react-icons/bs';
@@ -28,21 +29,24 @@ export default function CheckoutSection() {
 
     return (
         <section className="self-end p-4">
-            <div className="flex flex-col gap-2 rounded-md bg-slate-900 bg-opacity-50 px-4 py-2">
+            <div className="flex min-w-52 flex-col gap-2 rounded-md bg-slate-900 bg-opacity-50 px-4 py-2">
                 <p className="text-lg font-bold text-white">
                     Total Price: $ {totalPrice.toFixed(2)}
                 </p>
-                <button
-                    className={`flex ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
-                >
-                    Checkout <GrLinkNext />
-                </button>
-                <button
-                    onClick={onClickClearCart()}
-                    className="flex items-center justify-center gap-2 rounded-md bg-red-500 py-2 text-white transition duration-300 hover:bg-red-600"
-                >
-                    Clear Cart <BsFillCartXFill />
-                </button>
+                <div className="flex flex-col gap-2">
+                    <Link
+                        to={'checkout'}
+                        className={`flex ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
+                    >
+                        Checkout <GrLinkNext />
+                    </Link>
+                    <button
+                        onClick={onClickClearCart()}
+                        className="flex items-center justify-center gap-2 rounded-md bg-red-500 py-2 text-white transition duration-300 hover:bg-red-600"
+                    >
+                        Clear Cart <BsFillCartXFill />
+                    </button>
+                </div>
             </div>
         </section>
     );
