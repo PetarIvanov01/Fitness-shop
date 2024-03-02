@@ -20,8 +20,8 @@ export default function TableCart() {
     }, [fetchCartData, cartItems.length]);
 
     return (
-        <div className="grow px-4">
-            <table className="w-full border-collapse border border-gray-300">
+        <div className="px-4">
+            <table className="w-full">
                 <TableHead />
 
                 <tbody>

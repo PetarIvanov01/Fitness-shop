@@ -4,7 +4,7 @@ import CartBody from './components/CartBody';
 
 export default function Cart() {
     return (
-        <div className="h-auto font-alegreya">
+        <div className="h-auto pt-10 font-alegreya">
             <CartHeader />
 
             <CartBody />

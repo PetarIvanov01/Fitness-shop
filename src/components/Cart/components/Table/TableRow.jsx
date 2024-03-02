@@ -38,25 +38,25 @@ export default function TableRow({
     };
 
     return (
-        <tr className="border-b max-sm:text-[0.7em]">
-            <td className="flex items-center p-2">
-                <div className="p-2 ">
+        <tr className="max-sm:text-[0.7em]">
+            <td>
+                <div className="flex items-center gap-2 p-1">
                     <img
                         className="size-24 bg-white"
                         src={resolvedImage}
                         alt={title}
                     />
-                </div>
 
-                <Link
-                    className="text-blue-300 hover:underline"
-                    to={`/product/${product_id}`}
-                >
-                    {title}
-                </Link>
+                    <Link
+                        className=" text-blue-300 hover:underline"
+                        to={`/product/${product_id}`}
+                    >
+                        {title}
+                    </Link>
+                </div>
             </td>
 
-            <td className="p-2 text-center">
+            <td className="text-center">
                 <div className="flex items-center justify-center gap-2">
                     <RiSubtractFill
                         onClick={onClickRemoveProductFromCart(product_id)}
@@ -72,19 +72,17 @@ export default function TableRow({
                         })}
                         className="cursor-pointer ring-white hover:scale-105 hover:text-black hover:ring-1"
                     />
-                    <span className="w-8 appearance-none border bg-inherit px-2 py-1 text-center">
+                    <span className="w-8 appearance-none border  px-2 py-1 text-center">
                         {quantity}
                     </span>
                 </div>
             </td>
-            <td className="p-2 text-center">
+            <td className="text-center">
                 <div className="flex items-center justify-center">
-                    <div className="ml-auto">
-                        {priceForAllProducts.toFixed(2)} $
-                    </div>
+                    <div className="">{priceForAllProducts.toFixed(2)} $</div>
                     <MdClear
                         onClick={onClickClearTheProduct(product_id)}
-                        className="ml-auto cursor-pointer ring-white hover:scale-105 hover:text-black hover:ring-1"
+                        className="ml-2 cursor-pointer ring-white hover:scale-105 hover:text-black hover:ring-1"
                     />
                 </div>
             </td>
