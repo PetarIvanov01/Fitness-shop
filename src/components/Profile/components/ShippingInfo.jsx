@@ -7,7 +7,7 @@ export default function ShippingInfo({
     country,
     city,
     address,
-    zip,
+    postcode,
 }) {
     return (
         <div className="flex flex-col items-center py-6">
@@ -47,8 +47,8 @@ export default function ShippingInfo({
                     <Input
                         isEdit={isEditing}
                         handleOnChange={handleOnChange}
-                        name={'zip'}
-                        value={zip}
+                        name={'postcode'}
+                        value={postcode}
                     />
                 </div>
             </div>
