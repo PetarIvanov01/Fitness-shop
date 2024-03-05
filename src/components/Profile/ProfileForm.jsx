@@ -1,86 +1,43 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 
-import {
-    getUserInformation,
-    updateUserInformation,
-} from '../../api/services/user';
+import { updateUserInformation } from '../../api/services/user';
 import EditSaveToggleButton from './components/EditSaveToggleButton';
 import PersonalInfo from './components/PersonalInfo';
 import ShippingInfo from './components/ShippingInfo';
-
-const initialShippingState = {
-    country: '',
-    city: '',
-    address: '',
-    zip: '',
-};
-const initialPersonalInformation = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-};
+import useStore from '../../zustand/store';
 
 export default function ProfileForm() {
     const [isEditing, setIsEditing] = useState(true);
     const { userId } = useParams();
 
-    const { data } = useFetch(getUserInformation, userId);
-    const [valueState, setValuesState] = useState({
-        personalInfo: {
-            ...initialPersonalInformation,
-        },
-        shippingInfo: {
-            ...initialShippingState,
-        },
-    });
+    const fetchProfile = useStore((state) => state.fetchProfile);
+    useFetch(fetchProfile, userId);
 
-    useEffect(() => {
-        if (data.id !== undefined) {
-            setValuesState((state) => {
-                const [firstName, lastName] = data.fullName
-                    ? data.fullName.split(' ')
-                    : ['', ''];
-                /* eslint no-unused-vars: "off" */
-                const { fullName, id, ...rest } = data;
-                return {
-                    shippingInfo: { ...state.shippingInfo },
-                    personalInfo: { ...rest, firstName, lastName },
-                };
-            });
-        }
-    }, [data]);
+    const handleOnChangePersonalInfo = useStore(
+        (state) => state.handleOnChangePersonalInfo
+    );
+    const handleOnChangeShippingInfo = useStore(
+        (state) => state.handleOnChangeShippingInfo
+    );
 
-    const handleOnChangePersonalInfo = useCallback((e) => {
-        e.preventDefault();
-        setValuesState((state) => ({
-            shippingInfo: { ...state.shippingInfo },
-            personalInfo: {
-                ...state.personalInfo,
-                [e.target.name]: e.target.value,
-            },
-        }));
-    }, []);
-
-    const handleOnChangeShippingInfo = useCallback((e) => {
-        e.preventDefault();
-        setValuesState((state) => ({
-            personalInfo: { ...state.personalInfo },
-            shippingInfo: {
-                ...state.shippingInfo,
-                [e.target.name]: e.target.value,
-            },
-        }));
-    }, []);
+    const personalInfo = useStore((state) => state.personalInfo);
+    const shippingInfo = useStore((state) => state.shippingInfo);
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         if (e.target.dataset.type === 'save') return;
 
         const controller = new AbortController();
-        await updateUserInformation(userId, valueState, controller.signal);
+        await updateUserInformation(
+            userId,
+            {
+                personalInfo,
+                shippingInfo,
+            },
+            controller.signal
+        );
     };
 
     return (
@@ -92,13 +49,13 @@ export default function ProfileForm() {
                 <PersonalInfo
                     handleOnChange={handleOnChangePersonalInfo}
                     isEditing={isEditing}
-                    {...valueState.personalInfo}
+                    {...personalInfo}
                 />
                 <div className="absolute right-[50%] my-2 h-[1px] w-2/3 translate-x-1/2 bg-white"></div>
                 <ShippingInfo
                     handleOnChange={handleOnChangeShippingInfo}
                     isEditing={isEditing}
-                    {...valueState.shippingInfo}
+                    {...shippingInfo}
                 />
                 <EditSaveToggleButton
                     isEditing={isEditing}
