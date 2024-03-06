@@ -7,7 +7,7 @@ import useCloseSection from '../../hooks/useCloseSection';
 import useStore from '../../zustand/store';
 
 export default function Header() {
-    const user = useStore((state) => state.user);
+    const userId = useStore((state) => state.user?.id);
 
     const [isVisible, setIsVisible] = useState(false);
     const { ref } = useCloseSection(setIsVisible);
@@ -26,12 +26,12 @@ export default function Header() {
 
             <div ref={ref} className="relative">
                 <MainSection
-                    user={user}
+                    userId={userId}
                     handleAsideVisible={handleAsideVisible}
                     onClickClose={onClickClose}
                 />
                 <AsideHeader
-                    user={user}
+                    userId={userId}
                     onClickClose={onClickClose}
                     visible={isVisible}
                 />
