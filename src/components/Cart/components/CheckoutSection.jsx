@@ -5,11 +5,10 @@ import { BsFillCartXFill } from 'react-icons/bs';
 import useStore from '../../../zustand/store';
 
 export default function CheckoutSection() {
-    const user = useStore((state) => state.user);
     const cart = useStore((state) => state.cart);
     const clearCartItem = useStore((state) => state.clearCartItem);
 
-    const styleForUserCheckout = user
+    const styleForUserCheckout = cart.length
         ? 'bg-green-500 hover:bg-green-600'
         : 'bg-slate-500 cursor-not-allowed';
 
@@ -27,19 +26,31 @@ export default function CheckoutSection() {
         };
     };
 
+    const allowedLink = (
+        <Link
+            to={'checkout'}
+            className={`flex ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
+        >
+            Checkout <GrLinkNext />
+        </Link>
+    );
+
     return (
-        <section className="self-end p-4">
+        <section className="mt-auto self-end p-4">
             <div className="flex min-w-52 flex-col gap-2 rounded-md bg-slate-900 bg-opacity-50 px-4 py-2">
                 <p className="text-lg font-bold text-white">
                     Total Price: $ {totalPrice.toFixed(2)}
                 </p>
                 <div className="flex flex-col gap-2">
-                    <Link
-                        to={'checkout'}
-                        className={`flex ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
-                    >
-                        Checkout <GrLinkNext />
-                    </Link>
+                    {cart.length ? (
+                        allowedLink
+                    ) : (
+                        <Link
+                            className={`flex ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
+                        >
+                            Checkout <GrLinkNext />
+                        </Link>
+                    )}
                     <button
                         onClick={onClickClearCart()}
                         className="flex items-center justify-center gap-2 rounded-md bg-red-500 py-2 text-white transition duration-300 hover:bg-red-600"
