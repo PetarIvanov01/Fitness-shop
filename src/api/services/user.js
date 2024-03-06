@@ -1,4 +1,4 @@
-import { setUserInStore } from '../../zustand/authExternal';
+import { clearUserInStore, setUserInStore } from '../../zustand/authExternal';
 import * as methods from '../requester';
 import { removeFromBrowserStorage, setToBrowserStorage } from './storage';
 /*eslint no-useless-catch: "off"*/
@@ -39,15 +39,19 @@ export const sendUserLogin = async (userData) => {
 
 export const sendUserLogout = async () => {
     await methods.post(endpoints.logout);
-    setUserInStore(null);
+    clearUserInStore();
     return removeFromBrowserStorage('user');
 };
 
 function syncUserState(user) {
     if (user) {
         const { payload } = user;
-        setUserInStore(payload);
-        setToBrowserStorage('user', payload);
+        const storedInfo = {
+            id: payload.id,
+            token: payload.token,
+        };
+        setUserInStore(storedInfo);
+        setToBrowserStorage('user', storedInfo);
     }
 
     return null;
