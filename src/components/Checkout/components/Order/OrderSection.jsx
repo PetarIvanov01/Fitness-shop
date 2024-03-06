@@ -1,28 +1,30 @@
 import { TbClipboardList } from 'react-icons/tb';
 import { MdCheckBoxOutlineBlank } from 'react-icons/md';
 import TableRow from './components/TableRow';
+import useStore from '../../../../zustand/store';
+import { useMemo } from 'react';
 // import { IoIosCheckboxOutline } from 'react-icons/io';
 
-const mockOrders = [
-    {
-        id: 1,
-        title: 'Product A',
-        quantity: 2,
-        priceForAllProducts: 25.99,
-        name: 'Loaded Decline Chest Press',
-        createdAt: '2024 05-18 18:32',
-    },
-    {
-        id: 2,
-        title: 'Product B',
-        quantity: 1,
-        priceForAllProducts: 15.5,
-        name: 'Loaded Bench Press',
-        createdAt: '2023 05-28 06:32',
-    },
-];
-
 export default function OrderSection() {
+    const cart = useStore((state) => state.cart);
+
+    const OrderItems = cart.map((order) => {
+        const orderInfo = {
+            quantity: order.quantity,
+            name: order.title,
+            subtotal: Number(order.price) * Number(order.quantity),
+        };
+        return <TableRow key={order.product_id} {...orderInfo} />;
+    });
+
+    const totalPrice = useMemo(() => {
+        if (cart.length === 0) return 0;
+
+        return cart.reduce((prev, curr) => {
+            return prev + Number(curr.price) * Number(curr.quantity);
+        }, 0);
+    }, [cart]);
+
     return (
         <section className="px-4 pb-14 pt-6 text-white">
             <header className="flex items-center gap-3 pb-5">
@@ -38,11 +40,8 @@ export default function OrderSection() {
                             <th className="p-2">Subtotal</th>
                         </tr>
                     </thead>
-
+                    {OrderItems}
                     <tbody className="text-left">
-                        {mockOrders.map((order) => (
-                            <TableRow key={order.id} {...order} />
-                        ))}
                         <tr className="border text-left max-sm:text-[0.7em]">
                             <td className="p-2 font-semibold">
                                 <span>Subtotal:</span>
@@ -66,7 +65,9 @@ export default function OrderSection() {
                                 <span>Total:</span>
                             </td>
                             <td className="p-2 hover:cursor-pointer hover:underline">
-                                <span className="font-semibold">$ 3232,23</span>
+                                <span className="font-semibold">
+                                    $ {totalPrice.toFixed(2)}
+                                </span>
                             </td>
                         </tr>
                     </tbody>
