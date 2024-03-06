@@ -8,7 +8,7 @@ import CartDropdown from './CartDropdown';
 export default function MainSection({
     handleAsideVisible,
     onClickClose,
-    user,
+    userId,
 }) {
     return (
         <section className="flex h-16 items-center justify-between bg-[#4e4242] px-6 opacity-95">
@@ -27,12 +27,12 @@ export default function MainSection({
 
             <div className="flex items-center gap-3">
                 <CartDropdown />
-                {user ? (
+                {userId ? (
                     <>
                         <Link
                             className="hover:scale-110"
                             onClick={onClickClose}
-                            to={`/profile/${user.id}`}
+                            to={`/profile/${userId}`}
                         >
                             <FaRegUserCircle className="size-6" />
                         </Link>

@@ -7,7 +7,7 @@ import { BiLogOutCircle } from 'react-icons/bi';
 
 import AsideUl from './components/AsideUl';
 
-export default function AsideHeader({ visible, onClickClose, user }) {
+export default function AsideHeader({ visible, onClickClose, userId }) {
     const [isVisible, setVisible] = useState(false);
 
     const handleVisibility = () => {
@@ -47,7 +47,7 @@ export default function AsideHeader({ visible, onClickClose, user }) {
             <AsideUl onClickClose={onClickClose} isVisible={isVisible} />
 
             <div className="absolute bottom-5 flex w-full justify-between px-4 ">
-                {user ? (
+                {userId ? (
                     <Link onClick={onClickClose} to={'/logout'}>
                         <BiLogOutCircle className="size-6" />
                     </Link>
