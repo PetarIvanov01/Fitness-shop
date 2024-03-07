@@ -1,9 +1,9 @@
 import { TbClipboardList } from 'react-icons/tb';
-import { MdCheckBoxOutlineBlank } from 'react-icons/md';
-import TableRow from './components/TableRow';
-import useStore from '../../../../zustand/store';
 import { useMemo } from 'react';
-// import { IoIosCheckboxOutline } from 'react-icons/io';
+import useStore from '../../../../zustand/store';
+
+import TableRow from './components/TableRow';
+import FinishOrder from './FinishOrder';
 
 export default function OrderSection() {
     const cart = useStore((state) => state.cart);
@@ -40,8 +40,8 @@ export default function OrderSection() {
                             <th className="p-2">Subtotal</th>
                         </tr>
                     </thead>
-                    {OrderItems}
                     <tbody className="text-left">
+                        {OrderItems}
                         <tr className="border text-left max-sm:text-[0.7em]">
                             <td className="p-2 font-semibold">
                                 <span>Subtotal:</span>
@@ -74,25 +74,7 @@ export default function OrderSection() {
                 </table>
             </div>
 
-            <section className="flex flex-wrap justify-between gap-4 pt-6">
-                <div className="w-2/3">
-                    <div className="flex items-center gap-2">
-                        <p>Receive special offers by email?</p>
-                        <MdCheckBoxOutlineBlank
-                            className="cursor-pointer hover:scale-105"
-                            size={20}
-                        />
-                    </div>
-                    <p className="text-[0.7em] font-extralight">
-                        Your provided information will be used to process your
-                        order and for other purposes outlined in our privacy
-                        policy. By proceeding, you agree to our privacy policy.
-                    </p>
-                </div>
-                <button className="h-max w-max border border-[#EDAD09] px-1 text-xl text-[#EDAD09] hover:opacity-60">
-                    Complete Purchase
-                </button>
-            </section>
+            <FinishOrder />
         </section>
     );
 }
