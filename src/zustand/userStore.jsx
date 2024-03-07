@@ -1,51 +1,40 @@
 import { getFromBrowserStorage } from '../api/services/storage';
-import { getUserInformation } from '../api/services/user';
+import {
+    getUserInformation,
+    updateUserInformation,
+} from '../api/services/user';
+import { initialProfileValue } from '../utils/constants';
 
 const userSlice = (set) => ({
     user: getFromBrowserStorage('user'),
-    personalInfo: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
-    },
-    shippingInfo: {
-        country: '',
-        city: '',
-        address: '',
-        postcode: '',
-    },
-    handleOnChangePersonalInfo: handleOnChangePersonalInfo(set),
-    handleOnChangeShippingInfo: handleOnChangeShippingInfo(set),
+    personalInfo: initialProfileValue.personalInfo,
+    shippingInfo: initialProfileValue.shippingInfo,
     fetchProfile: async (userId, signal) => {
-        //Todo try to implement cache
         const { address, ...rest } = await getUserInformation(userId, signal);
-
-        set({
+        const state = {
             shippingInfo: { ...address },
             personalInfo: { ...rest },
-        });
+        };
+
+        if (address.address === null) {
+            state.shippingInfo = {
+                country: '',
+                city: '',
+                address: '',
+                postcode: '',
+            };
+        }
+
+        set(state);
+        return state;
+    },
+    updateUserProfile: async (userId, profileState, signal) => {
+        await updateUserInformation(userId, profileState, signal);
+        set(() => ({
+            personalInfo: profileState.personalInfo,
+            shippingInfo: profileState.shippingInfo,
+        }));
     },
 });
 
 export default userSlice;
-
-const handleOnChangePersonalInfo = (set) => (e) => {
-    e.preventDefault();
-    set((state) => ({
-        personalInfo: {
-            ...state.personalInfo,
-            [e.target.name]: e.target.value,
-        },
-    }));
-};
-
-const handleOnChangeShippingInfo = (set) => (e) => {
-    e.preventDefault();
-    set((state) => ({
-        shippingInfo: {
-            ...state.shippingInfo,
-            [e.target.name]: e.target.value,
-        },
-    }));
-};
