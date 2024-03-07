@@ -10,6 +10,7 @@ import Logout from '../Authentication/components/Logout';
 import ProfileView from '../Profile/ProfileView';
 import CheckoutView from '../Checkout/CheckoutView';
 import ValidateProductViewRoute from './Guards/ValidateProductViewRoute';
+import NotFound from '../NotFound';
 
 export default function Router() {
     return (
@@ -44,6 +45,8 @@ export default function Router() {
                 <Route element={<IsAuthenticatedUser />}>
                     <Route path="/logout" element={<Logout />} />
                 </Route>
+
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </div>
     );
