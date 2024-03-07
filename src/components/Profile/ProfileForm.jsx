@@ -1,43 +1,56 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useFetch from '../../hooks/useFetch';
 
-import { updateUserInformation } from '../../api/services/user';
 import EditSaveToggleButton from './components/EditSaveToggleButton';
 import PersonalInfo from './components/PersonalInfo';
 import ShippingInfo from './components/ShippingInfo';
 import useStore from '../../zustand/store';
+import useProfileCache from '../../hooks/useProfileCache';
+import { initialProfileValue } from '../../utils/constants';
 
 export default function ProfileForm() {
-    const [isEditing, setIsEditing] = useState(true);
     const { userId } = useParams();
+    const [isEditing, setIsEditing] = useState(true);
 
-    const fetchProfile = useStore((state) => state.fetchProfile);
-    useFetch(fetchProfile, userId);
+    const updateUserProfile = useStore((state) => state.updateUserProfile);
 
-    const handleOnChangePersonalInfo = useStore(
-        (state) => state.handleOnChangePersonalInfo
-    );
-    const handleOnChangeShippingInfo = useStore(
-        (state) => state.handleOnChangeShippingInfo
-    );
+    const { personalInfo, shippingInfo } = useProfileCache();
+    const [profileState, setProfileInfo] = useState(initialProfileValue);
 
-    const personalInfo = useStore((state) => state.personalInfo);
-    const shippingInfo = useStore((state) => state.shippingInfo);
+    useEffect(() => {
+        setProfileInfo({
+            personalInfo,
+            shippingInfo,
+        });
+    }, [personalInfo, shippingInfo]);
+
+    const handleOnChangePersonalInfo = useCallback((e) => {
+        e.preventDefault();
+        setProfileInfo((state) => ({
+            ...state,
+            personalInfo: {
+                ...state.personalInfo,
+                [e.target.name]: e.target.value,
+            },
+        }));
+    }, []);
+    const handleOnChangeShippingInfo = useCallback((e) => {
+        e.preventDefault();
+        setProfileInfo((state) => ({
+            ...state,
+            shippingInfo: {
+                ...state.shippingInfo,
+                [e.target.name]: e.target.value,
+            },
+        }));
+    }, []);
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         if (e.target.dataset.type === 'save') return;
 
         const controller = new AbortController();
-        await updateUserInformation(
-            userId,
-            {
-                personalInfo,
-                shippingInfo,
-            },
-            controller.signal
-        );
+        await updateUserProfile(userId, profileState, controller.signal);
     };
 
     return (
@@ -49,13 +62,13 @@ export default function ProfileForm() {
                 <PersonalInfo
                     handleOnChange={handleOnChangePersonalInfo}
                     isEditing={isEditing}
-                    {...personalInfo}
+                    {...profileState.personalInfo}
                 />
                 <div className="absolute right-[50%] my-2 h-[1px] w-2/3 translate-x-1/2 bg-white"></div>
                 <ShippingInfo
                     handleOnChange={handleOnChangeShippingInfo}
                     isEditing={isEditing}
-                    {...shippingInfo}
+                    {...profileState.shippingInfo}
                 />
                 <EditSaveToggleButton
                     isEditing={isEditing}
