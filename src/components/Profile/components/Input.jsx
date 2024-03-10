@@ -8,7 +8,7 @@ export default function Input({
 }) {
     const editStyles = `${isEdit ? 'text-gray-300 ' : 'hover:opacity-75 text-white '}`;
     const customWidth =
-        typeof width === 'number' ? `w-[${width}px]` : `w-${width}`;
+        typeof width === 'number' ? `w-[${width}px] ` : `w-${width} `;
     return (
         <input
             placeholder={placeholder}
@@ -16,7 +16,7 @@ export default function Input({
             type="text"
             name={name}
             onChange={handleOnChange}
-            className={`${customWidth} border-[1px] bg-zinc-700 p-1  ${editStyles}
+            className={`${customWidth} border bg-zinc-700 px-1 py-2 font-inter ${editStyles}
          focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300`}
             value={value}
         />

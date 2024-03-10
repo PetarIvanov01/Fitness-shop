@@ -1,4 +1,5 @@
-export default function TableRow({ quantity, priceForAllProducts, name }) {
+export default function TableRow({ quantity, name, subtotal }) {
+    //Todo Add class when hover over the name to show the image
     return (
         <tr className="border max-sm:text-[0.7em]">
             <td className="p-2 ">
@@ -9,7 +10,7 @@ export default function TableRow({ quantity, priceForAllProducts, name }) {
                 <span>{quantity}</span>
             </td>
             <td className="p-2">
-                <span>$ {priceForAllProducts.toFixed(2)}</span>
+                <span>$ {subtotal}</span>
             </td>
         </tr>
     );

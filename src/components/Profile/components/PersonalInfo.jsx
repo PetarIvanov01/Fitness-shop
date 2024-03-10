@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import Input from './Input';
-import Paragraph from './Paragraph';
+import Label from './Label';
 
 const PersonalInfo = memo(function PersonalInfo({
     isEditing,
@@ -17,7 +17,7 @@ const PersonalInfo = memo(function PersonalInfo({
             </h2>
             <div className="flex flex-wrap justify-center gap-x-20 gap-y-8 ">
                 <div>
-                    <Paragraph>First Name:</Paragraph>
+                    <Label>First Name:</Label>
                     <Input
                         name={'firstName'}
                         isEdit={isEditing}
@@ -26,7 +26,7 @@ const PersonalInfo = memo(function PersonalInfo({
                     />
                 </div>
                 <div>
-                    <Paragraph>Last Name:</Paragraph>
+                    <Label>Last Name:</Label>
                     <Input
                         name={'lastName'}
                         isEdit={isEditing}
@@ -35,7 +35,7 @@ const PersonalInfo = memo(function PersonalInfo({
                     />
                 </div>
                 <div>
-                    <Paragraph>Email:</Paragraph>
+                    <Label>Email:</Label>
                     <Input
                         name={'email'}
                         isEdit={isEditing}
@@ -44,7 +44,7 @@ const PersonalInfo = memo(function PersonalInfo({
                     />
                 </div>
                 <div>
-                    <Paragraph>Phone Number:</Paragraph>
+                    <Label>Phone Number:</Label>
                     <Input
                         name={'phoneNumber'}
                         isEdit={isEditing}

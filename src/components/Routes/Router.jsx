@@ -14,7 +14,7 @@ import NotFound from '../NotFound';
 
 export default function Router() {
     return (
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col py-8 ">
             <Routes>
                 <Route path="/" element={<Main />} />
 

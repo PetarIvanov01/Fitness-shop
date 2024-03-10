@@ -12,6 +12,7 @@ export function IsGuest() {
 }
 
 export function IsAuthenticatedUser() {
+    //Send request to the serve to validate the token!
     const user = useStore((state) => state.user);
 
     if (user && user.id) {

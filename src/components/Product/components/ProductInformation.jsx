@@ -55,7 +55,7 @@ export default function ProductInformation({ product }) {
                 <div className="pb-2">Price: ${product.price}</div>
                 <button
                     onClick={onAddToCartHandler}
-                    className="rounded-md bg-blue-500 px-4 py-2 text-white "
+                    className="shadow-btn rounded-md bg-blue-500 px-4 py-1 text-white hover:shadow-none"
                 >
                     Add to Cart
                 </button>

@@ -18,7 +18,7 @@ export default function Catalog() {
     const { data, isLoading } = useFetch(callCatalogSetStore, querieString);
 
     return (
-        <section className="mx-1 my-6 flex flex-1 rounded-lg bg-gray-900 bg-opacity-95 px-3 pt-10 font-alegreya">
+        <section className="mx-1 flex flex-1 rounded-lg bg-gray-900 bg-opacity-95 px-3 pt-10 font-alegreya">
             <div className="flex flex-1 max-[600px]:flex-col">
                 <AsideFilters clearQueries={clearQueries} />
 

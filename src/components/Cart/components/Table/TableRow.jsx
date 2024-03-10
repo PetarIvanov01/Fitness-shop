@@ -11,6 +11,7 @@ export default function TableRow({
     title,
     quantity = 1,
     product_id,
+    type,
 }) {
     const resolvedImage = resolveServerImg(image);
     const priceForAllProducts = Number(price) * Number(quantity);
@@ -49,7 +50,7 @@ export default function TableRow({
 
                     <Link
                         className=" text-blue-300 hover:underline"
-                        to={`/product/${product_id}`}
+                        to={`/${type}/${product_id}`}
                     >
                         {title}
                     </Link>

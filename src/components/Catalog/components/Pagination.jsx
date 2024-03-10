@@ -8,7 +8,7 @@ export default function Pagination() {
     const itemsLength = useStore((state) => state.itemsLngInDb);
 
     const page = Number(queryObj.page) || 1;
-    const perPage = Number(queryObj.perPage) || 4;
+    const perPage = Number(queryObj.perPage) || 6;
 
     const allPages = Math.ceil(itemsLength / perPage);
 

@@ -5,7 +5,7 @@ import Router from './components/Routes/Router';
 
 export default function App() {
     return (
-        <div className="flex flex-col bg-fitnes-img bg-cover bg-center bg-no-repeat">
+        <div className="flex flex-col bg-fitnes-img bg-cover bg-center bg-no-repeat ">
             <Header />
 
             <Router />

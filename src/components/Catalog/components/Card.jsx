@@ -24,11 +24,11 @@ export default function Card({
             <div
                 onClick={onClickRedirectToProduct}
                 className="relative mb-2 h-40  
-            min-w-60 cursor-pointer overflow-hidden rounded-lg bg-white max-sm:w-40"
+            w-60 cursor-pointer overflow-hidden rounded-lg bg-white max-sm:w-40"
             >
                 <img
                     className="h-full w-full transform 
-                    rounded-lg object-cover transition-transform duration-300 hover:scale-110"
+                    rounded-lg object-contain transition-transform duration-300 hover:scale-110"
                     src={resolvedImage}
                     alt={title}
                 />

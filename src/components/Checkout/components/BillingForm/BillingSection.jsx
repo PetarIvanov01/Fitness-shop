@@ -1,6 +1,6 @@
 import { LuAsterisk } from 'react-icons/lu';
 import Input from '../../../Profile/components/Input';
-import Paragraph from '../../../Profile/components/Paragraph';
+import Label from '../../../Profile/components/Label';
 import BillingHeader from './components/BillingHeader';
 import { useCallback, useEffect, useState } from 'react';
 import useProfileCache from '../../../../hooks/useProfileCache';
@@ -45,10 +45,10 @@ export default function BillingSection() {
                 <article className="flex w-1/2 flex-col gap-6 border-r border-white pr-3">
                     <div className="flex flex-wrap gap-6">
                         <div className="mr-auto">
-                            <Paragraph>
+                            <Label>
                                 First Name
                                 <LuAsterisk color="red" />
-                            </Paragraph>
+                            </Label>
                             <Input
                                 handleOnChange={handleOnChangePersonalInfo}
                                 name={'firstName'}
@@ -56,9 +56,9 @@ export default function BillingSection() {
                             />
                         </div>
                         <div className="">
-                            <Paragraph>
+                            <Label>
                                 Last Name <LuAsterisk color="red" />
-                            </Paragraph>
+                            </Label>
                             <Input
                                 handleOnChange={handleOnChangePersonalInfo}
                                 name={'lastName'}
@@ -68,9 +68,9 @@ export default function BillingSection() {
                     </div>
 
                     <div>
-                        <Paragraph>
+                        <Label>
                             Phone Number <LuAsterisk color="red" />
-                        </Paragraph>
+                        </Label>
                         <Input
                             handleOnChange={handleOnChangePersonalInfo}
                             name={'phoneNumber'}
@@ -79,9 +79,9 @@ export default function BillingSection() {
                     </div>
 
                     <div>
-                        <Paragraph>
+                        <Label>
                             City / Town <LuAsterisk color="red" />
-                        </Paragraph>
+                        </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
                             name={'city'}
@@ -90,9 +90,9 @@ export default function BillingSection() {
                     </div>
 
                     <div>
-                        <Paragraph>
+                        <Label>
                             Street address <LuAsterisk color="red" />
-                        </Paragraph>
+                        </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
                             value={profileState.shippingInfo.address}
@@ -103,9 +103,9 @@ export default function BillingSection() {
                     </div>
 
                     <div>
-                        <Paragraph>
+                        <Label>
                             Country <LuAsterisk color="red" />
-                        </Paragraph>
+                        </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
                             value={profileState.shippingInfo.country}
@@ -114,9 +114,9 @@ export default function BillingSection() {
                     </div>
 
                     <div>
-                        <Paragraph>
+                        <Label>
                             Postcode / ZIP <LuAsterisk color="red" />
-                        </Paragraph>
+                        </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
                             value={profileState.shippingInfo.postcode}
@@ -127,9 +127,9 @@ export default function BillingSection() {
 
                 <article className="flex w-1/2 flex-col gap-6 pl-1">
                     <div>
-                        <Paragraph>
+                        <Label>
                             Email address <LuAsterisk color="red" />
-                        </Paragraph>
+                        </Label>
                         <Input
                             handleOnChange={handleOnChangePersonalInfo}
                             name={'email'}
@@ -138,7 +138,7 @@ export default function BillingSection() {
                     </div>
 
                     <div>
-                        <Paragraph>Extra Information (optionla)</Paragraph>
+                        <Label>Extra Information (optionla)</Label>
                         <textarea className="h-[100px] w-full resize-none border-2 bg-zinc-700 p-1 focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300" />
                     </div>
                 </article>

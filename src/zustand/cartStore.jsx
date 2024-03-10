@@ -19,6 +19,15 @@ const cartStore = (set) => ({
             return 0;
         }
     })(),
+    fetchCartData: async (signal) => {
+        const currentCookieData = Cookies.get(COOKIE_NAME);
+
+        if (currentCookieData === undefined) return;
+
+        const data = await getCart(null, signal);
+
+        set({ cart: data });
+    },
     removeCartItem: (cartItemId) => {
         const currentCookieItems = Cookies.get(COOKIE_NAME);
         const parsedCookie = JSON.parse(currentCookieItems);
@@ -53,15 +62,6 @@ const cartStore = (set) => ({
                 length: parsedCookie.length,
             };
         });
-    },
-    fetchCartData: async (signal) => {
-        const currentCookieData = Cookies.get(COOKIE_NAME);
-
-        if (currentCookieData === undefined) return;
-
-        const data = await getCart(null, signal);
-
-        set({ cart: data });
     },
     clearCartItem: (productId = undefined) => {
         if (productId === undefined) {
