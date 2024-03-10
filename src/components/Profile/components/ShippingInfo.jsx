@@ -1,7 +1,9 @@
+import { memo } from 'react';
 import Input from './Input';
-import Paragraph from './Paragraph';
+import Label from './Label';
+import Select from './Select';
 
-export default function ShippingInfo({
+const ShippingInfo = memo(function ShippingInfo({
     isEditing,
     handleOnChange,
     country,
@@ -14,18 +16,17 @@ export default function ShippingInfo({
             <h2 className="mb-4 text-2xl font-semibold text-gray-300">
                 Shipping Information
             </h2>
-            <div className="flex flex-wrap justify-center gap-x-20 gap-y-8">
+            <div className="flex flex-wrap items-center justify-center gap-x-20 gap-y-8">
                 <div>
-                    <Paragraph>Country:</Paragraph>
-                    <Input
-                        isEdit={isEditing}
-                        handleOnChange={handleOnChange}
-                        name={'country'}
+                    <Label id={'country'}>Country:</Label>
+                    <Select
                         value={country}
+                        handleOnChange={handleOnChange}
+                        isEditing={isEditing}
                     />
                 </div>
                 <div>
-                    <Paragraph>City:</Paragraph>
+                    <Label>City:</Label>
                     <Input
                         isEdit={isEditing}
                         handleOnChange={handleOnChange}
@@ -34,7 +35,7 @@ export default function ShippingInfo({
                     />
                 </div>
                 <div>
-                    <Paragraph>Address:</Paragraph>
+                    <Label>Address:</Label>
                     <Input
                         isEdit={isEditing}
                         handleOnChange={handleOnChange}
@@ -43,7 +44,7 @@ export default function ShippingInfo({
                     />
                 </div>
                 <div>
-                    <Paragraph>ZIP code:</Paragraph>
+                    <Label>ZIP code:</Label>
                     <Input
                         isEdit={isEditing}
                         handleOnChange={handleOnChange}
@@ -54,4 +55,5 @@ export default function ShippingInfo({
             </div>
         </div>
     );
-}
+});
+export default ShippingInfo;
