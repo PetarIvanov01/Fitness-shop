@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import EditSaveToggleButton from './components/EditSaveToggleButton';
@@ -16,6 +16,7 @@ export default function ProfileForm() {
 
     const { personalInfo, shippingInfo } = useProfileCache();
     const [profileState, setProfileInfo] = useState(initialProfileValue);
+    const hasChange = useRef();
 
     useEffect(() => {
         setProfileInfo({
@@ -26,6 +27,7 @@ export default function ProfileForm() {
 
     const handleOnChangePersonalInfo = useCallback((e) => {
         e.preventDefault();
+        hasChange.current = true;
         setProfileInfo((state) => ({
             ...state,
             personalInfo: {
@@ -36,6 +38,7 @@ export default function ProfileForm() {
     }, []);
     const handleOnChangeShippingInfo = useCallback((e) => {
         e.preventDefault();
+        hasChange.current = true;
         setProfileInfo((state) => ({
             ...state,
             shippingInfo: {
@@ -49,8 +52,10 @@ export default function ProfileForm() {
         e.preventDefault();
         if (e.target.dataset.type === 'save') return;
 
-        const controller = new AbortController();
-        await updateUserProfile(userId, profileState, controller.signal);
+        if (hasChange.current) {
+            const controller = new AbortController();
+            await updateUserProfile(userId, profileState, controller.signal);
+        }
     };
 
     return (
