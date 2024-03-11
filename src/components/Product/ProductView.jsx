@@ -12,7 +12,7 @@ export default function ProductView() {
     const { data, isLoading } = useFetch(fetchProduct, productId);
 
     return (
-        <div className="mx-1 min-h-full max-w-[700px] self-center px-3 font-alegreya">
+        <div className="mx-1 min-h-full max-w-[1200px] self-center px-3 font-alegreya">
             <section className="flex min-h-[800px] w-full flex-col rounded-lg bg-gray-900 bg-opacity-95 p-4 text-white">
                 {isLoading ? (
                     <>

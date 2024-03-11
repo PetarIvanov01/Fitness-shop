@@ -9,6 +9,9 @@ export default {
             inter: ["'Inter'", 'sans-serif'],
         },
         extend: {
+            boxShadow: {
+                inp2l: 'inset 0px -1px 2px 1px rgba(156,156,156,1)',
+            },
             keyframes: {
                 'fade-in': {
                     '0%': {

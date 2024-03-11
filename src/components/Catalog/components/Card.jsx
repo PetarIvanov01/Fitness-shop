@@ -19,7 +19,8 @@ export default function Card({
     return (
         <div
             className="relative flex w-fit flex-col items-center justify-between
-        rounded-lg bg-[#456789] p-4 opacity-95 shadow-lg"
+             rounded-lg bg-gradient-to-r from-[#456789] via-[#7198bf]
+         to-[#456789] p-4 opacity-95 shadow-lg"
         >
             <div
                 onClick={onClickRedirectToProduct}
