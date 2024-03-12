@@ -3,6 +3,7 @@ import '../../src/index.css';
 import { MemoryRouter } from 'react-router-dom';
 import AsideFilters from '../../src/components/Catalog/components/AsideFilter/AsideFilters';
 import ItemsSection from '../../src/components/Catalog/ItemsSection';
+import Catalog from '../../src/components/Catalog/Catalog';
 
 describe('Render Catalog View components', () => {
     const Component = ({ children }) => (
@@ -13,8 +14,8 @@ describe('Render Catalog View components', () => {
         </MemoryRouter>
     );
 
-    describe('Testing Aside Filters', () => {
-        it('Testing Aside Filters component', () => {
+    describe('Aside Filters Component', () => {
+        it('renders Aside Filters component with default filter options', () => {
             cy.mount(
                 <Component>
                     <AsideFilters clearQueries={() => {}} />
@@ -22,41 +23,41 @@ describe('Render Catalog View components', () => {
             );
 
             cy.contains('Filter');
-            cy.get('aside').children().as('filt');
-            cy.get('@filt').contains('Price Range');
-            cy.get('@filt').contains('Category');
-            cy.get('@filt').contains('Rating');
-            cy.get('@filt').contains('Brand');
+            cy.get('aside').children().as('filterOptions');
+            cy.get('@filterOptions').contains('Price Range');
+            cy.get('@filterOptions').contains('Category');
+            cy.get('@filterOptions').contains('Rating');
+            cy.get('@filterOptions').contains('Brand');
         });
 
-        it('Testing Price filter component with valid values', () => {
+        it('allows selecting price range with valid values', () => {
             cy.mount(
                 <Component>
                     <AsideFilters clearQueries={() => {}} />
                 </Component>
             );
 
-            cy.get('#price-filter').children().last().as('range');
-            cy.get('@range')
+            cy.get('#price-filter').children().last().as('priceRange');
+            cy.get('@priceRange')
                 .get("input[name='from']")
                 .invoke('val', 5000)
                 .trigger('change');
 
-            cy.get('@range')
+            cy.get('@priceRange')
                 .get("input[name='from']")
                 .should('have.value', '5000');
 
-            cy.get('@range')
+            cy.get('@priceRange')
                 .get("input[name='to']")
                 .invoke('val', 7000)
                 .trigger('change');
 
-            cy.get('@range')
+            cy.get('@priceRange')
                 .get("input[name='to']")
                 .should('have.value', '7000');
         });
 
-        it('Testing Category filter component', () => {
+        it('allows selecting category', () => {
             cy.mount(
                 <Component>
                     <AsideFilters clearQueries={() => {}} />
@@ -67,7 +68,7 @@ describe('Render Catalog View components', () => {
             cy.get('#category').should('have.value', 'machines');
         });
 
-        it('Testing Rating filter component', () => {
+        it('allows selecting rating', () => {
             cy.mount(
                 <Component>
                     <AsideFilters clearQueries={() => {}} />
@@ -78,7 +79,7 @@ describe('Render Catalog View components', () => {
             cy.get('#rating').should('have.value', '5');
         });
 
-        it('Testing Brand filter component', () => {
+        it('allows selecting brand', () => {
             cy.mount(
                 <Component>
                     <AsideFilters clearQueries={() => {}} />
@@ -90,15 +91,29 @@ describe('Render Catalog View components', () => {
         });
     });
 
-    describe('Testing the section with all products', () => {
-        it('Testing spinner widget when there is no products', () => {
+    describe('ItemsSection Component', () => {
+        it('renders spinner widget when there are no products', () => {
+            cy.stub(window, 'fetch').resolves({
+                json: cy.stub().resolves({ data: [] }),
+            });
+
+            cy.mount(
+                <Component>
+                    <Catalog />
+                </Component>
+            );
+
+            cy.get('[data-test="spinner"]').should('exist');
+        });
+
+        it('renders products with correct information', () => {
             cy.mount(
                 <Component>
                     <ItemsSection
                         data={[
                             {
                                 product_id: '1',
-                                title: 'Test',
+                                title: 'Test Product',
                                 image: '/image_1710060501743.jpg',
                                 price: '1000',
                                 type: 'cardio',
@@ -107,8 +122,9 @@ describe('Render Catalog View components', () => {
                     />
                 </Component>
             );
-            cy.contains('Test');
-            cy.get('button').contains('Add to Cart');
+
+            cy.contains('Test Product');
+            cy.get('button').contains('Add to Cart').should('exist');
         });
     });
 });
