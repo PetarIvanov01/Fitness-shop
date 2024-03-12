@@ -50,7 +50,11 @@ describe('Render Home View components', () => {
                 <OtherItems />
             </Component>
         );
-        cy.get('header > h1').should('have.text', 'Explore More');
+        cy.get('header > h1')
+            .should('be.visible')
+            .invoke('text')
+            .should('match', /explore more/i);
+
         cy.get('.animate-slide-up').contains('Price');
     });
 });
