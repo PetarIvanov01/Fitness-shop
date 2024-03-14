@@ -72,8 +72,15 @@ export default function LoginForm() {
                     />
                 </div>
                 <div className="flex items-center gap-x-32">
-                    <Button text={'Sign In'} />
-                    <p className="text-lg text-red-500">{error.requestErr}</p>
+                    <Button text={'Sign In'} errors={error} />
+                    {error.requestErr && (
+                        <p
+                            data-test="error-req"
+                            className="text-lg text-red-500"
+                        >
+                            {error.requestErr}
+                        </p>
+                    )}
                 </div>
             </form>
         </div>

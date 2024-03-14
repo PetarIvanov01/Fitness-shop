@@ -76,7 +76,9 @@ export default function RegsiterForm() {
                         type={'text'}
                         error={!!error.firstName}
                     />
-                    {visibleError && <ErrorLabel error={error.firstName} />}
+                    {visibleError && (
+                        <ErrorLabel error={error.firstName} id={'firstName'} />
+                    )}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -91,7 +93,9 @@ export default function RegsiterForm() {
                         type={'text'}
                         error={!!error.lastName}
                     />
-                    {visibleError && <ErrorLabel error={error.lastName} />}
+                    {visibleError && (
+                        <ErrorLabel error={error.lastName} id={'lastName'} />
+                    )}
                 </div>
 
                 <div className=" h-16 max-w-96">
@@ -108,7 +112,12 @@ export default function RegsiterForm() {
                         title="Please provide valid phone number"
                         error={!!error.phoneNumber}
                     />
-                    {visibleError && <ErrorLabel error={error.phoneNumber} />}
+                    {visibleError && (
+                        <ErrorLabel
+                            error={error.phoneNumber}
+                            id={'phoneNumber'}
+                        />
+                    )}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -124,7 +133,9 @@ export default function RegsiterForm() {
                         title="Please provide valid email address"
                         error={!!error.email}
                     />
-                    {visibleError && <ErrorLabel error={error.email} />}
+                    {visibleError && (
+                        <ErrorLabel error={error.email} id={'email'} />
+                    )}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -139,7 +150,9 @@ export default function RegsiterForm() {
                         type={'password'}
                         error={!!error.password || requestErr}
                     />
-                    {visibleError && <ErrorLabel error={error.password} />}
+                    {visibleError && (
+                        <ErrorLabel error={error.password} id={'password'} />
+                    )}
                 </div>
 
                 <div className="h-16 max-w-96">
@@ -155,12 +168,17 @@ export default function RegsiterForm() {
                         error={!!error['re-password'] || requestErr}
                     />
                     {visibleError && (
-                        <ErrorLabel error={error['re-password']} />
+                        <ErrorLabel
+                            error={error['re-password']}
+                            id={'re-password'}
+                        />
                     )}
                 </div>
                 <div className="flex items-center gap-x-32">
-                    <Button text={'Sign Up'} />
-                    <p className="text-lg text-red-500">{requestErr}</p>
+                    <Button text={'Sign Up'} errors={error} />
+                    <p data-test="error-fetch" className="text-lg text-red-500">
+                        {requestErr}
+                    </p>
                 </div>
             </form>
         </div>
