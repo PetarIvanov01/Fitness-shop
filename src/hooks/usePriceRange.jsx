@@ -28,8 +28,9 @@ export default function usePriceRange() {
         return state;
     });
 
-    const invalidPriceRange = Number(totalPrice.from) > Number(totalPrice.to);
     const debouncedValues = useDebounce(totalPrice);
+    const invalidPriceRange =
+        Number(debouncedValues.from) > Number(debouncedValues.to);
 
     useEffect(() => {
         if (
