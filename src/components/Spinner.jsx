@@ -1,6 +1,6 @@
 export default function Spinner() {
     return (
-        <div className="absolute  bottom-1/2 left-1/2">
+        <div data-test="spinner" className="absolute  bottom-1/2 left-1/2">
             <svg
                 aria-hidden="true"
                 className="h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
