@@ -43,13 +43,25 @@ export default {
                 'fade-out': 'fade-out 1000ms forwards',
                 'slide-up': 'slide-up 1500ms forwards',
             },
+            backgroundColor: {
+                'gray-w': '#D9D9D9',
+                'gray-s': '#C8C4C4',
+            },
             colors: {
                 'black-c': '#101314',
                 'blue-c': '#36454F',
             },
             backgroundImage: {
-                'fitnes-img': "url('/src/assets/backgroundCompres-min.jpg')",
+                'fitnes-img': 'url(/src/assets/backgroundCompres-min.jpg)',
             },
+        },
+        screens: {
+            sm: '640px',
+            md: '768px',
+            lg: '1024px',
+            xl: '1280px',
+            '2xl': '1536px',
+            ml: '550px',
         },
     },
     plugins: [],
