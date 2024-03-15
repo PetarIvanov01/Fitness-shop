@@ -1,11 +1,9 @@
-import prev from '../../../assets/controllers/prev.svg';
-import next from '../../../assets/controllers/next.svg';
-
 import OfferCards from './components/OffersCards';
 import ControlOfferButton from './components/ControlOfferButton';
 import topOfferData from '../../../assets/utils/topOfferData.json';
 import resolveImgPaths from '../../../utils/resolveImgPaths';
 
+import { GrPrevious, GrNext } from 'react-icons/gr';
 import { useState } from 'react';
 
 export default function TopOffers() {
@@ -59,11 +57,9 @@ export default function TopOffers() {
                 py-4 max-sm:min-w-[330px] 
                 "
             >
-                <ControlOfferButton
-                    handler={handlePrevClick}
-                    icon={prev}
-                    alt={'prev'}
-                />
+                <ControlOfferButton handler={handlePrevClick}>
+                    <GrPrevious className="w-16 text-white" />
+                </ControlOfferButton>
 
                 <h1 className="absolute top-0 z-10 mb-6 text-center text-[2em] font-bold text-stone-200 max-md:text-[1.5em]">
                     Top Offers for the Week!
@@ -73,11 +69,9 @@ export default function TopOffers() {
                     <OfferCards key={i.key} {...i} />
                 ))}
 
-                <ControlOfferButton
-                    handler={handleNextClick}
-                    icon={next}
-                    alt={'next'}
-                />
+                <ControlOfferButton handler={handleNextClick}>
+                    <GrNext className="w-16 text-white" />
+                </ControlOfferButton>
             </article>
 
             <hr className="my-4 border-t-2 border-black" />
