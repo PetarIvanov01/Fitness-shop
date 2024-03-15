@@ -1,10 +1,10 @@
-import { LuAsterisk } from 'react-icons/lu';
-import Input from '../../../Profile/components/Input';
-import Label from '../../../Profile/components/Label';
-import BillingHeader from './components/BillingHeader';
 import { useCallback, useEffect, useState } from 'react';
-import useProfileCache from '../../../../hooks/useProfileCache';
 import { initialProfileValue } from '../../../../utils/constants';
+import { LuAsterisk } from 'react-icons/lu';
+import BillingHeader from './components/BillingHeader';
+import Label from './components/Label';
+import Input from './components/Input';
+import useProfileCache from '../../../../hooks/useProfileCache';
 
 export default function BillingSection() {
     const { personalInfo, shippingInfo } = useProfileCache();
