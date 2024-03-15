@@ -1,5 +1,6 @@
 function resolveImgPaths(props) {
-    const imgPath = import.meta.resolve('/src/assets' + props.imgPath);
+    const baseULR = import.meta.env.BASE_URL + 'src/assets';
+    const imgPath = import.meta.resolve(baseULR + props.imgPath);
     return { ...props, imgPath };
 }
 
