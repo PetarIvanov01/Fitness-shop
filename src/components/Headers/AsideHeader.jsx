@@ -21,25 +21,25 @@ export default function AsideHeader({ visible, onClickClose, userId }) {
     return (
         <aside
             className={`${visibilityStyle}
-            absolute z-10 flex h-96 w-52 
-            flex-col items-center bg-stone-950 px-8 py-12 text-stone-50
-            transition-transform max-sm:w-32`}
+            max-sm:w-32 absolute z-10 flex h-96 
+            w-52 flex-col items-center bg-stone-950 px-8 py-12
+            text-stone-50 transition-transform`}
         >
-            <h2 className="mb-8 font-bold uppercase text-slate-300 max-sm:text-xs md:text-xl ">
+            <h2 className="max-sm:text-xs md:text-xl mb-8 font-bold uppercase text-slate-300 ">
                 Products
             </h2>
 
             <Link
                 onClick={onClickClose}
                 to={'/catalog'}
-                className="mb-2 flex items-center gap-2 rounded-md bg-stone-700 px-4 py-2 text-xs text-stone-300 hover:bg-stone-500 max-sm:px-2 md:text-base"
+                className="max-sm:px-2 max-sm:text-xs mb-2 flex items-center gap-2 rounded-md bg-stone-700 px-4 py-2 text-base  text-stone-300 hover:bg-stone-500"
             >
                 Catalog <GrLinkNext />
             </Link>
 
             <button
                 onClick={handleVisibility}
-                className="mb-2 rounded-md bg-stone-700 px-4 py-2 text-xs text-stone-300 hover:bg-stone-500 max-sm:px-2 md:text-base"
+                className="max-sm:px-2 max-sm:text-xs  mb-2  rounded-md bg-stone-700 px-4 py-2 text-base text-stone-300 hover:bg-stone-500"
             >
                 + Categories
             </button>
