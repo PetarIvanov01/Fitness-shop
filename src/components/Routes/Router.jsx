@@ -7,10 +7,11 @@ import Cart from '../Cart/Cart';
 import ProductView from '../Product/ProductView';
 import AuthenticationSection from '../Authentication/AuthenticationSection';
 import Logout from '../Authentication/components/Logout';
-import ProfileView from '../Profile/ProfileView';
+
 import CheckoutView from '../Checkout/CheckoutView';
 import ValidateProductViewRoute from './Guards/ValidateProductViewRoute';
 import NotFound from '../NotFound';
+import ProfileView from '../ProfileSection/ProfileView';
 
 export default function Router() {
     return (
@@ -19,7 +20,7 @@ export default function Router() {
                 <Route path="/" element={<Main />} />
 
                 <Route element={<IsAuthenticatedUser />}>
-                    <Route path="/profile/:userId" element={<ProfileView />} />
+                    <Route path="/profile/:type" element={<ProfileView />} />
                 </Route>
 
                 <Route path="/catalog" element={<Catalog />} />
