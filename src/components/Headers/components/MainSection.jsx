@@ -35,7 +35,7 @@ export default function MainSection({
                         <Link
                             className="hover:scale-110"
                             onClick={onClickClose}
-                            to={`/profile/${userId}`}
+                            to={`/profile/info/${userId}`}
                         >
                             <FaRegUserCircle className="size-6" />
                         </Link>
