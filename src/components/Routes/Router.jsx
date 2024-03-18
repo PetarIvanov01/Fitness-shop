@@ -12,6 +12,7 @@ import CheckoutView from '../Checkout/CheckoutView';
 import ValidateProductViewRoute from './Guards/ValidateProductViewRoute';
 import NotFound from '../NotFound';
 import ProfileView from '../ProfileSection/ProfileView';
+import SectionAccessControl from './Guards/SectionAccessControl';
 
 export default function Router() {
     return (
@@ -20,7 +21,12 @@ export default function Router() {
                 <Route path="/" element={<Main />} />
 
                 <Route element={<IsAuthenticatedUser />}>
-                    <Route path="/profile/:type" element={<ProfileView />} />
+                    <Route element={<SectionAccessControl />}>
+                        <Route
+                            path="/profile/:type/:userId"
+                            element={<ProfileView />}
+                        />
+                    </Route>
                 </Route>
 
                 <Route path="/catalog" element={<Catalog />} />
