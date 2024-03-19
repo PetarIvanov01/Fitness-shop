@@ -1,39 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useStore from '../zustand/store';
 
-export default function useProfileCache() {
+export default function useProfileCache(userId, data = {}) {
     const fetchProfile = useStore((state) => state.fetchProfile);
 
-    const userId = useStore((state) => state.user.id);
-    const personalInfo = useStore((state) => state.personalInfo);
-    const shippingInfo = useStore((state) => state.shippingInfo);
+    const emptyValue = useMemo(() => {
+        return Object.values(data).some((e) => e === '');
+    }, [data]);
 
+    const [isLoading, setLoading] = useState(() => {
+        if (emptyValue) {
+            return false;
+        }
+        return true;
+    });
     const [cachedData, setCache] = useState({
-        personalInfo,
-        shippingInfo,
+        ...data,
     });
 
     useEffect(() => {
-        if (
-            personalInfo.firstName === '' ||
-            personalInfo.lastName === '' ||
-            personalInfo.email === '' ||
-            personalInfo.phoneNumber === ''
-        ) {
+        if (emptyValue) {
             const abortController = new AbortController();
-            fetchProfile(userId, abortController.signal).then(setCache);
-        }
-    }, [
-        userId,
-        fetchProfile,
-        personalInfo.firstName,
-        personalInfo.lastName,
-        personalInfo.email,
-        personalInfo.phoneNumber,
-    ]);
 
-    return {
-        personalInfo: cachedData.personalInfo,
-        shippingInfo: cachedData.shippingInfo,
-    };
+            fetchProfile(userId, abortController.signal).then((d) => {
+                setCache(d);
+                setLoading(true);
+            });
+        }
+    }, [userId, fetchProfile, emptyValue]);
+
+    const body = useMemo(() => {
+        return {
+            emptyValue,
+            isLoading,
+            data: { ...cachedData },
+        };
+    }, [isLoading, cachedData, emptyValue]);
+
+    return body;
 }
