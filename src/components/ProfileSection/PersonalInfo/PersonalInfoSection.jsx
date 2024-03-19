@@ -1,7 +1,7 @@
 import { IoMdInformationCircleOutline } from 'react-icons/io';
-import FormSection from './components/FormSection';
+import InfoBody from './InfoBody';
 
-export default function PersonalInfoSection() {
+export default function PersonalInfoSection({ userId }) {
     return (
         <div className="h-full">
             <header className="px-6 py-8">
@@ -17,7 +17,7 @@ export default function PersonalInfoSection() {
                 </div>
             </header>
 
-            <FormSection />
+            <InfoBody userId={userId} />
         </div>
     );
 }
