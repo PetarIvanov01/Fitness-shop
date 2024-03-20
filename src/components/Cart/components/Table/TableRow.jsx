@@ -4,8 +4,9 @@ import { FiPlus } from 'react-icons/fi';
 import resolveServerImg from '../../../../utils/resolveServerImg';
 import { Link } from 'react-router-dom';
 import useStore from '../../../../zustand/store';
+import { memo } from 'react';
 
-export default function TableRow({
+const TableRow = memo(function TableRow({
     image,
     price,
     title,
@@ -89,4 +90,5 @@ export default function TableRow({
             </td>
         </tr>
     );
-}
+});
+export default TableRow;
