@@ -29,13 +29,13 @@ export default function useProfileCache(userId, data = {}) {
         }
     }, [userId, fetchProfile, emptyValue]);
 
-    const body = useMemo(() => {
-        return {
-            emptyValue,
-            isLoading,
-            data: { ...cachedData },
-        };
-    }, [isLoading, cachedData, emptyValue]);
+    // const body = useMemo(() => {
+    return {
+        emptyValue,
+        isLoading,
+        data: { ...cachedData },
+    };
+    // }, [isLoading, cachedData, emptyValue]);
 
-    return body;
+    // return body;
 }
