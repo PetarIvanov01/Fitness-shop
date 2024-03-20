@@ -1,10 +1,10 @@
-import 'react-international-phone/style.css';
 import { useCallback, useRef, useState } from 'react';
-
-import { PhoneInput } from 'react-international-phone';
-import Controllers from './Controllers';
-import useStore from '../../../../zustand/store';
 import { initialProfileValue } from '../../../../utils/constants';
+
+import useStore from '../../../../zustand/store';
+
+import PhoneComp from './PhoneComp';
+import Controllers from './Controllers';
 import Field from '../../components/Field';
 
 export default function FormSection({ userId, personalInfo, emptyValue }) {
@@ -29,19 +29,24 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
         [setProfileInfo]
     );
 
-    const handleOnSubmit = async (e) => {
-        e.preventDefault();
-        if (e.target.dataset.type === 'save') return;
+    const handleOnChangePhoneInput = useCallback((phone) => {
+        setProfileInfo((state) => ({
+            ...state,
+            phoneNumber: phone,
+        }));
+    }, []);
 
+    const handleOnSubmit = async () => {
         if (hasChange.current) {
             const controller = new AbortController();
             await updateUserProfile(userId, personalState, controller.signal);
+            hasChange.current = false;
         }
     };
 
     return (
         <section className="flex flex-col px-6 text-white">
-            <form onSubmit={handleOnSubmit} className="flex flex-col gap-2 ">
+            <form className="flex flex-col gap-2 ">
                 <div className="flex flex-wrap justify-between gap-2 max-[730px]:justify-center">
                     <div className="flex flex-col">
                         <Field
@@ -75,37 +80,20 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
                     />
                 </div>
                 <div className="flex flex-col max-[730px]:items-center">
-                    <div>
-                        <label htmlFor="phoneNumbee">Phone number</label>
-                        <PhoneInput
-                            name="phoneNumber"
-                            style={{
-                                color: '#1B263E',
-                                backgroundColor: '#1B263E',
-                                width: 'max-content',
-                            }}
-                            defaultCountry="bg"
-                            value={personalState.phoneNumber}
-                            inputStyle={{
-                                backgroundColor: '#1B263E',
-                                color: 'white',
-                                width: '180px',
-                            }}
-                            onChange={(phone) =>
-                                setProfileInfo((state) => ({
-                                    ...state,
-                                    phoneNumber: phone,
-                                }))
-                            }
-                        />
-                    </div>
+                    <PhoneComp
+                        handlOnChange={handleOnChangePhoneInput}
+                        phoneNumber={personalState.phoneNumber}
+                    />
                 </div>
-                <p className="pt-4 text-[0.7em] text-orange-300">
+                <p className="pt-4 text-[0.8em] text-orange-300">
                     Please ensure all fields are filled to enjoy all features of
                     our app to the fullest.
                 </p>
 
-                <Controllers />
+                <Controllers
+                    hasChange={hasChange.current}
+                    handleOnSubmit={handleOnSubmit}
+                />
             </form>
         </section>
     );
