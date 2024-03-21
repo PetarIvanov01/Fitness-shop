@@ -5,6 +5,11 @@ import { removeFromBrowserStorage, setToBrowserStorage } from './storage';
 const endpoints = {
     getUser: (userId) => `/user/${userId}`,
     updateUser: (userId) => `/user/${userId}`,
+    getAddress: (userId, addressId) =>
+        `/user/address/${userId}?addressId=${addressId}`,
+    createAddress: (userId) => `/user/address/${userId}`,
+    updateAddress: (userId, addressId) =>
+        `/user/address/${userId}?addressId=${addressId}`,
     register: '/user/sign-up',
     login: '/user/sign-in',
     logout: '/user/logout',
@@ -22,6 +27,22 @@ export const getUserInformation = async (userId, signal) => {
 
 export const updateUserInformation = async (userId, data, signal) => {
     return await methods.put(endpoints.updateUser(userId), data, signal);
+};
+
+export const getAddresses = async (userId, addressId, signal) => {
+    return methods.get(endpoints.getAddress(userId, addressId), null, signal);
+};
+
+export const createAddress = async (userId, data, signal) => {
+    return methods.post(endpoints.createAddress(userId), data, signal);
+};
+
+export const updateAddress = async (userId, addressId, data, signal) => {
+    return methods.put(
+        endpoints.updateAddress(userId, addressId),
+        data,
+        signal
+    );
 };
 
 export const sendUserRegistration = async (userData) => {
