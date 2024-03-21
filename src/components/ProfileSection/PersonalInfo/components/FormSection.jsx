@@ -46,7 +46,7 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
 
     return (
         <section className="flex flex-col px-6 text-white">
-            <form className="flex flex-col gap-2 ">
+            <form className="flex flex-col gap-4 ">
                 <div className="flex flex-wrap justify-between gap-2 max-[730px]:justify-center">
                     <div className="flex flex-col">
                         <Field
@@ -91,6 +91,9 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
                 </p>
 
                 <Controllers
+                    text={
+                        'Are you sure you want to edit your personal information?'
+                    }
                     hasChange={hasChange.current}
                     handleOnSubmit={handleOnSubmit}
                 />
