@@ -14,7 +14,7 @@ export default function Field({
             <input
                 value={value}
                 onChange={handleOnChange}
-                className="h-8 rounded-sm border border-white bg-[#1B263E] p-1"
+                className="h-8 rounded-sm border border-white bg-[#1B263E] py-4 pl-2"
                 type={type}
                 name={name}
                 id={id}
