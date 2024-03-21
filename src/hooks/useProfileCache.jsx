@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import useStore from '../zustand/store';
 
-export default function useProfileCache(userId, data = {}) {
-    const fetchProfile = useStore((state) => state.fetchProfile);
-
+export default function useProfileCache(userId, data = {}, fetchFunc, ...args) {
     const emptyValue = useMemo(() => {
         return Object.values(data).some((e) => e === '');
     }, [data]);
@@ -22,20 +19,16 @@ export default function useProfileCache(userId, data = {}) {
         if (emptyValue) {
             const abortController = new AbortController();
 
-            fetchProfile(userId, abortController.signal).then((d) => {
+            fetchFunc(userId, abortController.signal, ...args).then((d) => {
                 setCache(d);
                 setLoading(true);
             });
         }
-    }, [userId, fetchProfile, emptyValue]);
+    }, [userId, fetchFunc, emptyValue, args]);
 
-    // const body = useMemo(() => {
     return {
         emptyValue,
         isLoading,
         data: { ...cachedData },
     };
-    // }, [isLoading, cachedData, emptyValue]);
-
-    // return body;
 }
