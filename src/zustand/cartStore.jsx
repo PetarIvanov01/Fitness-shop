@@ -27,6 +27,7 @@ const cartStore = (set) => ({
         const data = await getCart(null, signal);
 
         set({ cart: data });
+        return data;
     },
     removeCartItem: (cartItemId) => {
         const currentCookieItems = Cookies.get(COOKIE_NAME);
@@ -42,7 +43,7 @@ const cartStore = (set) => ({
         }
 
         const stringifiedCookieData = JSON.stringify(parsedCookie);
-        Cookies.set('cart-cookie', stringifiedCookieData, COOKIE_OPTIONS);
+        Cookies.set(COOKIE_NAME, stringifiedCookieData, COOKIE_OPTIONS);
 
         set((state) => {
             let cart = [...state.cart];
@@ -79,7 +80,7 @@ const cartStore = (set) => ({
         }
 
         const stringifiedCookieData = JSON.stringify(parsedCookie);
-        Cookies.set('cart-cookie', stringifiedCookieData, COOKIE_OPTIONS);
+        Cookies.set(COOKIE_NAME, stringifiedCookieData, COOKIE_OPTIONS);
 
         set((state) => {
             const { cart } = state;
@@ -143,5 +144,5 @@ function addCartItemsToCookies(cartItemId) {
 
     parsedCookieData.length++;
     const stringifiedCookieData = JSON.stringify(parsedCookieData);
-    Cookies.set('cart-cookie', stringifiedCookieData, COOKIE_OPTIONS);
+    Cookies.set(COOKIE_NAME, stringifiedCookieData, COOKIE_OPTIONS);
 }
