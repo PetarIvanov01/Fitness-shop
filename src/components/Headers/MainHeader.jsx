@@ -10,7 +10,15 @@ export default function Header() {
     const userId = useStore((state) => state.user?.id);
 
     const [isVisible, setIsVisible] = useState(false);
-    const { ref } = useCloseSection(setIsVisible);
+
+    const handleVisibility = useCallback(
+        (val) => {
+            setIsVisible(val);
+        },
+        [setIsVisible]
+    );
+
+    const { ref } = useCloseSection(handleVisibility);
 
     const handleAsideVisible = useCallback(() => {
         setIsVisible((prev) => !prev);
