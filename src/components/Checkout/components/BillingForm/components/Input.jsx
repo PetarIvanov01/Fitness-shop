@@ -16,7 +16,7 @@ export default function Input({
             type="text"
             name={name}
             onChange={handleOnChange}
-            className={`${customWidth} shadow-inp2l border bg-zinc-700 px-1 py-2 font-inter ${editStyles}
+            className={`${customWidth} border bg-zinc-700 px-1 py-2 font-inter shadow-inp2l ${editStyles}
          focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300`}
             value={value}
         />
