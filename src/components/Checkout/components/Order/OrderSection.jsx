@@ -1,29 +1,30 @@
 import { TbClipboardList } from 'react-icons/tb';
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import useStore from '../../../../zustand/store';
 
 import TableRow from './components/TableRow';
 import FinishOrder from './FinishOrder';
 
 export default function OrderSection() {
-    const cart = useStore((state) => state.cart);
+    const fetchCartData = useStore((state) => state.fetchCartData);
+    const [cart, setCart] = useState([]);
 
-    const OrderItems = cart.map((order) => {
-        const orderInfo = {
-            quantity: order.quantity,
-            name: order.title,
-            subtotal: Number(order.price) * Number(order.quantity),
+    useEffect(() => {
+        const abortController = new AbortController();
+
+        fetchCartData(abortController.signal).then(setCart);
+
+        return () => {
+            abortController.abort();
         };
-        return <TableRow key={order.product_id} {...orderInfo} />;
-    });
+    }, [fetchCartData]);
 
-    const totalPrice = useMemo(() => {
-        if (cart.length === 0) return 0;
-
-        return cart.reduce((prev, curr) => {
-            return prev + Number(curr.price) * Number(curr.quantity);
-        }, 0);
-    }, [cart]);
+    const totalPrice =
+        cart.length === 0
+            ? 0
+            : cart.reduce((prev, curr) => {
+                  return prev + Number(curr.price) * Number(curr.quantity);
+              }, 0);
 
     return (
         <section className="px-4 pb-14 pt-6 text-white">
@@ -41,13 +42,28 @@ export default function OrderSection() {
                         </tr>
                     </thead>
                     <tbody className="text-left">
-                        {OrderItems}
+                        {cart.length > 0 &&
+                            cart.map((order) => {
+                                const orderInfo = {
+                                    quantity: order.quantity,
+                                    name: order.title,
+                                    subtotal:
+                                        Number(order.price) *
+                                        Number(order.quantity),
+                                };
+                                return (
+                                    <TableRow
+                                        key={order.product_id}
+                                        {...orderInfo}
+                                    />
+                                );
+                            })}
                         <tr className="border text-left max-sm:text-[0.7em]">
                             <td className="p-2 font-semibold">
                                 <span>Subtotal:</span>
                             </td>
                             <td className="p-2 ">
-                                <span className="">$ 3232,23</span>
+                                <span className="">$ 3232.23</span>
                             </td>
                         </tr>
 
