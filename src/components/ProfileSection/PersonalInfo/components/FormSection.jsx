@@ -29,12 +29,16 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
         [setProfileInfo]
     );
 
-    const handleOnChangePhoneInput = useCallback((phone) => {
-        setProfileInfo((state) => ({
-            ...state,
-            phoneNumber: phone,
-        }));
-    }, []);
+    const handleOnChangePhoneInput = useCallback(
+        (phone) => {
+            hasChange.current = true;
+            setProfileInfo((state) => ({
+                ...state,
+                phoneNumber: phone,
+            }));
+        },
+        [hasChange]
+    );
 
     const handleOnSubmit = async () => {
         if (hasChange.current) {
@@ -72,6 +76,7 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
                 <div className="flex flex-col">
                     <Field
                         handleOnChange={handleOnChangePersonalInfo}
+                        isEdit={true}
                         id={'email'}
                         name={'email'}
                         type={'email'}
