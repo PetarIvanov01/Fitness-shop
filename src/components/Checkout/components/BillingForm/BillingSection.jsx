@@ -1,40 +1,47 @@
+import { LuAsterisk } from 'react-icons/lu';
+
 import { useCallback, useEffect, useState } from 'react';
 import { initialProfileValue } from '../../../../utils/constants';
-import { LuAsterisk } from 'react-icons/lu';
+import useStore from '../../../../zustand/store';
+import useFetch from '../../../../hooks/useFetch';
+
 import BillingHeader from './components/BillingHeader';
 import Label from './components/Label';
 import Input from './components/Input';
-import useProfileCache from '../../../../hooks/useProfileCache';
 
 export default function BillingSection() {
-    const { personalInfo, shippingInfo } = useProfileCache();
-    const [profileState, setProfileInfo] = useState(initialProfileValue);
+    const user = useStore((state) => state.user);
+    const fetchData = useStore((state) => state.fetchBillingData);
+
+    const { data } = useFetch(fetchData, user.id);
+
+    const [personalState, setProfileInfo] = useState(
+        initialProfileValue.personalInfo
+    );
+    const [addressState, setProfileAddress] = useState(
+        initialProfileValue.shippingInfo
+    );
 
     useEffect(() => {
-        setProfileInfo({
-            personalInfo,
-            shippingInfo,
-        });
-    }, [personalInfo, shippingInfo]);
+        if (data.personalInfo && data.shippingInfo) {
+            setProfileInfo(data.personalInfo);
+            setProfileAddress(data.shippingInfo);
+        }
+    }, [data]);
 
     const handleOnChangePersonalInfo = useCallback((e) => {
         e.preventDefault();
         setProfileInfo((state) => ({
-            ...state,
-            personalInfo: {
-                ...state.personalInfo,
-                [e.target.name]: e.target.value,
-            },
+            ...state.personalInfo,
+            [e.target.name]: e.target.value,
         }));
     }, []);
+
     const handleOnChangeShippingInfo = useCallback((e) => {
         e.preventDefault();
-        setProfileInfo((state) => ({
-            ...state,
-            shippingInfo: {
-                ...state.shippingInfo,
-                [e.target.name]: e.target.value,
-            },
+        setProfileAddress((state) => ({
+            ...state.shippingInfo,
+            [e.target.name]: e.target.value,
         }));
     }, []);
     return (
@@ -52,7 +59,7 @@ export default function BillingSection() {
                             <Input
                                 handleOnChange={handleOnChangePersonalInfo}
                                 name={'firstName'}
-                                value={profileState.personalInfo.firstName}
+                                value={personalState.firstName}
                             />
                         </div>
                         <div className="">
@@ -62,7 +69,7 @@ export default function BillingSection() {
                             <Input
                                 handleOnChange={handleOnChangePersonalInfo}
                                 name={'lastName'}
-                                value={profileState.personalInfo.lastName}
+                                value={personalState.lastName}
                             />
                         </div>
                     </div>
@@ -74,7 +81,7 @@ export default function BillingSection() {
                         <Input
                             handleOnChange={handleOnChangePersonalInfo}
                             name={'phoneNumber'}
-                            value={profileState.personalInfo.phoneNumber}
+                            value={personalState.phoneNumber}
                         />
                     </div>
 
@@ -85,7 +92,7 @@ export default function BillingSection() {
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
                             name={'city'}
-                            value={profileState.shippingInfo.city}
+                            value={addressState.city}
                         />
                     </div>
 
@@ -95,7 +102,7 @@ export default function BillingSection() {
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
-                            value={profileState.shippingInfo.address}
+                            value={addressState.address}
                             name={'address'}
                             placeholder={'House number, street name, apartment'}
                             width={'full'}
@@ -108,7 +115,7 @@ export default function BillingSection() {
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
-                            value={profileState.shippingInfo.country}
+                            value={addressState.country}
                             name={'country'}
                         />
                     </div>
@@ -119,7 +126,7 @@ export default function BillingSection() {
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
-                            value={profileState.shippingInfo.postcode}
+                            value={addressState.postcode}
                             name={'postcode'}
                         />
                     </div>
@@ -131,9 +138,10 @@ export default function BillingSection() {
                             Email address <LuAsterisk color="red" />
                         </Label>
                         <Input
+                            isEdit={true}
                             handleOnChange={handleOnChangePersonalInfo}
                             name={'email'}
-                            value={profileState.personalInfo.email}
+                            value={personalState.email}
                         />
                     </div>
 
