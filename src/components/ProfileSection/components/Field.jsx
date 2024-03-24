@@ -5,6 +5,7 @@ export default function Field({
     name,
     id,
     type,
+    isEdit = false,
 }) {
     return (
         <>
@@ -12,6 +13,7 @@ export default function Field({
                 {label}
             </label>
             <input
+                disabled={isEdit}
                 value={value}
                 onChange={handleOnChange}
                 className="h-8 rounded-sm border border-white bg-[#1B263E] py-4 pl-2"
