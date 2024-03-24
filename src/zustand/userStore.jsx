@@ -49,6 +49,15 @@ const userSlice = (set) => ({
         );
         set(() => ({ shippingInfo: addressState }));
     },
+    fetchBillingData: async (userId, signal) => {
+        const data = await getUserInformation(userId, signal);
+        const { payload } = await getAddresses(userId, '', signal);
+
+        return {
+            personalInfo: data,
+            shippingInfo: payload[0],
+        };
+    },
 });
 
 export default userSlice;
