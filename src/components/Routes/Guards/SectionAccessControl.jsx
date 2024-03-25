@@ -1,11 +1,12 @@
 import { Navigate, Outlet, useParams } from 'react-router-dom';
 import PersonalInfoSection from '../../ProfileSection/PersonalInfo/PersonalInfoSection';
 import AddressSection from '../../ProfileSection/AddressInfo/AddressSection';
+import OrderSection from '../../ProfileSection/OrdersInfo/OrderSection';
 
 const SECTION_COMPONENT_MAPPING = {
     info: PersonalInfoSection,
     address: AddressSection,
-    orders: PersonalInfoSection,
+    orders: OrderSection,
     'pay-methods': PersonalInfoSection,
 };
 
