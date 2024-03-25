@@ -1,11 +1,11 @@
 import { MdOutlineClear } from 'react-icons/md';
 
+import { RANGES } from '../../../../utils/priceRangeConstants';
 import filters from '../../../../assets/utils/filterData';
+import usePriceRange from '../../../../hooks/usePriceRange';
 
 import PriceRange from './PriceRange';
 import Filter from './ReusableFilter';
-import usePriceRange from '../../../../hooks/usePriceRange';
-import { RANGES } from '../../../../utils/priceRangeConstants';
 
 export default function AsideFilters({ clearQueries }) {
     const { setPrice, invalidPriceRange, totalPrice } = usePriceRange();
@@ -20,7 +20,7 @@ export default function AsideFilters({ clearQueries }) {
     const asideMediaQueries = 'max-[600px]:self-center max-[600px]:border-none';
     return (
         <aside
-            className={`flex h-[50%] max-w-[250px] flex-col gap-1 border-r border-white px-2 pt-1 shadow-md ${asideMediaQueries}`}
+            className={`flex h-[50%] max-w-[250px] flex-col gap-1 rounded-md  bg-slate-700 px-2 pt-1 shadow-lg ${asideMediaQueries}`}
         >
             <div className="flex flex-col">
                 <div className="mb-4 flex justify-between border-b">

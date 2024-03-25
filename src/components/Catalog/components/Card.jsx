@@ -19,8 +19,8 @@ export default function Card({
     return (
         <div
             className="relative flex w-fit flex-col items-center justify-between
-             rounded-lg bg-gradient-to-r from-[#456789] via-[#7198bf]
-         to-[#456789] p-4 opacity-95 shadow-lg"
+             rounded-lg bg-gradient-to-r from-slate-700 via-[#3d5874]
+         to-slate-700 p-4 opacity-95 shadow-lg"
         >
             <div
                 onClick={onClickRedirectToProduct}
@@ -35,16 +35,16 @@ export default function Card({
                 />
             </div>
 
-            <div className="max-w-32 text-wrap text-center text-xl font-bold text-white">
+            <div className="max-w-32 text-wrap text-center text-xl font-bold text-neutral-200">
                 {title}
             </div>
 
-            <div className="flex flex-col items-center gap-2 text-white">
+            <div className="flex flex-col items-center gap-2 text-neutral-200">
                 <p className="text-lg">Price: ${price}</p>
                 <button
                     onClick={onClickAddCookieData}
                     className="rounded bg-blue-500 
-                px-4 py-2 font-bold text-white ring ring-blue-900 hover:bg-blue-700 "
+                px-4 py-2 font-bold text-neutral-200  hover:bg-blue-700 "
                 >
                     Add to Cart
                 </button>

@@ -26,7 +26,7 @@ export default function SortBy() {
     };
 
     return (
-        <section className="flex flex-col">
+        <section className="max-s:self-start max-s:pt-2 flex flex-col ">
             <section className="self-end">
                 <div className="flex items-center gap-1 rounded-md bg-white p-0.5 text-gray-800">
                     <label htmlFor="sort">Sort By: </label>
