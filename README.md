@@ -19,94 +19,91 @@ Welcome to **StrongEqup**, a fitness equipment store project aimed at enhancing 
 -   **Planned Feature: View Order History Under "My Orders" Section**
     -   This feature will enable users to view their order history, including details such as order dates, item descriptions, and order statuses, providing transparency and order tracking capabilities.
 
-## Screenshots
-
-Here are some screenshots showcasing various views of the StrongEqup application:
-
-<style>
-    details {
-        border: 1px solid #000; 
-        box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.85);
-        border-radius: 3px;
-        margin-bottom: 20px;
-        background-color: gray; 
-    }
-
-    summary {
-        font-weight: bold;
-        color: #333;
-        cursor: pointer;
-        background-color: #f0f0f0; 
-        padding: 10px;
-        border-radius: 3px;
-        margin-bottom: 5px;
-    }
-
-    details p {
-        font-family: "Lato";
-        color:black;
-        padding: 2px 5px;
-        font-size: 16px;
-        border-bottom: 1px solid #000;
-    }
-
-   .image-wrapper {
-        overflow-x: hidden; 
-        overflow-y: auto; 
-        scrollbar-width: thin; 
-        scrollbar-color: #888 #f4f4f4; 
-        max-height: 700px; 
-    }
-    .image-wrapper img {
-       max-width: 100%;
-        height: auto; 
-    }
-
-    .image-wrapper::-webkit-scrollbar {
-        width: 5px; 
-    }
-
-    .image-wrapper::-webkit-scrollbar-thumb {
-        background-color: white; 
-        border-radius: 5px; 
-    }
-
-    .image-wrapper::-webkit-scrollbar-thumb:hover {
-        background-color: #555; 
-    }
-</style>
-
-<details>
-    <summary>Home Page</summary>
-    <p>The Home Page serves as the main entry point to the StrongEqup application. Here, users are greeted with an overview of featured products, promotional offers, and important announcements. The design aims to provide a visually appealing and engaging experience, encouraging users to explore the catalog and make purchases.</p>
-    <div class="image-wrapper">
-        <img src="screenshots/home-page.png" alt="Home Page Screenshot"> 
+<svg xmlns="http://www.w3.org/2000/svg" style="margin: 0; padding: 0;">
+  
+  <foreignObject width="100%" height="100%" style="margin: 0; padding: 0;">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <h2>Screenshots</h2>
+    <p>Here are some screenshots showcasing various views of the StrongEqup application:</p>
+     <style>
+        details {
+            border: 1px solid #000; 
+            box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.85);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            background-color: gray; 
+        }
+        summary {
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            background-color: #f0f0f0; 
+            padding: 10px;
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+        details p {
+            font-family: "Lato";
+            color:black;
+            padding: 2px 5px;
+            font-size: 16px;
+            border-bottom: 1px solid #000;
+        }
+        .image-wrapper {
+            overflow-x: hidden; 
+            overflow-y: auto; 
+            scrollbar-width: thin; 
+            scrollbar-color: #888 #f4f4f4; 
+            max-height: 700px; 
+        }
+        .image-wrapper img {
+        max-width: 100%;
+            height: auto; 
+        }
+        .image-wrapper::-webkit-scrollbar {
+            width: 5px; 
+        }
+        .image-wrapper::-webkit-scrollbar-thumb {
+            background-color: white; 
+            border-radius: 5px; 
+        }
+        .image-wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: #555; 
+        }
+    </style>
+    <div>
+        <details>
+            <summary>Home Page</summary>
+            <p>The Home Page serves as the main entry point to the StrongEqup application. Here, users are greeted with an overview of featured products, promotional offers, and important announcements. The design aims to provide a visually appealing and engaging experience, encouraging users to explore the catalog and make purchases.</p>
+            <div class="image-wrapper">
+                <img src="screenshots/home-page.png" alt="Home Page Screenshot"> 
+            </div>
+        </details>
+        <details>
+            <summary><b>Catalog Page</b></summary>
+            <p>The Catalog Page showcases the wide range of fitness equipment available on StrongEqup. Users can browse through various categories such as cardio machines, strength training equipment, accessories, and more. The page features intuitive navigation and filtering options, allowing users to easily find products that suit their fitness needs and preferences.</p>
+            <div class="image-wrapper">
+                <img src="screenshots/catalog-page.png"/> 
+            </div>
+        </details>
+        <details>
+            <summary><b>Profile Page</b></summary>
+            <p>The Profile Page provides users with personalized account management features. Here, users can view and edit their personal information, manage delivery addresses, track order history, and update account settings. The page is designed to offer convenience and control, empowering users to tailor their StrongEqup experience to their individual preferences.</p>
+            <div class="image-wrapper">
+                <img src="screenshots/profile-page.png"/>
+            </div>
+        </details>
+        <details>
+            <summary><b>Cart Page</b></summary>
+            <p>The Cart Page displays the items that users have added to their shopping cart while browsing the StrongEqup catalog. Users can review the selected products, adjust quantities, and proceed to checkout. The page is designed to be user-friendly and intuitive, providing a seamless shopping experience from product selection to purchase confirmation.</p>
+            <div class="image-wrapper">
+                <img src="screenshots/cart-page.png"/>
+            </div>
+        </details>
+        </div>
     </div>
-</details>
-
-<details>
-    <summary><b>Catalog Page</b></summary>
-    <p>The Catalog Page showcases the wide range of fitness equipment available on StrongEqup. Users can browse through various categories such as cardio machines, strength training equipment, accessories, and more. The page features intuitive navigation and filtering options, allowing users to easily find products that suit their fitness needs and preferences.</p>
-    <div class="image-wrapper">
-        <img src="screenshots/catalog-page.png"/> 
-    </div>
-</details>
-
-<details>
-    <summary><b>Profile Page</b></summary>
-    <p>The Profile Page provides users with personalized account management features. Here, users can view and edit their personal information, manage delivery addresses, track order history, and update account settings. The page is designed to offer convenience and control, empowering users to tailor their StrongEqup experience to their individual preferences.</p>
-    <div class="image-wrapper"> 
-        <img src="screenshots/profile-page.png"/> 
-    </div>  
-</details>
-
-<details>
-    <summary><b>Cart Page</b></summary>
-    <p>The Cart Page displays the items that users have added to their shopping cart while browsing the StrongEqup catalog. Users can review the selected products, adjust quantities, and proceed to checkout. The page is designed to be user-friendly and intuitive, providing a seamless shopping experience from product selection to purchase confirmation.</p>
-    <div class="image-wrapper">
-        <img src="screenshots/cart-page.png"/> 
-    </div>
-</details>
+  </foreignObject>
+</svg>
 
 ## Future Plans
 
