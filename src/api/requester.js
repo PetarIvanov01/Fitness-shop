@@ -1,6 +1,6 @@
 /*eslint no-useless-catch: "off"*/
 import { getFromBrowserStorage } from './services/storage';
-import { handleRefreshingToken } from './services/user';
+import { handleRefreshingToken } from './services/refreshToken';
 
 const HOST = 'http://localhost:5000/api/v1';
 
