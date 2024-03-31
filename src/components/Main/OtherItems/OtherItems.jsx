@@ -60,9 +60,8 @@ export default function OtherItems() {
 
     return (
         <section
-            className="mx-2 mb-6 
-        mt-[6em] min-h-[300px]
-        w-9/12 max-w-[640px] rounded-xl bg-stone-950 bg-opacity-95 p-5"
+            className="mx-2 mb-6 mt-[5em] 
+        min-h-[307px] w-9/12 max-w-[640px] rounded-xl bg-stone-950 bg-opacity-95 p-5"
         >
             <header className="border-b-2 border-solid border-white text-center">
                 <h1 className="text-[2em] font-bold text-white max-md:text-[1.5em]">
