@@ -3,9 +3,10 @@ import Input from './Tags/Input';
 import Button from './Tags/Button';
 import Heading from './Tags/Heading';
 import useForm from '../../../hooks/useForm';
-import { sendUserLogin } from '../../../api/services/user';
+import { sendUserLogin } from '../../../api/services/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { useState } from 'react';
 
 const initialState = {
     email: '',
@@ -13,18 +14,20 @@ const initialState = {
 };
 export default function LoginForm() {
     const navigate = useNavigate();
-
+    const [isSubmit, setIsSubmit] = useState(false);
     const onSubmit = async (values) => {
         try {
+            setIsSubmit(true);
             const body = {
                 email: values.email,
                 password: values.password,
             };
-            await sendUserLogin(body);
-
-            toast('You are logged in!');
-
-            navigate('/');
+            setTimeout(async () => {
+                setIsSubmit(false);
+                await sendUserLogin(body);
+                toast('You are logged in!');
+                navigate('/');
+            }, 800);
         } catch (error) {
             if (error.errors) {
                 throw error.errors;
@@ -37,7 +40,7 @@ export default function LoginForm() {
         initialState,
         onSubmit
     );
-
+    const requestErr = error.requestErr;
     return (
         <div className="flex w-1/2 flex-col items-center px-6 text-white ">
             <Heading text={'Registered User'} />
@@ -55,7 +58,7 @@ export default function LoginForm() {
                         placeholder={'Email address...'}
                         type={'email'}
                         title="Please provide valid email address"
-                        error={!!error.email || error.requestErr}
+                        error={!!error.email || requestErr}
                     />
                 </div>
 
@@ -68,17 +71,21 @@ export default function LoginForm() {
                         name={'password'}
                         placeholder={'Password...'}
                         type={'password'}
-                        error={!!error.password || error.requestErr}
+                        error={!!error.password || requestErr}
                     />
                 </div>
                 <div className="flex items-center gap-x-32">
-                    <Button text={'Sign In'} errors={error} />
-                    {error.requestErr && (
+                    <Button
+                        text={'Sign In'}
+                        errors={error}
+                        loadSpin={isSubmit}
+                    />
+                    {requestErr && (
                         <p
                             data-test="error-req"
                             className="text-lg text-red-500"
                         >
-                            {error.requestErr}
+                            {requestErr}
                         </p>
                     )}
                 </div>
