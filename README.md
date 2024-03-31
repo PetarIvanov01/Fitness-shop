@@ -17,65 +17,6 @@ Welcome to **StrongEqup**, a fitness equipment store project aimed at enhancing 
 -   **User Profile Options Including Editing Personal Information and Adding Multiple Addresses** ⚠️(Still in development)
     -   Within their user profile, users have access to various options for managing their account settings. They can edit personal information, add or remove delivery addresses as needed, providing flexibility and customization.
 -   **Planned Feature: View Order History Under "My Orders" Section** - This feature will enable users to view their order history, including details such as order dates, item descriptions, and order statuses, providing transparency and order tracking capabilities.
-<!---
-<svg xmlns="http://www.w3.org/2000/svg" style="margin: 0; padding: 0;">
-
-  <foreignObject width="100%" height="100%" style="margin: 0; padding: 0;">
-    <div xmlns="http://www.w3.org/1999/xhtml">
-    <h2>Screenshots</h2>
-    <p>Here are some screenshots showcasing various views of the StrongEqup application:</p>
-     <style>
-        details {
-            border: 1px solid #000; 
-            box-shadow: 7px 10px 5px 0px rgba(0,0,0,0.85);
-            border-radius: 3px;
-            margin-bottom: 20px;
-            background-color: gray; 
-        }
-        summary {
-            font-weight: bold;
-            color: #333;
-            cursor: pointer;
-            background-color: #f0f0f0; 
-            padding: 10px;
-            border-radius: 3px;
-            margin-bottom: 5px;
-        }
-        details p {
-            font-family: "Lato";
-            color:black;
-            padding: 2px 5px;
-            font-size: 16px;
-            border-bottom: 1px solid #000;
-        }
-        .image-wrapper {
-            overflow-x: hidden; 
-            overflow-y: auto; 
-            scrollbar-width: thin; 
-            scrollbar-color: #888 #f4f4f4; 
-            max-height: 700px; 
-        }
-        .image-wrapper img {
-        max-width: 100%;
-            height: auto; 
-        }
-        .image-wrapper::-webkit-scrollbar {
-            width: 5px; 
-        }
-        .image-wrapper::-webkit-scrollbar-thumb {
-            background-color: white; 
-            border-radius: 5px; 
-        }
-        .image-wrapper::-webkit-scrollbar-thumb:hover {
-            background-color: #555; 
-        }
-    </style>
-    <div>
-
-      </foreignObject>
-
-</svg>
--->
 
 ## Screenshots
 
@@ -108,7 +49,7 @@ Welcome to **StrongEqup**, a fitness equipment store project aimed at enhancing 
     </div>
 </details>
 
-## Future Plans
+## 📢 Future Plans
 
 In the future, my goal is to deploy the StrongEqup web application so that everyone can access its features. Stay tuned for updates on the deployment progress!
 
@@ -132,6 +73,6 @@ Follow these steps to set up StrongEqup on your local machine:
 
     `npm run dev`
 
-## License
+## 📃 License
 
 This project is licensed under the [MIT License](LICENSE).
