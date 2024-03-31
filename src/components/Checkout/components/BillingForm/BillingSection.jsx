@@ -1,11 +1,12 @@
-import { LuAsterisk } from 'react-icons/lu';
-
 import { useCallback, useEffect, useState } from 'react';
-import { initialProfileValue } from '../../../../utils/constants';
+
 import useStore from '../../../../zustand/store';
 import useFetch from '../../../../hooks/useFetch';
 
+import { initialProfileValue } from '../../../../utils/constants';
+
 import BillingHeader from './components/BillingHeader';
+import { LuAsterisk } from 'react-icons/lu';
 import Label from './components/Label';
 import Input from './components/Input';
 
@@ -48,7 +49,7 @@ export default function BillingSection() {
         <section className="border-b border-white px-4 pb-14 pt-12 text-white">
             <BillingHeader />
 
-            <div className="flex justify-between gap-2 ">
+            <form className="flex justify-between gap-2 ">
                 <article className="flex w-1/2 flex-col gap-6 border-r border-white pr-3">
                     <div className="flex flex-wrap gap-6">
                         <div className="mr-auto">
@@ -57,6 +58,7 @@ export default function BillingSection() {
                                 <LuAsterisk color="red" />
                             </Label>
                             <Input
+                                isEdit={true}
                                 handleOnChange={handleOnChangePersonalInfo}
                                 name={'firstName'}
                                 value={personalState.firstName}
@@ -67,6 +69,7 @@ export default function BillingSection() {
                                 Last Name <LuAsterisk color="red" />
                             </Label>
                             <Input
+                                isEdit={true}
                                 handleOnChange={handleOnChangePersonalInfo}
                                 name={'lastName'}
                                 value={personalState.lastName}
@@ -79,6 +82,7 @@ export default function BillingSection() {
                             Phone Number <LuAsterisk color="red" />
                         </Label>
                         <Input
+                            isEdit={true}
                             handleOnChange={handleOnChangePersonalInfo}
                             name={'phoneNumber'}
                             value={personalState.phoneNumber}
@@ -150,7 +154,7 @@ export default function BillingSection() {
                         <textarea className="h-[100px] w-full resize-none border-2 bg-zinc-700 p-1 focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300" />
                     </div>
                 </article>
-            </div>
+            </form>
         </section>
     );
 }
