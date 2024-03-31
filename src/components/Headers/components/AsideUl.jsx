@@ -19,7 +19,7 @@ const categories = [
 export default function AsideUl({ isVisible, onClickClose }) {
     return (
         <ul
-            className={`${!isVisible && 'hidden'} flex w-full flex-col gap-2 pl-4 pt-5`}
+            className={`${!isVisible && 'hidden'} flex w-full flex-col gap-2 pl-4 pt-5 max-[639px]:text-sm`}
         >
             {categories.map((e) => (
                 <li
