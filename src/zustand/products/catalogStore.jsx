@@ -1,4 +1,4 @@
-import { getCatalog } from '../api/services/catalog';
+import { getCatalog } from '../../api/services/catalog';
 
 const catalogSlice = (set) => ({
     itemsLngInDb: 0,

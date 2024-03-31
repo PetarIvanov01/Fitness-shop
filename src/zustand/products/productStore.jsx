@@ -1,11 +1,12 @@
-import { getProduct } from '../api/services/catalog';
+import { getProduct } from '../../api/services/catalog';
 
 const productSlice = (set) => ({
-    product: [],
+    product: {},
     fetchProduct: async (productId, signal) => {
         const data = await getProduct(productId, signal);
-        set({ product: data });
-        return data;
+
+        set({ product: data.result });
+        return data.result;
     },
 });
 

@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { getCart } from '../api/services/catalog';
+import { getCart } from '../../api/services/catalog';
 
 const COOKIE_NAME = 'cart-cookie';
 const COOKIE_OPTIONS = { expires: 1, sameSite: 'Strict', path: '/' };

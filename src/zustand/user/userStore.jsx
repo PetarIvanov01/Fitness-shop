@@ -1,17 +1,21 @@
-import { getFromBrowserStorage } from '../api/services/storage';
+import { getFromBrowserStorage } from '../../api/services/storage';
 import {
-    getAddresses,
-    updateAddress,
-    getUserInformation,
     updateUserInformation,
-} from '../api/services/user';
-import { initialProfileValue } from '../utils/constants';
+    getUserInformation,
+} from '../../api/services/user';
+import {
+    getAddress,
+    updateAddress,
+} from '../../api/services/userService/address';
+
+import { initialProfileValue } from '../../utils/constants';
 
 const userSlice = (set) => ({
     user: getFromBrowserStorage('user'),
     personalInfo: initialProfileValue.personalInfo,
     shippingInfo: initialProfileValue.shippingInfo,
     otherShippingAddresses: [],
+
     fetchProfile: async (userId, signal) => {
         const data = await getUserInformation(userId, signal);
 
@@ -19,7 +23,7 @@ const userSlice = (set) => ({
         return data;
     },
     fetchAddress: async (userId, signal, addressId = '') => {
-        const { payload } = await getAddresses(userId, addressId, signal);
+        const { payload } = await getAddress(userId, addressId, signal);
         let state = {
             ...payload[0],
         };
@@ -51,7 +55,7 @@ const userSlice = (set) => ({
     },
     fetchBillingData: async (userId, signal) => {
         const data = await getUserInformation(userId, signal);
-        const { payload } = await getAddresses(userId, '', signal);
+        const { payload } = await getAddress(userId, '', signal);
 
         return {
             personalInfo: data,
