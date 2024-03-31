@@ -1,13 +1,18 @@
+import useForm from '../../../hooks/useForm';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { sendUserRegistration } from '../../../api/services/auth';
+import { registerFieldValidation } from '../../../validations/registerFormValidation';
+
 import { toast } from 'sonner';
+
 import Label from './Tags/Label';
 import Input from './Tags/Input';
 import Button from './Tags/Button';
 import Heading from './Tags/Heading';
-import useForm from '../../../hooks/useForm';
-import { sendUserRegistration } from '../../../api/services/user';
-import { registerFieldValidation } from '../../../validations/registerFormValidation';
 import ErrorLabel from './Tags/ErrorLabel';
+import PhoneInputRefac from './Tags/PhoneInputRefac';
 
 const initialState = {
     firstName: '',
@@ -19,6 +24,7 @@ const initialState = {
 };
 
 export default function RegsiterForm() {
+    const [isSubmit, setIsSubmit] = useState(false);
     const navigate = useNavigate();
 
     const onSubmit = async (values) => {
@@ -26,6 +32,7 @@ export default function RegsiterForm() {
             if (values.password !== values['re-password']) {
                 throw new Error("Password doesn't matched!");
             }
+            setIsSubmit(true);
             const body = {
                 firstName: values.firstName,
                 lastName: values.lastName,
@@ -34,10 +41,15 @@ export default function RegsiterForm() {
                 password: values.password,
                 rePassword: values['re-password'],
             };
-            await sendUserRegistration(body);
-            toast('Successfull registration!');
-            navigate('/');
+
+            setTimeout(async () => {
+                await sendUserRegistration(body);
+                toast('Successfull registration!');
+                setIsSubmit(false);
+                navigate('/');
+            }, 800);
         } catch (error) {
+            setIsSubmit(false);
             if (error.errors) {
                 throw error.errors;
             }
@@ -100,17 +112,12 @@ export default function RegsiterForm() {
 
                 <div className=" h-16 max-w-96">
                     <Label htmlFor={'phoneNumber'} text={'Phone number'} />
-                    <Input
-                        onblur={handleOnBlurValidation}
-                        handler={handleChangeValues}
-                        value={values.phoneNumber}
-                        id={'phoneNumber'}
-                        name={'phoneNumber'}
-                        placeholder={'+359 12 34 5678'}
-                        type={'tel'}
-                        pattern="\+[0-9]{3} [0-9]{2} [0-9]{3} [0-9]{4}"
-                        title="Please provide valid phone number"
-                        error={!!error.phoneNumber}
+
+                    <PhoneInputRefac
+                        handleChangeValues={handleChangeValues}
+                        handleOnBlurValidation={handleOnBlurValidation}
+                        phoneNumberErr={error.phoneNumber}
+                        phoneValue={values.phoneNumber}
                     />
                     {visibleError && (
                         <ErrorLabel
@@ -174,8 +181,13 @@ export default function RegsiterForm() {
                         />
                     )}
                 </div>
+
                 <div className="flex items-center gap-x-32">
-                    <Button text={'Sign Up'} errors={error} />
+                    <Button
+                        text={'Sign Up'}
+                        errors={error}
+                        loadSpin={isSubmit}
+                    />
                     <p data-test="error-fetch" className="text-lg text-red-500">
                         {requestErr}
                     </p>
