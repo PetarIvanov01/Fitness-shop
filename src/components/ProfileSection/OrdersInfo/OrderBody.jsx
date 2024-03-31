@@ -64,8 +64,8 @@ const sortingMenus = [
 
 export default function OrderBody() {
     return (
-        <section className="flex grow flex-col px-6 text-white ">
-            <div className="flex justify-center gap-5 ">
+        <section className="flex grow flex-col px-6 text-white">
+            <div className="flex flex-wrap justify-center gap-5 ">
                 {sortingMenus.map((e) => (
                     <SelectSort key={e.id} {...e} />
                 ))}

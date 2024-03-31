@@ -4,7 +4,7 @@ import OrderBody from './OrderBody';
 
 export default function OrderSection({ userId }) {
     return (
-        <div className="flex h-full flex-col">
+        <div className="flex h-full flex-col pb-5">
             <Header
                 icon={<IoMdInformationCircleOutline className="size-8" />}
                 title={'Orders Information'}

@@ -51,7 +51,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'address'}
                             type={'text'}
                             label={'Address'}
-                            value={addressState.address}
+                            value={addressState.address || ''}
                         />
                     </div>
                     <div className="flex flex-col">
@@ -61,7 +61,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'country'}
                             type={'text'}
                             label={'Country'}
-                            value={addressState.country}
+                            value={addressState.country || ''}
                         />
                     </div>
                 </div>
@@ -73,7 +73,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'city'}
                             type={'text'}
                             label={'City'}
-                            value={addressState.city}
+                            value={addressState.city || ''}
                         />
                     </div>
                     <div className="flex flex-col">
@@ -83,7 +83,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'postcode'}
                             type={'text'}
                             label={'Postal Code'}
-                            value={addressState.postcode}
+                            value={addressState.postcode || ''}
                         />
                     </div>
                 </div>

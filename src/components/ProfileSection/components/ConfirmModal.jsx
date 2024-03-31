@@ -8,7 +8,7 @@ export default function ConfirmModal({
             aria-hidden="true"
             className="fixed left-0 right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
         >
-            <div className="relative w-1/3 max-w-2xl p-4">
+            <div className="relative w-1/3 min-w-[260px] max-w-[350px] p-4">
                 <div className="relative rounded-lg border border-b-4 border-r-2 border-white bg-slate-700">
                     <div className="space-y-4 p-4 md:p-5">
                         <p className="text- text-center font-medium">{text}</p>
@@ -24,7 +24,9 @@ export default function ConfirmModal({
                         <button
                             onClick={toggleModal}
                             type="button"
-                            className="ms-3 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100  dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+                            className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium
+                             text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4
+                              focus:ring-gray-100  dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
                         >
                             Decline
                         </button>
