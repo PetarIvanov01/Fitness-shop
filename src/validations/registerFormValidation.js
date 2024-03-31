@@ -21,7 +21,7 @@ const REG_FIELDS = {
         if (!value.trim()) {
             return 'Phone number is required';
         }
-        if (!/\+[0-9]{3} [0-9]{2} [0-9]{3} [0-9]{4}/.test(value)) {
+        if (!/\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{4}/.test(value)) {
             return 'Please provide a valid phone number (e.g., +123 45 678 9012)';
         }
         return '';
