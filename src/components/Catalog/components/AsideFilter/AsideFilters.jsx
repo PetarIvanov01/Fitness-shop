@@ -20,7 +20,7 @@ export default function AsideFilters({ clearQueries }) {
     const asideMediaQueries = 'max-[600px]:self-center max-[600px]:border-none';
     return (
         <aside
-            className={`flex h-[50%] max-w-[250px] flex-col gap-1 rounded-md  bg-slate-700 px-2 pt-1 shadow-lg ${asideMediaQueries}`}
+            className={`flex h-[50%] max-w-[250px] flex-col gap-1 rounded-md bg-slate-700 px-2 pt-1 shadow-xl ${asideMediaQueries}`}
         >
             <div className="flex flex-col">
                 <div className="mb-4 flex justify-between border-b">
