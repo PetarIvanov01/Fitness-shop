@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { sendUserLogout } from '../../../api/services/user';
+import { sendUserLogout } from '../../../api/services/auth';
 import { toast } from 'sonner';
 import useStore from '../../../zustand/store';
 
