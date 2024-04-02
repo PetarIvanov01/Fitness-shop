@@ -6,7 +6,7 @@ export default function Input({
     width = 200,
     placeholder,
 }) {
-    const editStyles = `${isEdit ? 'text-gray-300 ' : 'hover:opacity-75 text-white '}`;
+    const editStyles = `${isEdit ? 'text-blue-300 border-blue-300' : 'text-white focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300'}`;
     const customWidth =
         typeof width === 'number' ? `w-[${width}px] ` : `w-${width} `;
     return (
@@ -16,8 +16,7 @@ export default function Input({
             type="text"
             name={name}
             onChange={handleOnChange}
-            className={`${customWidth} border bg-zinc-700 px-1 py-2 font-inter shadow-inp2l ${editStyles}
-         focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300`}
+            className={` ${customWidth} ${editStyles} border bg-gray-800 p-1`}
             value={value}
         />
     );
