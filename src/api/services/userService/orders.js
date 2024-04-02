@@ -2,9 +2,9 @@
 import * as methods from '../../requester';
 
 const endpoints = {
-    getOne: (userId, orderId) => `/${userId}/orders?orderId=${orderId}`,
-    getAll: (userId) => `/${userId}/orders`,
-    create: (userId) => `/${userId}/orders`,
+    getOne: (userId, orderId) => `/users/${userId}/orders?orderId=${orderId}`,
+    getAll: (userId) => `/users/${userId}/orders`,
+    create: (userId) => `/users/${userId}/orders`,
 };
 export const getPartialOrders = async (userId, signal) => {
     return await methods.get(endpoints.getAll(userId), null, signal);
