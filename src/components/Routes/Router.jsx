@@ -32,7 +32,9 @@ export default function Router() {
                 <Route path="/catalog" element={<Catalog />} />
 
                 <Route path="/cart" element={<Cart />} />
-                <Route path="/cart/checkout" element={<CheckoutView />} />
+                <Route element={<IsAuthenticatedUser />}>
+                    <Route path="/cart/checkout" element={<CheckoutView />} />
+                </Route>
 
                 <Route element={<ValidateProductViewRoute />}>
                     <Route
