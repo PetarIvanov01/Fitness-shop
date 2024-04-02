@@ -1,6 +1,5 @@
 import CheckoutHeader from './components/CheckoutHeader';
 import BillingSection from './components/BillingForm/BillingSection';
-import OrderSection from './components/Order/OrderSection';
 
 export default function CheckoutView() {
     return (
@@ -9,8 +8,6 @@ export default function CheckoutView() {
                 <CheckoutHeader />
 
                 <BillingSection />
-
-                <OrderSection />
             </div>
         </section>
     );
