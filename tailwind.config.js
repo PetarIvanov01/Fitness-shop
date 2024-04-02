@@ -56,6 +56,7 @@ export default {
             },
         },
         screens: {
+            'bil-s': '520px',
             s: '600px',
             sm: '640px',
             md: '768px',
