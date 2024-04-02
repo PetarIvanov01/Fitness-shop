@@ -2,6 +2,7 @@ import useForm from '../../../hooks/useForm';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import delay from '../../../utils/withDelayPromise';
 import { sendUserRegistration } from '../../../api/services/auth';
 import { registerFieldValidation } from '../../../validations/registerFormValidation';
 
@@ -28,33 +29,32 @@ export default function RegsiterForm() {
     const navigate = useNavigate();
 
     const onSubmit = async (values) => {
-        try {
-            if (values.password !== values['re-password']) {
-                throw new Error("Password doesn't matched!");
-            }
-            setIsSubmit(true);
-            const body = {
-                firstName: values.firstName,
-                lastName: values.lastName,
-                email: values.email,
-                phoneNumber: values.phoneNumber,
-                password: values.password,
-                rePassword: values['re-password'],
-            };
+        if (values.password !== values['re-password']) {
+            throw new Error("Password doesn't matched!");
+        }
+        setIsSubmit(true);
+        const body = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            phoneNumber: values.phoneNumber,
+            password: values.password,
+            rePassword: values['re-password'],
+        };
 
-            setTimeout(async () => {
+        await delay(800)
+            .then(async () => {
+                setIsSubmit(false);
                 await sendUserRegistration(body);
                 toast('Successfull registration!');
-                setIsSubmit(false);
                 navigate('/');
-            }, 800);
-        } catch (error) {
-            setIsSubmit(false);
-            if (error.errors) {
-                throw error.errors;
-            }
-            throw error;
-        }
+            })
+            .catch((e) => {
+                if (e.errors) {
+                    throw e.errors;
+                }
+                throw e;
+            });
     };
 
     const {

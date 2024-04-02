@@ -1,45 +1,53 @@
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+import { useState } from 'react';
+import { sendUserLogin } from '../../../api/services/auth';
+
+import delay from '../../../utils/withDelayPromise';
+
 import Label from './Tags/Label';
 import Input from './Tags/Input';
 import Button from './Tags/Button';
 import Heading from './Tags/Heading';
 import useForm from '../../../hooks/useForm';
-import { sendUserLogin } from '../../../api/services/auth';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
-import { useState } from 'react';
 
 const initialState = {
     email: '',
     password: '',
 };
+
 export default function LoginForm() {
     const navigate = useNavigate();
     const [isSubmit, setIsSubmit] = useState(false);
+
     const onSubmit = async (values) => {
-        try {
-            setIsSubmit(true);
-            const body = {
-                email: values.email,
-                password: values.password,
-            };
-            setTimeout(async () => {
+        setIsSubmit(true);
+
+        const body = {
+            email: values.email,
+            password: values.password,
+        };
+
+        await delay(800)
+            .then(async () => {
                 setIsSubmit(false);
                 await sendUserLogin(body);
                 toast('You are logged in!');
                 navigate('/');
-            }, 800);
-        } catch (error) {
-            if (error.errors) {
-                throw error.errors;
-            }
-            throw error;
-        }
+            })
+            .catch((e) => {
+                if (e.errors) {
+                    throw e.errors;
+                }
+                throw e;
+            });
     };
 
     const { values, handleChangeValues, handleSubmitForm, error } = useForm(
         initialState,
         onSubmit
     );
+
     const requestErr = error.requestErr;
     return (
         <div className="flex w-1/2 flex-col items-center px-6 text-white ">
