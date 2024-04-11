@@ -23,5 +23,13 @@ export default function SectionAccessControl() {
         return <Navigate to={'/'} />;
     }
 
-    return <Outlet context={{ RenderedSection, userId: params.userId }} />;
+    return (
+        <Outlet
+            context={{
+                RenderedSection,
+                userId: params.userId,
+                type: params.type,
+            }}
+        />
+    );
 }
