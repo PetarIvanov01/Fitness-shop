@@ -1,5 +1,6 @@
 import { GiPadlock } from 'react-icons/gi';
 import { CiUnlock } from 'react-icons/ci';
+
 export default function Field({
     value,
     handleOnChange,
@@ -24,7 +25,7 @@ export default function Field({
                 disabled={isEdit}
                 value={value}
                 onChange={handleOnChange}
-                className="h-8 rounded-sm border border-white bg-[#1B263E] py-4 pl-2"
+                className="h-8 w-full rounded-sm border border-white bg-[#1B263E] py-4 pl-2"
                 type={type}
                 name={name}
                 id={id}

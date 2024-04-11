@@ -15,6 +15,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
     });
     const updateUserAddress = useStore((state) => state.updateUserAddress);
     const hasChange = useRef();
+
     const handleOnChangePersonalInfo = useCallback(
         (e) => {
             e.preventDefault();
@@ -24,7 +25,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                 [e.target.name]: e.target.value,
             }));
         },
-        [setAddressInfo]
+        [setAddressInfo, hasChange]
     );
 
     const handleOnSubmit = async () => {
@@ -43,8 +44,8 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
     return (
         <section className="flex flex-col px-6 text-white">
             <form className="flex flex-col gap-4 ">
-                <div className="flex flex-wrap justify-between gap-2 max-[730px]:justify-center">
-                    <div className="flex flex-col">
+                <div className="flex flex-wrap justify-between gap-4 max-[730px]:justify-center">
+                    <div className="flex grow flex-col">
                         <Field
                             handleOnChange={handleOnChangePersonalInfo}
                             id={'address'}
@@ -54,7 +55,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             value={addressState.address || ''}
                         />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex grow flex-col">
                         <Field
                             handleOnChange={handleOnChangePersonalInfo}
                             id={'country'}
@@ -65,8 +66,8 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                         />
                     </div>
                 </div>
-                <div className="flex flex-wrap justify-between gap-2 max-[730px]:justify-center">
-                    <div className="flex flex-col">
+                <div className="flex flex-wrap justify-between gap-4 max-[730px]:justify-center">
+                    <div className="flex grow flex-col">
                         <Field
                             handleOnChange={handleOnChangePersonalInfo}
                             id={'city'}
@@ -76,7 +77,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             value={addressState.city || ''}
                         />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex grow flex-col">
                         <Field
                             handleOnChange={handleOnChangePersonalInfo}
                             id={'postcode'}

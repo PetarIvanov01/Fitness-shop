@@ -6,7 +6,7 @@ export default function ConfirmModal({
     return (
         <div
             aria-hidden="true"
-            className="fixed left-0 right-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
+            className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50"
         >
             <div className="relative w-1/3 min-w-[260px] max-w-[350px] p-4">
                 <div className="relative rounded-lg border border-b-4 border-r-2 border-white bg-slate-700">

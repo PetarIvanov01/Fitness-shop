@@ -13,12 +13,12 @@ export default function PhoneComp({ phoneNumber, handlOnChange }) {
                     width: 'max-content',
                 }}
                 defaultCountry="bg"
-                value={phoneNumber}
                 inputStyle={{
                     backgroundColor: '#1B263E',
                     color: 'white',
                     width: '180px',
                 }}
+                value={phoneNumber}
                 onChange={handlOnChange}
             />
         </div>

@@ -26,18 +26,20 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
                 [e.target.name]: e.target.value,
             }));
         },
-        [setProfileInfo]
+        [setProfileInfo, hasChange]
     );
 
     const handleOnChangePhoneInput = useCallback(
         (phone) => {
-            hasChange.current = true;
-            setProfileInfo((state) => ({
-                ...state,
-                phoneNumber: phone,
-            }));
+            if (phone !== personalState.phoneNumber.replace(' ', '')) {
+                hasChange.current = true;
+                setProfileInfo((state) => ({
+                    ...state,
+                    phoneNumber: phone,
+                }));
+            }
         },
-        [hasChange]
+        [setProfileInfo, hasChange, personalState.phoneNumber]
     );
 
     const handleOnSubmit = async () => {
@@ -49,10 +51,10 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
     };
 
     return (
-        <section className="flex flex-col px-6 text-white">
+        <section className="flex flex-col px-6 font-sans text-white">
             <form className="flex flex-col gap-4 ">
-                <div className="flex flex-wrap justify-between gap-2 max-[730px]:justify-center">
-                    <div className="flex flex-col">
+                <div className="flex flex-wrap justify-between gap-4 max-[730px]:justify-center">
+                    <div className="flex grow flex-col">
                         <Field
                             handleOnChange={handleOnChangePersonalInfo}
                             id={'firstName'}
@@ -62,7 +64,7 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
                             value={personalState.firstName}
                         />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex grow flex-col">
                         <Field
                             handleOnChange={handleOnChangePersonalInfo}
                             id={'lastName'}
