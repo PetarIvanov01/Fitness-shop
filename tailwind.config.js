@@ -7,6 +7,8 @@ export default {
             sans: ["'Roboto'", 'sans-serif'],
             alegreya: ["'Alegreya Sans'", 'sans-serif'],
             inter: ["'Inter'", 'sans-serif'],
+            oswald: ["'Oswald'", 'sans-serif'],
+            lora: ["'Lora'", 'serif'],
         },
         extend: {
             boxShadow: {
