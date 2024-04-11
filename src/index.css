@@ -53,3 +53,7 @@ table,th,td {
     background-color: rgb(144, 153, 202) !important;
 }
 
+
+input, label {
+    font-family: "Lora", serif;
+}
