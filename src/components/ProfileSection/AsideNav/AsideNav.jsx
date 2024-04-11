@@ -1,15 +1,17 @@
+import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
+import { NavLi } from './components/NavLi';
+
 import { LuMapPin } from 'react-icons/lu';
 import { IoTicketOutline } from 'react-icons/io5';
 import { MdOutlinePayment } from 'react-icons/md';
 import { IoMdInformationCircleOutline } from 'react-icons/io';
 
 import ProfilePic from './components/ProfilePic';
-import { NavLi } from './components/NavLi';
-import { useState } from 'react';
 
-export default function AsideNav({ userId }) {
-    const [active, setActive] = useState('info');
+export default function AsideNav({ userId, type }) {
+    const [active, setActive] = useState(type);
 
     const onNavigateSetActive = (id) => {
         return () => {
