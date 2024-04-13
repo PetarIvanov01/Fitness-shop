@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import * as methods from '../../requester';
 
 const endpoints = {
@@ -7,7 +6,12 @@ const endpoints = {
     create: (userId) => `/users/${userId}/orders`,
 };
 export const getPartialOrders = async (userId, signal) => {
-    return await methods.get(endpoints.getAll(userId), null, signal);
+    const { payload } = await methods.get(
+        endpoints.getAll(userId),
+        null,
+        signal
+    );
+    return payload;
 };
 
 export const getOneFullOrderInfo = async (userId, orderId, signal) => {
