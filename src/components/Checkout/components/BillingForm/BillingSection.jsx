@@ -73,8 +73,8 @@ export default function BillingSection() {
         <section className="px-4 pt-12 text-white">
             <BillingHeader />
 
-            <form className="max-bil-s:w-full max-bil-s:flex-wrap flex justify-between gap-2 border-b border-white pb-14">
-                <article className="max-bil-s:border-none flex w-1/2 flex-col gap-6 border-r border-white pr-3">
+            <form className="flex justify-between gap-2 border-b border-white pb-14 max-bil-s:w-full max-bil-s:flex-wrap">
+                <article className="flex w-1/2 flex-col gap-6 border-r border-white pr-3 max-bil-s:border-none">
                     <div className="flex flex-wrap gap-6">
                         <div className="mr-auto">
                             <Label>
@@ -161,7 +161,7 @@ export default function BillingSection() {
                     </div>
                 </article>
 
-                <article className="max-bil-s:w-full max-bil-s:flex-wrap flex w-1/2 flex-col gap-6 pl-1">
+                <article className="flex w-1/2 flex-col gap-6 pl-1 max-bil-s:w-full max-bil-s:flex-wrap">
                     <div>
                         <Label>
                             Email address <GiPadlock />
@@ -176,7 +176,7 @@ export default function BillingSection() {
                     </div>
 
                     <div className="max-bil-s:w-full">
-                        <Label>Extra Information (optionla)</Label>
+                        <Label>Extra Information (optional)</Label>
                         <textarea className="h-[100px] w-full resize-none border bg-gray-800 p-1 focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300" />
                     </div>
                 </article>
