@@ -17,7 +17,7 @@ export default function Input({
             name={name}
             onChange={handleOnChange}
             className={` ${customWidth} ${editStyles} border bg-gray-800 p-1`}
-            value={value}
+            value={value || ''}
         />
     );
 }
