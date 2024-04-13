@@ -1,35 +1,10 @@
+import useFetch from '../../../hooks/useFetch';
+
+import { getPartialOrders } from '../../../api/services/userService/orders';
+
 import SelectSort from './components/SelectSort';
 import OrderRow from './components/OrderRow';
-
-const mockOrders = [
-    {
-        id: 1,
-        title: 'Product A',
-        quantity: 2,
-        priceForAllProducts: 2523.99,
-        order_id: 'aksh1_20ddas0d12d',
-        status: 'Canceled',
-        createdAt: '2024 05-18 18:32',
-    },
-    {
-        id: 2,
-        title: 'Product B',
-        quantity: 1,
-        priceForAllProducts: 1521.5,
-        order_id: 'aksh120ddas_0d12d',
-        status: 'Finished',
-        createdAt: '2023 05-28 06:32',
-    },
-    {
-        id: 3,
-        title: 'Product C',
-        quantity: 3,
-        priceForAllProducts: 3033.75,
-        order_id: 'aksh12_0ddas0d12d',
-        status: 'In Process',
-        createdAt: '2024 02-18 08:32',
-    },
-];
+import Skeleton from '../components/Skeleton';
 
 const sortingMenus = [
     {
@@ -46,8 +21,8 @@ const sortingMenus = [
         id: 'sortByDate',
         options: [
             { value: '', label: '-- Select --' },
-            { value: 'new', label: 'New' },
-            { value: 'old', label: 'Old' },
+            { value: 'new', label: 'Newest' },
+            { value: 'old', label: 'Oldest' },
         ],
     },
     {
@@ -62,7 +37,12 @@ const sortingMenus = [
     },
 ];
 
-export default function OrderBody() {
+/*
+ - Pass data length to Skeleton component
+*/
+export default function OrderBody({ userId }) {
+    const { data, isLoading } = useFetch(getPartialOrders, userId);
+
     return (
         <section className="flex grow flex-col px-6 text-white">
             <div className="flex flex-wrap justify-center gap-5 ">
@@ -71,9 +51,11 @@ export default function OrderBody() {
                 ))}
             </div>
             <div className="flex flex-col gap-5 pt-10 ">
-                {mockOrders.map((e) => (
-                    <OrderRow key={e.id} {...e} />
-                ))}
+                {isLoading ? (
+                    data.map((e) => <OrderRow key={e.order_id} {...e} />)
+                ) : (
+                    <Skeleton />
+                )}
             </div>
         </section>
     );
