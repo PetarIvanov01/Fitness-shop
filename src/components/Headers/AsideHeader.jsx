@@ -6,6 +6,7 @@ import { GrLinkNext } from 'react-icons/gr';
 import { BiLogOutCircle } from 'react-icons/bi';
 
 import AsideUl from './components/AsideUl';
+import CatalogLink from '../CatalogLink';
 
 export default function AsideHeader({ visible, onClickClose, userId }) {
     const [isVisible, setVisible] = useState(false);
@@ -29,13 +30,11 @@ export default function AsideHeader({ visible, onClickClose, userId }) {
                 Products
             </h2>
 
-            <Link
-                onClick={onClickClose}
-                to={'/catalog'}
-                className="mb-2 flex items-center gap-2 rounded-md bg-stone-700 px-4 py-2 text-base text-stone-300 hover:bg-stone-500  max-sm:px-2 max-sm:text-sm"
-            >
-                Catalog <GrLinkNext />
-            </Link>
+            <div className="mb-2 flex items-center gap-2 rounded-md bg-stone-700 px-4 py-2 text-base text-stone-300 hover:bg-stone-500  max-sm:px-2 max-sm:text-sm">
+                <CatalogLink handler={onClickClose}>
+                    Catalog <GrLinkNext />
+                </CatalogLink>
+            </div>
 
             <button
                 onClick={handleVisibility}
