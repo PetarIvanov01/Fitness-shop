@@ -5,14 +5,31 @@ const STATUS_COLORS = {
     Finished: 'text-green-500',
     'In Process': 'text-orange-500',
 };
+const STATUSES = {
+    1: 'In Process',
+    2: 'Finished',
+    3: 'Canceled',
+};
 
 export default function OrderRow({
     order_id,
-    status,
-    createdAt,
-    priceForAllProducts,
+    status_id,
+    order_date,
+    total_price,
 }) {
+    const status = STATUSES[status_id];
     const statusColor = STATUS_COLORS[status];
+
+    const dateObject = new Date(order_date);
+
+    const formattedDate = dateObject.toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    });
 
     return (
         <div className="flex justify-between  border-b p-1">
@@ -20,7 +37,7 @@ export default function OrderRow({
                 <p>
                     <span className="">Order number: </span>
                     <span className="pl-1 font-semibold text-neutral-100 hover:underline hover:underline-offset-2">
-                        {order_id}
+                        {order_id.substring(0, Math.floor(order_id.length / 2))}
                     </span>
                 </p>
                 <p>
@@ -34,7 +51,7 @@ export default function OrderRow({
                 <p>
                     <span>Order data: </span>
                     <span className="pl-1 text-neutral-100 hover:underline hover:underline-offset-2">
-                        {createdAt}
+                        {formattedDate}
                     </span>
                 </p>
             </div>
@@ -44,8 +61,7 @@ export default function OrderRow({
                     <CgDetailsMore className="h size-6 text-green-700 hover:scale-110 hover:border-2 hover:border-green-700 hover:text-green-400" />
                 </button>
                 <p className="">
-                    Price: ${' '}
-                    <span className="font-medium">{priceForAllProducts}</span>
+                    Price: $ <span className="font-medium">{total_price}</span>
                 </p>
             </div>
         </div>
