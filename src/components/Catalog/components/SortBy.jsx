@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+
 import useQuery from '../../../hooks/useQuery';
+import useDebounce from '../../../hooks/useDebounce';
 
 export default function SortBy() {
     const { queryObj, handleQueryChange } = useQuery();
@@ -10,23 +12,21 @@ export default function SortBy() {
         return 'asc';
     });
 
+    const debouncedVal = useDebounce(selectedOption, 700);
+
     useEffect(() => {
-        setSelectedOption(queryObj.sort_by || '');
-    }, [queryObj.sort_by]);
+        handleQueryChange({
+            sort_by: debouncedVal,
+        });
+    }, [debouncedVal, handleQueryChange]);
 
     const onSelectChangeQuery = (e) => {
-        const queryParam = e.target.id;
         const queryValue = e.target.value;
-
-        handleQueryChange({
-            [queryParam]: queryValue,
-        });
-
         setSelectedOption(queryValue);
     };
 
     return (
-        <section className="max-s:self-start max-s:pt-2 flex flex-col ">
+        <section className="flex flex-col max-s:self-start max-s:pt-2 ">
             <section className="self-end">
                 <div className="flex items-center gap-1 rounded-md bg-white p-0.5 text-gray-800">
                     <label htmlFor="sort">Sort By: </label>
