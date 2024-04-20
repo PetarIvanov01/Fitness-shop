@@ -39,11 +39,16 @@ export default {
                         transform: 'translateX(0%)',
                     },
                 },
+                wiggle: {
+                    '0%, 100%': { transform: 'rotate(-3deg)' },
+                    '50%': { transform: 'rotate(3deg)' },
+                },
             },
             animation: {
                 'fade-in': 'fade-in 1000ms forwards',
                 'fade-out': 'fade-out 1000ms forwards',
                 'slide-up': 'slide-up 1500ms forwards',
+                wiggle: 'wiggle 200ms ease-in-out',
             },
             backgroundColor: {
                 'gray-w': '#D9D9D9',
