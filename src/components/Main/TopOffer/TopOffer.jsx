@@ -1,14 +1,12 @@
 import OfferCards from './components/OffersCards';
 import ControlOfferButton from './components/ControlOfferButton';
 import topOfferData from '../../../assets/utils/topOfferData.json';
-import resolveImgPaths from '../../../utils/resolveImgPaths';
 
 import { GrPrevious, GrNext } from 'react-icons/gr';
 import { useState } from 'react';
 
 export default function TopOffers() {
-    const resolvedTopOffersData = resolveImgPaths(topOfferData);
-    const [offers, setOffers] = useState(resolvedTopOffersData);
+    const [offers, setOffers] = useState(topOfferData);
 
     const handlePrevClick = () => {
         setOffers((prevOffers) => {
