@@ -1,12 +1,20 @@
+import { useState } from 'react';
 import { GrLinkNext } from 'react-icons/gr';
 
 export default function Button({ text, errors, loadSpin = false }) {
-    const isDisabled = Object.keys(errors).length > 2;
+    const [effect, setEffect] = useState(false);
+
+    const handlersEffects = {
+        onClick: () => setEffect(true),
+        onAnimationEnd: () => setEffect(false),
+    };
+    const showAnimation = effect && errors.requestErr && 'animate-wiggle';
+
     return (
         <button
-            disabled={isDisabled}
-            className="mt-2 flex h-10 w-fit items-center gap-2 rounded-sm
-                 bg-white px-2 py-1 text-black opacity-65 hover:scale-105 hover:bg-blue-400"
+            {...handlersEffects}
+            className={`${showAnimation} flex h-10 w-fit items-center gap-2 rounded-sm
+                 bg-white px-2 py-1 text-black opacity-65 hover:scale-105 hover:bg-blue-400`}
             type="submit"
         >
             <div className="flex w-full items-center justify-center gap-1">
