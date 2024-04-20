@@ -1,4 +1,3 @@
-import resolveServerImg from '../../../utils/resolveServerImg';
 import RelatedProduct from './Product';
 import { getCatalog } from '../../../api/services/catalog';
 import { useParams } from 'react-router-dom';
@@ -22,13 +21,13 @@ export default function RelatedProducts() {
             <div className="flex flex-wrap justify-center gap-8">
                 {relatedItems &&
                     relatedItems.map((pr) => {
-                        const image = resolveServerImg(pr.image);
                         return (
                             <RelatedProduct
+                                type={categoryType}
                                 key={pr.product_id}
                                 id={pr.product_id}
                                 title={pr.title}
-                                image={image}
+                                image={pr.image}
                             />
                         );
                     })}
