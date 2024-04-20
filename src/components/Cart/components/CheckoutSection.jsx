@@ -1,16 +1,20 @@
 import { Link } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+
 import { GrLinkNext } from 'react-icons/gr';
 import { BsFillCartXFill } from 'react-icons/bs';
+
 import useStore from '../../../zustand/store';
 
 export default function CheckoutSection() {
+    const id = useStore((state) => state.user?.id);
     const cart = useStore((state) => state.cart);
     const clearCartItem = useStore((state) => state.clearCartItem);
 
-    const styleForUserCheckout = cart.length
-        ? 'bg-green-500 hover:bg-green-600'
-        : 'bg-slate-500 cursor-not-allowed';
+    const styleForUserCheckout =
+        cart.length && id
+            ? 'bg-green-500 hover:bg-green-600'
+            : 'bg-slate-500 cursor-not-allowed';
 
     const totalPrice = useMemo(() => {
         if (cart.length === 0) return 0;
@@ -26,10 +30,19 @@ export default function CheckoutSection() {
         };
     };
 
+    const [effect, setEffect] = useState(false);
+
+    const handlersEffects = {
+        onClick: () => setEffect(true),
+        onAnimationEnd: () => setEffect(false),
+    };
+    const showAnimation = effect && 'animate-wiggle';
+
     const allowedLink = (
         <Link
+            {...handlersEffects}
             to={'checkout'}
-            className={`flex ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
+            className={`flex ${showAnimation} ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
         >
             Checkout <GrLinkNext />
         </Link>
@@ -42,11 +55,12 @@ export default function CheckoutSection() {
                     Total Price: $ {totalPrice.toFixed(2)}
                 </p>
                 <div className="flex flex-col gap-2">
-                    {cart.length ? (
+                    {cart.length && id ? (
                         allowedLink
                     ) : (
                         <Link
-                            className={`flex ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
+                            {...handlersEffects}
+                            className={`flex ${showAnimation} ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
                         >
                             Checkout <GrLinkNext />
                         </Link>
