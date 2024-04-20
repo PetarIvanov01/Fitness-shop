@@ -28,7 +28,7 @@ export default function AuthenticationSection() {
                 </h1>
             </header>
 
-            <div className="flex gap-2 pt-8">
+            <div className="flex gap-2 pt-8 max-sm:flex-col max-sm:gap-8">
                 <GetStarted
                     handler={handleRegisterVisibility}
                     isGuest={showRegister}

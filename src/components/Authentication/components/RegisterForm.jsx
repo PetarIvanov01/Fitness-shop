@@ -44,7 +44,6 @@ export default function RegsiterForm() {
 
         await delay(800)
             .then(async () => {
-                setIsSubmit(false);
                 await sendUserRegistration(body);
                 toast('Successfull registration!');
                 navigate('/');
@@ -54,6 +53,9 @@ export default function RegsiterForm() {
                     throw e.errors;
                 }
                 throw e;
+            })
+            .finally(() => {
+                setIsSubmit(false);
             });
     };
 
@@ -182,7 +184,7 @@ export default function RegsiterForm() {
                     )}
                 </div>
 
-                <div className="flex items-center gap-x-32">
+                <div className="flex items-center gap-5">
                     <Button
                         text={'Sign Up'}
                         errors={error}

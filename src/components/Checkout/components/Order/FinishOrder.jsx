@@ -41,7 +41,7 @@ export default function FinishOrder({ orderData }) {
 
             <button
                 onClick={handleOpenModal}
-                className="h-max w-max border-2  border-[#EDAD09] px-1 text-xl text-[#EDAD09] hover:scale-105 hover:opacity-60"
+                className="h-max w-max border-2 border-[#EDAD09] px-1 text-xl text-[#EDAD09] hover:scale-105 hover:opacity-60"
             >
                 Complete Purchase
             </button>

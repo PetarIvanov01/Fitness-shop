@@ -6,7 +6,7 @@ export default function GetStarted({ handler, isGuest }) {
     const width = isGuest ? 'w-full' : 'w-1/2';
 
     return (
-        <div className={`${width} text-white`}>
+        <div className={`${width} text-white max-sm:w-full`}>
             <Heading text={'For new users'} />
 
             <div className="pt-6 font-alegreya">

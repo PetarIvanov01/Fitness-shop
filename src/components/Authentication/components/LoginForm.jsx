@@ -30,7 +30,6 @@ export default function LoginForm() {
 
         await delay(800)
             .then(async () => {
-                setIsSubmit(false);
                 await sendUserLogin(body);
                 toast('You are logged in!');
                 navigate('/');
@@ -40,6 +39,9 @@ export default function LoginForm() {
                     throw e.errors;
                 }
                 throw e;
+            })
+            .finally(() => {
+                setIsSubmit(false);
             });
     };
 
@@ -50,7 +52,7 @@ export default function LoginForm() {
 
     const requestErr = error.requestErr;
     return (
-        <div className="flex w-1/2 flex-col items-center px-6 text-white ">
+        <div className="flex w-1/2 flex-col items-center px-6 text-white max-sm:w-full max-sm:p-0">
             <Heading text={'Registered User'} />
             <form
                 onSubmit={handleSubmitForm}
@@ -82,7 +84,7 @@ export default function LoginForm() {
                         error={!!error.password || requestErr}
                     />
                 </div>
-                <div className="flex items-center gap-x-32">
+                <div className="flex w-full items-center gap-5">
                     <Button
                         text={'Sign In'}
                         errors={error}
@@ -91,7 +93,7 @@ export default function LoginForm() {
                     {requestErr && (
                         <p
                             data-test="error-req"
-                            className="text-lg text-red-500"
+                            className="w-full text-lg text-red-500 max-sm:text-base"
                         >
                             {requestErr}
                         </p>

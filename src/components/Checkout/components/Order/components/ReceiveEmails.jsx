@@ -6,7 +6,7 @@ export default function ReceiveEmails() {
     const [isChecked, setChecked] = useState(false);
 
     return (
-        <div className="w-2/3">
+        <div className="flex-grow">
             <div className="flex items-center gap-2">
                 <p>Receive special offers by email?</p>
                 <button
