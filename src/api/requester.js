@@ -2,8 +2,12 @@
 import { getFromBrowserStorage } from './services/storage';
 import { handleRefreshingToken } from './services/refreshToken';
 
-const HOST = 'http://localhost:5000/api/v1';
+const endpoint = '/api/v1';
+let HOST = import.meta.env.VITE_HOST_LOCAL + endpoint;
 
+if (import.meta.env.MODE === 'production') {
+    HOST = import.meta.env.VITE_HOST_PROD + endpoint;
+}
 async function request(url, option) {
     try {
         const response = await fetch(HOST + url, option);
