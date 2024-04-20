@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
 import useStore from '../../../zustand/store';
-import resolveServerImg from '../../../utils/resolveServerImg';
 import { toast } from 'sonner';
 
 export default function ProductInformation({ product }) {
@@ -9,8 +8,6 @@ export default function ProductInformation({ product }) {
     const addCartItemIntoStore = useStore(
         (state) => state.addCartItemIntoStore
     );
-
-    const image = resolveServerImg(product.image);
 
     const onAddToCartHandler = () => {
         addCartItemIntoStore(product);
@@ -33,7 +30,7 @@ export default function ProductInformation({ product }) {
 
                 <div className="max-w-96 pb-4">
                     <img
-                        src={image}
+                        src={product.image}
                         alt={product.title}
                         className="h-[260px] w-full rounded-lg bg-white shadow-lg max-sm:h-[200px]"
                     />
