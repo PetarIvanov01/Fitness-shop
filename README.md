@@ -2,6 +2,10 @@
 
 Welcome to **StrongEqup**, a fitness equipment store project aimed at enhancing my skills in React and other technologies. This project serves primarily as a learning exercise, providing challenges and opportunities for growth.
 
+## 🌐 Deployment
+
+The StrongEqup web application is now deployed and accessible to everyone! You can visit the deployed application by clicking [here](https://fitness-store-a1206.web.app/).
+
 ## 🔑 Features
 
 -   **Registration and Profile Creation**
@@ -49,9 +53,6 @@ Welcome to **StrongEqup**, a fitness equipment store project aimed at enhancing 
     </div>
 </details>
 
-## 📢 Future Plans
-
-In the future, my goal is to deploy the StrongEqup web application so that everyone can access its features. Stay tuned for updates on the deployment progress!
 
 ## 🔧 Installation
 
