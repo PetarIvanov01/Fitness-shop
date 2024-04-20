@@ -32,11 +32,7 @@ export default function CatalogLink({
     }
 
     return (
-        <Link
-            onClick={handler}
-            className="flex w-full items-center gap-2"
-            to={endpoint}
-        >
+        <Link onClick={handler} to={endpoint}>
             {children}
         </Link>
     );
