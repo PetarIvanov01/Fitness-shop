@@ -32,7 +32,9 @@ export default function AsideHeader({ visible, onClickClose, userId }) {
 
             <div className="mb-2 flex items-center gap-2 rounded-md bg-stone-700 px-4 py-2 text-base text-stone-300 hover:bg-stone-500  max-sm:px-2 max-sm:text-sm">
                 <CatalogLink handler={onClickClose}>
-                    Catalog <GrLinkNext />
+                    <span className="flex items-center gap-2">
+                        Catalog <GrLinkNext />
+                    </span>
                 </CatalogLink>
             </div>
 

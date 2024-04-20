@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import CatalogLink from '../../CatalogLink';
 
 export default function CartFooter() {
     return (
@@ -8,12 +8,9 @@ export default function CartFooter() {
             </h2>
             <p className="text-gray-300">
                 Explore more fitness equipment and accessories.
-                <Link
-                    to={'/catalog'}
-                    className="ml-1 underline hover:no-underline"
-                >
-                    Go back to shopping
-                </Link>
+                <span className="ml-1 underline hover:no-underline">
+                    <CatalogLink>Go back to shopping</CatalogLink>
+                </span>
                 .
             </p>
         </div>

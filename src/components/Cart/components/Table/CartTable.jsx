@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import useStore from '../../../../zustand/store';
@@ -6,6 +5,7 @@ import useStore from '../../../../zustand/store';
 import TableHead from './TableHead';
 import TableRow from './TableRow';
 import ArrowSvg from './ArrowSvg';
+import CatalogLink from '../../../CatalogLink';
 
 export default function TableCart() {
     const cartItems = useStore((state) => state.cart);
@@ -57,12 +57,11 @@ export default function TableCart() {
                     <div className="absolute left-[60%] top-[275%] w-full max-[670px]:relative max-[670px]:left-0 max-[670px]:top-0">
                         <p className="text-2xl text-neutral-400">
                             Explore our{' '}
-                            <Link
-                                to="/catalog"
-                                className="text-orange-500 underline transition-colors duration-300 hover:text-orange-700"
-                            >
-                                collection
-                            </Link>
+                            <CatalogLink className="text-orange-500 underline transition-colors duration-300 hover:text-orange-700">
+                                <span className="text-orange-500 underline transition-colors duration-300 hover:text-orange-700">
+                                    collection
+                                </span>
+                            </CatalogLink>
                         </p>
                     </div>
                 </div>

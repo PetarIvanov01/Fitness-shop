@@ -32,8 +32,10 @@ export default function AsideUl({ isVisible, onClickClose }) {
                             queryType="category"
                             queryValue={e.path}
                         >
-                            {e.title}{' '}
-                            <GrLinkNext className="hidden group-hover:block" />
+                            <span className="flex items-center gap-2">
+                                {e.title}{' '}
+                                <GrLinkNext className="hidden group-hover:block" />
+                            </span>
                         </CatalogLink>
                     </div>
                 </li>
