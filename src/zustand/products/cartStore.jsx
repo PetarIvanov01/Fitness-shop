@@ -1,50 +1,39 @@
-import Cookies from 'js-cookie';
 import { getCart } from '../../api/services/catalog';
 
-const COOKIE_NAME = 'cart-cookie';
-const COOKIE_OPTIONS = { expires: 1, sameSite: 'Strict', path: '/' };
+import {
+    getFromBrowserStorage,
+    setToBrowserStorage,
+} from '../../api/services/storage';
+
+const STORAGE_NAME = 'cart';
+const NEW_CART = { cart: [], length: 0 };
 
 const cartStore = (set) => ({
     cart: [],
     length: (() => {
         try {
-            const items = Cookies.get(COOKIE_NAME);
-            if (items === undefined) {
+            const storageCart = getFromBrowserStorage(STORAGE_NAME);
+            if (storageCart === null) {
+                setToBrowserStorage(STORAGE_NAME, NEW_CART);
                 return 0;
             }
-            const parsedCookieData = JSON.parse(items);
-            return parsedCookieData.length ? parsedCookieData.length : 0;
+            return storageCart.length ? storageCart.length : 0;
         } catch (error) {
             console.error('Error while calculating length:', error);
             return 0;
         }
     })(),
     fetchCartData: async (signal) => {
-        const currentCookieData = Cookies.get(COOKIE_NAME);
+        const storageCart = getFromBrowserStorage(STORAGE_NAME);
+        if (storageCart.length === 0) return NEW_CART;
 
-        if (currentCookieData === undefined) return;
+        const data = await getCart(storageCart, signal);
 
-        const data = await getCart(null, signal);
-
-        set({ cart: data });
-        return data;
+        set({ cart: data.cart });
+        return data.cart;
     },
     removeCartItem: (cartItemId) => {
-        const currentCookieItems = Cookies.get(COOKIE_NAME);
-        const parsedCookie = JSON.parse(currentCookieItems);
-
-        const items = parsedCookie.cartItems;
-
-        parsedCookie.length--;
-        items[cartItemId]--;
-
-        if (items[cartItemId] === 0) {
-            delete items[cartItemId];
-        }
-
-        const stringifiedCookieData = JSON.stringify(parsedCookie);
-        Cookies.set(COOKIE_NAME, stringifiedCookieData, COOKIE_OPTIONS);
-
+        const storageCart = removeCartFromWebStorage(cartItemId);
         set((state) => {
             let cart = [...state.cart];
             const existingItem = cart.find(
@@ -58,47 +47,37 @@ const cartStore = (set) => ({
             }
 
             return {
-                ...state,
                 cart,
-                length: parsedCookie.length,
+                length: storageCart.length,
             };
         });
     },
     clearCartItem: (productId = undefined) => {
         if (productId === undefined) {
-            Cookies.remove(COOKIE_NAME, COOKIE_OPTIONS);
-            set({ cart: [], length: 0 });
+            setToBrowserStorage(STORAGE_NAME, NEW_CART);
+            set(NEW_CART);
             return;
         }
 
-        const currentCookieItems = Cookies.get(COOKIE_NAME);
-        const parsedCookie = JSON.parse(currentCookieItems);
-
-        if (parsedCookie.cartItems[productId]) {
-            parsedCookie.length -= parsedCookie.cartItems[productId];
-            delete parsedCookie.cartItems[productId];
-        }
-
-        const stringifiedCookieData = JSON.stringify(parsedCookie);
-        Cookies.set(COOKIE_NAME, stringifiedCookieData, COOKIE_OPTIONS);
+        clearCartWebStorage(productId);
 
         set((state) => {
-            const { cart } = state;
+            let cart = [...state.cart];
             const existingItem = cart.find(
                 (cartItem) => cartItem.product_id === productId
             );
 
             let length = state.length - existingItem.quantity;
+            cart = cart.filter((p) => p.product_id !== productId);
 
-            const newCart = cart.filter((p) => p.product_id !== productId);
             return {
-                cart: newCart,
+                cart,
                 length,
             };
         });
     },
     addCartItemIntoStore: (item) => {
-        addCartItemsToCookies(item.product_id);
+        addCartToWebStorage(item.product_id);
 
         set((state) => {
             const { cart } = state;
@@ -122,27 +101,50 @@ const cartStore = (set) => ({
 
 export default cartStore;
 
-function addCartItemsToCookies(cartItemId) {
-    const currentCookieData = Cookies.get(COOKIE_NAME);
+function removeCartFromWebStorage(cartItemId) {
+    const storageCart = getFromBrowserStorage(STORAGE_NAME);
 
-    if (currentCookieData === undefined) {
-        Cookies.set(
-            COOKIE_NAME,
-            JSON.stringify({ cartItems: { [cartItemId]: 1 }, length: 1 }),
-            COOKIE_OPTIONS
-        );
+    const cartItems = storageCart.cartItems;
+
+    storageCart.length--;
+    cartItems[cartItemId]--;
+
+    if (cartItems[cartItemId] === 0) {
+        delete cartItems[cartItemId];
+    }
+
+    setToBrowserStorage(STORAGE_NAME, storageCart);
+    return storageCart;
+}
+
+function clearCartWebStorage(productId) {
+    const storageCart = getFromBrowserStorage(STORAGE_NAME);
+
+    if (storageCart.cartItems[productId]) {
+        storageCart.length -= storageCart.cartItems[productId];
+        delete storageCart.cartItems[productId];
+    }
+
+    setToBrowserStorage(STORAGE_NAME, storageCart);
+}
+
+function addCartToWebStorage(cartItemId) {
+    const storageCart = getFromBrowserStorage(STORAGE_NAME);
+
+    if (storageCart.length === 0) {
+        setToBrowserStorage(STORAGE_NAME, {
+            cartItems: { [cartItemId]: 1 },
+            length: 1,
+        });
         return;
     }
 
-    const parsedCookieData = JSON.parse(currentCookieData);
-
-    if (parsedCookieData.cartItems[cartItemId]) {
-        parsedCookieData.cartItems[cartItemId]++;
+    if (storageCart.cartItems[cartItemId]) {
+        storageCart.cartItems[cartItemId]++;
     } else {
-        parsedCookieData.cartItems[cartItemId] = 1;
+        storageCart.cartItems[cartItemId] = 1;
     }
 
-    parsedCookieData.length++;
-    const stringifiedCookieData = JSON.stringify(parsedCookieData);
-    Cookies.set(COOKIE_NAME, stringifiedCookieData, COOKIE_OPTIONS);
+    storageCart.length++;
+    setToBrowserStorage(STORAGE_NAME, storageCart);
 }
