@@ -35,7 +35,9 @@ export default function useForm(
         async (e) => {
             e.preventDefault();
             try {
-                await onSubmit(values);
+                if (error.requestErr === null) {
+                    await onSubmit(values);
+                }
             } catch (error) {
                 if (error.message) {
                     setError((state) => ({
@@ -45,7 +47,7 @@ export default function useForm(
                 }
             }
         },
-        [onSubmit, values]
+        [onSubmit, values, error.requestErr]
     );
 
     const handleOnBlurValidation = useCallback(
