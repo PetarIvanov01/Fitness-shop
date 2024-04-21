@@ -8,8 +8,14 @@ import {
 const STORAGE_NAME = 'cart';
 const NEW_CART = { cart: [], length: 0 };
 
-const cartStore = (set) => ({
+const cartStore = (set, get) => ({
     cart: [],
+    shouldFetchCart: () => {
+        const storageCart = getFromBrowserStorage(STORAGE_NAME);
+        const cartStoreLength = get().cart.length;
+
+        return storageCart.length !== cartStoreLength;
+    },
     length: (() => {
         try {
             const storageCart = getFromBrowserStorage(STORAGE_NAME);
