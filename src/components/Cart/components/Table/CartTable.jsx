@@ -9,29 +9,25 @@ import CatalogLink from '../../../CatalogLink';
 
 export default function TableCart() {
     const cartItems = useStore((state) => state.cart);
-    const cartLengthInCookie = useStore((state) => state.length);
+    const cartLengthInWebStorage = useStore((state) => state.length);
     const fetchCartData = useStore((state) => state.fetchCartData);
-
-    const cartItemsLengthInStore =
-        cartItems.length === 0
-            ? 0
-            : cartItems.reduce((prev, curr) => prev + curr.quantity, 0);
+    const shouldFetchCart = useStore((state) => state.shouldFetchCart);
 
     useEffect(() => {
         const abortController = new AbortController();
 
-        if (cartItemsLengthInStore !== cartLengthInCookie) {
+        if (shouldFetchCart()) {
             fetchCartData(abortController.signal);
         }
 
         return () => {
             abortController.abort();
         };
-    }, [fetchCartData, cartItemsLengthInStore, cartLengthInCookie]);
+    }, [fetchCartData, shouldFetchCart]);
 
     return (
         <div className="px-4">
-            {cartItemsLengthInStore > 0 ? (
+            {cartLengthInWebStorage > 0 ? (
                 <table className="w-full">
                     <TableHead />
                     <tbody>
