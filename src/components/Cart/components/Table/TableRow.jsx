@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
+import useStore from '../../../../zustand/store';
+
 import { RiSubtractFill } from 'react-icons/ri';
 import { MdClear } from 'react-icons/md';
 import { FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import useStore from '../../../../zustand/store';
-import { memo } from 'react';
 
 const TableRow = memo(function TableRow({
     image,
@@ -41,8 +43,13 @@ const TableRow = memo(function TableRow({
         <tr className="max-sm:text-[0.7em]">
             <td>
                 <div className="flex items-center gap-2 p-1">
-                    <img className="size-24 bg-white" src={image} alt={title} />
-
+                    <div className="flex size-24 justify-center rounded-md bg-white">
+                        <img
+                            className="obejct-contain h-full w-full object-scale-down"
+                            src={image}
+                            alt={title}
+                        />
+                    </div>
                     <Link
                         className=" text-blue-300 hover:underline"
                         to={`/${type}/${product_id}`}

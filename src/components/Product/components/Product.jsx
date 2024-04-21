@@ -6,14 +6,11 @@ export default function RelatedProduct({ id, image, title, type }) {
             <img
                 src={image}
                 alt={title}
-                className="h-24 w-32 rounded-lg bg-white shadow-lg"
+                className="h-24 w-32 rounded-lg bg-white object-contain shadow-lg"
             />
-            <Link
-                to={`/${type}/${id}`}
-                className="mt-2 block rounded-sm px-1 text-white  ring-1 transition duration-300 hover:ring-offset-1"
-            >
-                View Product
-            </Link>
+            <div className="mt-2 block rounded-sm px-1 text-white transition duration-300 hover:ring-1 hover:ring-offset-1">
+                <Link to={`/${type}/${id}`}>View Product</Link>
+            </div>
         </div>
     );
 }

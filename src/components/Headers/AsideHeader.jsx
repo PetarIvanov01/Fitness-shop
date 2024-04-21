@@ -40,26 +40,26 @@ export default function AsideHeader({ visible, onClickClose, userId }) {
 
             <button
                 onClick={handleVisibility}
-                className="mb-2 flex gap-1 rounded-md bg-stone-700  px-4 py-2 text-base text-stone-300 hover:bg-stone-500 max-sm:px-2 max-sm:text-sm"
+                className="mb-2 flex gap-1 rounded-md bg-stone-700 px-4 py-2 text-base text-stone-300 hover:bg-stone-500 max-sm:px-2 max-sm:text-sm"
             >
                 Categories <span> +</span>
             </button>
 
             <AsideUl onClickClose={onClickClose} isVisible={isVisible} />
 
-            <div className="absolute bottom-5 flex w-full justify-between px-4 ">
+            <div className="absolute bottom-5 flex w-full justify-between px-4">
                 {userId ? (
                     <Link onClick={onClickClose} to={'/logout'}>
-                        <BiLogOutCircle className="size-6" />
+                        <BiLogOutCircle className="size-6 hover:scale-110" />
                     </Link>
                 ) : (
                     <Link onClick={onClickClose} to={'/login'}>
-                        <FaRegUserCircle className="size-6" />
+                        <FaRegUserCircle className="size-6 hover:scale-110" />
                     </Link>
                 )}
 
                 <Link onClick={onClickClose} to={'/cart'}>
-                    <FaShoppingCart className="size-6" />
+                    <FaShoppingCart className="size-6 hover:scale-110" />
                 </Link>
             </div>
         </aside>

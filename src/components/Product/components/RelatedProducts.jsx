@@ -11,9 +11,9 @@ export default function RelatedProducts() {
     const relatedItems = data.result;
 
     return (
-        <div className="flex flex-col items-center gap-3 pt-8">
-            <header className="rounded-xl bg-stone-950 p-2">
-                <h1 className="text-center text-[1.5em]  font-bold text-stone-200 max-md:text-[1em] ">
+        <div className="flex flex-col items-center gap-5 pt-4">
+            <header className="border-b border-neutral-400  text-neutral-200">
+                <h1 className="text-center text-2xl font-bold text-stone-200">
                     Related Products
                 </h1>
             </header>

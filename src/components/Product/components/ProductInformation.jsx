@@ -24,55 +24,64 @@ export default function ProductInformation({ product }) {
     };
 
     return (
-        <div className="relative flex w-full flex-col">
-            <div className="flex flex-col items-center gap-2">
-                <h1 className="pb-2 text-2xl font-bold">{product.title}</h1>
+        <div className="relative flex w-full flex-col gap-4 font-sans">
+            <div className="flex flex-col items-center gap-3">
+                <h1 className="border-b border-neutral-400 text-2xl font-bold">
+                    {product.title}
+                </h1>
 
-                <div className="max-w-96 pb-4">
+                <div className="h-56 min-w-72 max-w-96 rounded-lg border bg-neutral-200 shadow-lg">
                     <img
                         src={product.image}
                         alt={product.title}
-                        className="h-[260px] w-full rounded-lg bg-white shadow-lg max-sm:h-[200px]"
+                        className="h-full w-full object-contain"
                     />
                 </div>
             </div>
 
-            <p className="pb-4 text-lg">{product.description}</p>
+            <div className="rounded-md border bg-slate-400/20 p-2 text-base text-white shadow-inner">
+                <p>{product.description}</p>
+            </div>
 
-            <ul className="list-disc pb-4 pl-6">
+            <ul className="list-disc pl-4">
                 <li>
-                    <b>Availability:</b> ✔
+                    <b>Availability:</b>
+                    <span className="text-lime-500"> ✔</span>
                 </li>
                 <li>
-                    <b>Weight:</b> 50.00kg
+                    <b>Weight:</b>{' '}
+                    <span className="text-orange-400">50.00kg</span>
                 </li>
             </ul>
 
-            <div className="flex w-fit flex-col justify-center self-end text-xl font-bold max-sm:text-[1em]">
-                <div className="pb-2">Price: ${product.price}</div>
+            <div className="flex flex-col items-center justify-center gap-1 self-end text-lg">
+                <div>
+                    <b>Price: </b>
+                    <span className="font-bold text-lime-500">
+                        ${Number(product.price).toFixed(2)}
+                    </span>
+                </div>
                 <button
                     onClick={onAddToCartHandler}
-                    className="rounded bg-blue-500 
-                    px-4 py-2 font-bold text-white ring ring-blue-900 hover:bg-blue-700 "
+                    className="rounded-lg border-2 border-black
+                      bg-slate-400/20 px-4 py-2 font-bold text-neutral-200 transition duration-300 hover:bg-stone-900/60"
                 >
                     Add to Cart
                 </button>
             </div>
 
-            <div className="flex items-center gap-8 pt-2 max-sm:text-[0.8em]">
-                <p className="text-base">
-                    Item added to cart! What would you like to do next?
-                </p>
-                <div>
+            <div className="flex items-center gap-4 pt-2 max-sm:text-[0.8em]">
+                <p className="text-base">What would you like to do next?</p>
+                <div className="flex gap-2 text-neutral-200">
                     <Link
                         to="/catalog"
-                        className="mr-2 text-white underline transition duration-300 hover:text-gray-300"
+                        className="underline transition duration-300 hover:text-neutral-400"
                     >
                         Continue Shopping
                     </Link>
                     <Link
                         to="/cart"
-                        className="text-white underline transition duration-300 hover:text-gray-300"
+                        className=" underline transition duration-300 hover:text-neutral-400"
                     >
                         Go to Cart
                     </Link>
