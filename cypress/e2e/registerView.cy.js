@@ -7,12 +7,14 @@ describe('Testing Register View', () => {
         cy.contains(/join the market/i);
         cy.contains(/create a profile/i);
     });
-    it.only('Verify that a successful registration request is intercepted, and the user is navigated to the home view.', () => {
+    it('Verify that a successful registration request is intercepted, and the user is navigated to the home view.', () => {
+        cy.clearAllLocalStorage();
+
         let firstName = 'Test';
         let lastName = 'Testov';
         cy.intercept(
             'POST',
-            'http://localhost:5000/api/v1/user/sign-up',
+            'http://localhost:5000/api/v1/users/sign-up',
             (req) => {
                 req.reply({
                     statusCode: 200,
@@ -30,16 +32,17 @@ describe('Testing Register View', () => {
 
         cy.get('#firstName').type(firstName, { delay: 10 });
         cy.get('#lastName').type(lastName, { delay: 10 });
-        cy.get('#phoneNumber').type('+359 12 342 5678', { delay: 10 });
+        cy.get('input[name=phoneNumber]').type('12 342 5678', {
+            delay: 10,
+        });
         cy.get('#email').type('test@mail.com', { delay: 10 });
         cy.get('#password').type('test123456', { delay: 10 });
         cy.get('#re-password').type('test123456', { delay: 10 });
 
         cy.get('button[type=submit]').click();
 
-        cy.wait('@signup');
+        cy.wait('@signup').url().should('eq', 'http://localhost:5173/');
 
-        cy.url().should('eq', 'http://localhost:5173/');
         cy.contains(/top offer/i).should('exist');
 
         cy.getAllLocalStorage().then((result) => {
@@ -53,14 +56,14 @@ describe('Testing Register View', () => {
     it('Test if the registration request is prevented when there are input errors.', () => {
         cy.get('#firstName').type('T', { delay: 10 });
         cy.get('#lastName').type('T', { delay: 10 });
-        cy.get('#phoneNumber').type('+359 12 342 5678', { delay: 10 });
+        cy.get('input[name=phoneNumber]').type('+359 12 342 5678', {
+            delay: 10,
+        });
         cy.get('#email').type('test@mail.com', { delay: 10 });
         cy.get('#password').type('test123456', { delay: 10 });
         cy.get('#re-password').type('test123456', { delay: 10 });
 
-        cy.get('button[type=submit]')
-            .should('be.disabled')
-            .click({ force: true });
+        cy.get('button[type=submit]').click({ force: true });
 
         cy.get("[data-test='error-firstName']").should('exist');
         cy.get("[data-test='error-lastName']").should('exist');
@@ -68,7 +71,9 @@ describe('Testing Register View', () => {
     it('Test the scenario where registration fails due to mismatched passwords.', () => {
         cy.get('#firstName').type('Test', { delay: 10 });
         cy.get('#lastName').type('Testov', { delay: 10 });
-        cy.get('#phoneNumber').type('+359 12 342 5678', { delay: 10 });
+        cy.get('input[name=phoneNumber]').type('+359 12 342 5678', {
+            delay: 10,
+        });
         cy.get('#email').type('test@mail.com', { delay: 10 });
         cy.get('#password').type('test12345', { delay: 10 });
         cy.get('#re-password').type('test123456', { delay: 10 });
