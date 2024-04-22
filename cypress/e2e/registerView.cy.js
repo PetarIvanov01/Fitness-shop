@@ -41,7 +41,12 @@ describe('Testing Register View', () => {
 
         cy.get('button[type=submit]').click();
 
-        cy.wait('@signup').url().should('eq', 'http://localhost:5173/');
+        cy.wait('@signup')
+            .then((interception) => {
+                expect(interception.response.statusCode).to.equal(200);
+            })
+            .url()
+            .should('eq', 'http://localhost:5173/');
 
         cy.contains(/top offer/i).should('exist');
 
