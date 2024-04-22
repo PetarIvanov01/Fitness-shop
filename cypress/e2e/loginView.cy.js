@@ -1,4 +1,3 @@
-/// <reference types="Cypress" />
 describe('Testing Login View', () => {
     beforeEach(() => {
         cy.visit('/login');
@@ -14,9 +13,11 @@ describe('Testing Login View', () => {
         cy.location('pathname').should('eq', '/login');
     });
     it('Verify that a successful login request is intercepted, and the user is navigated to the home view', () => {
+        cy.clearAllLocalStorage();
+
         cy.intercept(
             'POST',
-            'http://localhost:5000/api/v1/user/sign-in',
+            'http://localhost:5000/api/v1/users/sign-in',
             (req) => {
                 req.reply({
                     statusCode: 200,
@@ -35,9 +36,8 @@ describe('Testing Login View', () => {
 
         cy.get('button[type=submit]').click();
 
-        cy.wait('@signin');
+        cy.wait('@signin').url().should('eq', 'http://localhost:5173/');
 
-        cy.url().should('eq', 'http://localhost:5173/');
         cy.contains(/top offer/i).should('exist');
 
         cy.getAllLocalStorage().then((result) => {
@@ -51,7 +51,7 @@ describe('Testing Login View', () => {
     it('Test if the login request is prevented when there are input errors', () => {
         cy.intercept(
             'POST',
-            'http://localhost:5000/api/v1/user/sign-in',
+            'http://localhost:5000/api/v1/users/sign-in',
             (req) => {
                 req.reply({
                     statusCode: 422,
@@ -70,7 +70,9 @@ describe('Testing Login View', () => {
         cy.get('#password').type('test12345', { delay: 10 });
 
         cy.get('button[type=submit]').click();
-        cy.wait('@signin');
+        cy.wait('@signin').then((interception) => {
+            expect(interception.response.statusCode).to.equal(422);
+        });
 
         cy.get("[data-test='error-req']").should('exist');
     });
