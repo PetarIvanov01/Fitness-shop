@@ -13,6 +13,7 @@ export default function MainSection({
     return (
         <section className="flex h-16 items-center justify-between bg-[#4e4242] px-6 opacity-95">
             <button
+                data-cy="aside-nav"
                 onClick={handleAsideVisible}
                 className="w-8 hover:scale-110"
             >

@@ -30,9 +30,10 @@ export default function CatalogLink({
     if (typeof type === 'string') {
         endpoint = type;
     }
+    const _test = queryValue ? queryValue : 'catalog';
 
     return (
-        <Link onClick={handler} to={endpoint}>
+        <Link data-cy={_test} onClick={handler} to={endpoint}>
             {children}
         </Link>
     );
