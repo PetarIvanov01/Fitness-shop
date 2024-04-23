@@ -1,0 +1,15 @@
+{
+    "itemsLng": 1,
+    "result": [
+        {
+            "product_id": "1",
+            "categoriy_id": "2",
+            "title": "Test",
+            "price": "100",
+            "description": "Test Description",
+            "image": "https://res.cloudinary.com/ddsjy034j/image/upload/v1713630791/aiscggogc14oblhsrgbv.jpg",
+            "type": "machine",
+            "quantity": 1
+        }
+    ]
+}
