@@ -4,10 +4,14 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 
+// eslint-disable-next-line react-refresh/only-export-components
+const StrictModeWrapper =
+    import.meta.env.VITE_ENV === 'testing' ? React.Fragment : React.StrictMode;
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
+    <StrictModeWrapper>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </React.StrictMode>
+    </StrictModeWrapper>
 );
