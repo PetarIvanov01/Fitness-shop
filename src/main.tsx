@@ -8,7 +8,7 @@ import './index.css';
 const StrictModeWrapper =
     import.meta.env.VITE_ENV === 'testing' ? React.Fragment : React.StrictMode;
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
     <StrictModeWrapper>
         <BrowserRouter>
             <App />

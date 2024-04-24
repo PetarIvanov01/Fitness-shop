@@ -1,4 +1,13 @@
-export default function OfferCards({ imgPath, alt, visible }) {
+export default function OfferCards({
+    imgPath,
+    alt,
+    visible,
+}: {
+    imgPath: string;
+    alt: string;
+    id: number;
+    visible: boolean;
+}) {
     return (
         <div
             className={`${

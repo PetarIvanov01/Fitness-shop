@@ -5,6 +5,15 @@ export default function ItemCard({
     price,
     description,
     active,
+}: {
+    index: number;
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    price: number;
+    alt: string;
+    active: boolean;
 }) {
     return (
         <div

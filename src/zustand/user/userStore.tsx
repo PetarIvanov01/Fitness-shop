@@ -1,3 +1,4 @@
+import { StateCreator } from 'zustand';
 import { getFromBrowserStorage } from '../../api/services/storage';
 import {
     updateUserInformation,
@@ -9,8 +10,15 @@ import {
 } from '../../api/services/userService/address';
 
 import { initialProfileValue } from '../../utils/constants';
+import { UserSliceInter } from '../interfaces';
 
-const userSlice = (set) => ({
+/* 
+TODO:
+- Create proper user, personalInfo, 
+- shippingInfo and otherShippingAddressess interface
+*/
+
+const userSlice: StateCreator<UserSliceInter> = (set) => ({
     user: getFromBrowserStorage('user'),
     personalInfo: initialProfileValue.personalInfo,
     shippingInfo: initialProfileValue.shippingInfo,
@@ -30,7 +38,7 @@ const userSlice = (set) => ({
 
         set(() => ({
             shippingInfo: state,
-            otherShippingAddresses: payload.slice(1).map((e) => ({
+            otherShippingAddresses: payload.slice(1).map((e: any) => ({
                 ...e,
             })),
         }));

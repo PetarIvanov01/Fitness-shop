@@ -63,7 +63,7 @@ export default function TopOffers() {
                 </h1>
 
                 {offers.map((i) => (
-                    <OfferCards key={i.key} {...i} />
+                    <OfferCards key={i.id} {...i} />
                 ))}
 
                 <ControlOfferButton handler={handleNextClick}>

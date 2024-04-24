@@ -1,6 +1,17 @@
 import CatalogLink from '../../../CatalogLink';
 
-export default function Card({ path, imgPath, alt, buttonText }) {
+export default function Card({
+    path,
+    imgPath,
+    alt,
+    buttonText,
+}: {
+    id: number;
+    imgPath: string;
+    alt: string;
+    buttonText: string;
+    path: string;
+}) {
     return (
         <div
             className="relative size-60 

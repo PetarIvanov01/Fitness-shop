@@ -1,14 +1,18 @@
+import { StateCreator } from 'zustand';
 import { getCart } from '../../api/services/catalog';
 
 import {
     getFromBrowserStorage,
     setToBrowserStorage,
 } from '../../api/services/storage';
+import { CartSliceInter } from '../interfaces';
 
 const STORAGE_NAME = 'cart';
 const NEW_CART = { cart: [], length: 0 };
 
-const cartStore = (set, get) => ({
+// TODO - Create Cart interface and asign it where it's needed
+
+const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
     cart: [],
     shouldFetchCart: () => {
         const storageCart = getFromBrowserStorage(STORAGE_NAME);
@@ -107,7 +111,8 @@ const cartStore = (set, get) => ({
 
 export default cartStore;
 
-function removeCartFromWebStorage(cartItemId) {
+// TODO add interfaces and types for storageCart
+function removeCartFromWebStorage(cartItemId: string) {
     const storageCart = getFromBrowserStorage(STORAGE_NAME);
 
     const cartItems = storageCart.cartItems;
@@ -123,7 +128,7 @@ function removeCartFromWebStorage(cartItemId) {
     return storageCart;
 }
 
-function clearCartWebStorage(productId) {
+function clearCartWebStorage(productId: string) {
     const storageCart = getFromBrowserStorage(STORAGE_NAME);
 
     if (storageCart.cartItems[productId]) {
@@ -134,7 +139,7 @@ function clearCartWebStorage(productId) {
     setToBrowserStorage(STORAGE_NAME, storageCart);
 }
 
-function addCartToWebStorage(cartItemId) {
+function addCartToWebStorage(cartItemId: string) {
     const storageCart = getFromBrowserStorage(STORAGE_NAME);
 
     if (storageCart.length === 0) {
