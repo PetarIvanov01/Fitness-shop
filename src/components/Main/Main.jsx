@@ -4,7 +4,7 @@ import TopOffers from './TopOffer/TopOffer';
 
 export default function Main() {
     return (
-        <section>
+        <section className="font-alegreya">
             <TopOffers />
 
             <EquipCategories />

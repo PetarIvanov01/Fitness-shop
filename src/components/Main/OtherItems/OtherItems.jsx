@@ -59,25 +59,33 @@ export default function OtherItems() {
     }, []);
 
     return (
-        <section
-            className="mx-2 mb-6 mt-[5em] 
-        min-h-[307px] w-9/12 max-w-[640px] rounded-xl bg-stone-950 bg-opacity-95 p-5"
-        >
-            <header className="border-b-2 border-solid border-white text-center">
-                <h1 className="text-[2em] font-bold text-white max-md:text-[1.5em]">
-                    Explore More
-                </h1>
-            </header>
+        <div className="px-2 pt-10">
+            <section className="flex min-h-[470px] w-9/12 max-w-[640px] flex-col justify-between rounded-xl bg-stone-950/95 p-5">
+                <header className="border-b-2 border-solid border-white text-center">
+                    <h1 className="text-3xl font-bold text-white max-md:text-2xl">
+                        Explore More
+                    </h1>
+                </header>
 
-            {fitnessItems.map((e) => (
-                <ItemCard key={e.id} {...e} active={active === e.index} />
-            ))}
+                <div className="size-full">
+                    {fitnessItems.map((e) => (
+                        <ItemCard
+                            key={e.id}
+                            {...e}
+                            active={active === e.index}
+                        />
+                    ))}
+                </div>
 
-            <Pagination
-                active={active}
-                handleClick={handleClick}
-                item={fitnessItems.map((e) => ({ index: e.index, key: e.id }))}
-            />
-        </section>
+                <Pagination
+                    active={active}
+                    handleClick={handleClick}
+                    item={fitnessItems.map((e) => ({
+                        index: e.index,
+                        key: e.id,
+                    }))}
+                />
+            </section>
+        </div>
     );
 }

@@ -1,9 +1,10 @@
+import { useState } from 'react';
+
+import topOfferData from '../../../assets/utils/topOfferData.json';
+import { GrPrevious, GrNext } from 'react-icons/gr';
+
 import OfferCards from './components/OffersCards';
 import ControlOfferButton from './components/ControlOfferButton';
-import topOfferData from '../../../assets/utils/topOfferData.json';
-
-import { GrPrevious, GrNext } from 'react-icons/gr';
-import { useState } from 'react';
 
 export default function TopOffers() {
     const [offers, setOffers] = useState(topOfferData);
@@ -47,13 +48,11 @@ export default function TopOffers() {
     };
 
     return (
-        <section className="flex min-h-12 flex-col px-2 ">
+        <section className="flex min-h-12 flex-col px-2">
             <article
-                className="relative mt-4 flex w-9/12 max-w-[640px] items-center 
-                justify-center self-end rounded-xl
-                bg-stone-950 bg-opacity-95
-                py-4 max-sm:min-w-[330px] 
-                "
+                className="relative flex min-h-64 w-9/12 max-w-[640px] items-center 
+                justify-center self-end rounded-xl bg-stone-950/95
+                px-2 py-4 max-sm:min-h-32 max-sm:min-w-[330px]"
             >
                 <ControlOfferButton handler={handlePrevClick}>
                     <GrPrevious className="w-16 text-white" />
