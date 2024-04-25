@@ -1,8 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
 
-export default function useProfileCache(userId, data = {}, fetchFunc, ...args) {
+type AsyncFunction<T, F extends (...args: any) => any> = (
+    userId: T,
+    signal: AbortSignal,
+    ...args: string[]
+) => Promise<Awaited<ReturnType<F>>>;
+
+export default function useProfileCache<
+    T,
+    A extends {},
+    B extends AsyncFunction<T, B>,
+>(userId: T, data: A, fetchFunc: B, ...args: string[]) {
     const emptyValue = useMemo(() => {
-        return Object.values(data).some((e) => e === '');
+        return Object.keys(data).length === 0;
     }, [data]);
 
     const [isLoading, setLoading] = useState(() => {
@@ -19,10 +29,12 @@ export default function useProfileCache(userId, data = {}, fetchFunc, ...args) {
         if (emptyValue) {
             const abortController = new AbortController();
 
-            fetchFunc(userId, abortController.signal, ...args).then((d) => {
-                setCache(d);
-                setLoading(true);
-            });
+            fetchFunc(userId, abortController.signal, ...args).then(
+                (result) => {
+                    setCache(result);
+                    setLoading(true);
+                }
+            );
         }
     }, [userId, fetchFunc, emptyValue, args]);
 
