@@ -40,9 +40,9 @@ const fitnessItems = [
 export default function OtherItems() {
     const [active, setActive] = useState(fitnessItems[0].index);
 
-    const handleClick = (e: any) => {
-        const index = e.target.closest('svg').id;
-        if (index && index !== active) {
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        const index = e.currentTarget.id;
+        if (index && Number(index) !== active) {
             setActive(Number(index));
         }
     };
