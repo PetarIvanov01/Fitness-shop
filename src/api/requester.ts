@@ -8,7 +8,7 @@ let HOST = import.meta.env.VITE_HOST_LOCAL + endpoint;
 if (import.meta.env.MODE === 'production') {
     HOST = import.meta.env.VITE_HOST_PROD + endpoint;
 }
-async function request(url, option) {
+async function request(url: string, option: Options) {
     try {
         const response = await fetch(HOST + url, option);
 
@@ -38,8 +38,19 @@ async function request(url, option) {
     }
 }
 
-function createOptions(method = 'GET', data, signal) {
-    const option = {
+type Options = {
+    method: string;
+    headers: {
+        Authorization?: string;
+        'Content-Type'?: string;
+    };
+    signal: AbortSignal;
+    body?: string;
+    credentials: 'include';
+};
+
+function createOptions(method = 'GET', data: any, signal: AbortSignal) {
+    const option: Options = {
         method,
         headers: {},
         signal,
@@ -62,18 +73,18 @@ function createOptions(method = 'GET', data, signal) {
     return option;
 }
 
-export async function get(url, data, signal) {
+export async function get(url: string, data: any, signal: AbortSignal) {
     return await request(url, createOptions('GET', data, signal));
 }
 
-export async function post(url, data, signal) {
+export async function post(url: string, data: any, signal: AbortSignal) {
     return await request(url, createOptions('post', data, signal));
 }
 
-export async function put(url, data) {
-    return await request(url, createOptions('PUT', data));
+export async function put(url: string, data: any, signal: AbortSignal) {
+    return await request(url, createOptions('PUT', data, signal));
 }
 
-export async function del(url) {
-    return await request(url, createOptions('DELETE'));
+export async function del(url: string, signal: AbortSignal) {
+    return await request(url, createOptions('DELETE', null, signal));
 }
