@@ -1,8 +1,15 @@
+type ConfirmModalProps = {
+    toggleModal: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    onAcceptCloseModal: (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => void;
+    text: string;
+};
 export default function ConfirmModal({
     toggleModal,
     onAcceptCloseModal,
     text,
-}) {
+}: ConfirmModalProps) {
     return (
         <div
             aria-hidden="true"

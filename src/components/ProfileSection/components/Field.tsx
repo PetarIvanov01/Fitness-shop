@@ -1,6 +1,15 @@
 import { GiPadlock } from 'react-icons/gi';
 import { CiUnlock } from 'react-icons/ci';
 
+type FieldProps = {
+    value: string;
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    label: string;
+    name: string;
+    id: string;
+    type: string;
+    isEdit?: boolean;
+};
 export default function Field({
     value,
     handleOnChange,
@@ -9,7 +18,7 @@ export default function Field({
     id,
     type,
     isEdit = false,
-}) {
+}: FieldProps) {
     const editStyles = isEdit ? 'text-blue-300' : 'text-[#b9d2f3]';
     return (
         <>
