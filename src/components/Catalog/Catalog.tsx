@@ -16,7 +16,7 @@ export default function Catalog() {
     const { queryObj, clearQueries } = useQuery();
     const querieString = createQueryString(queryObj);
 
-    const { data, isLoading } = useFetch(callCatalogSetStore, querieString);
+    const { data, isLoading } = useFetch(callCatalogSetStore, querieString, []);
 
     return (
         <section className="mx-1 flex min-h-[900px] flex-1 rounded-lg bg-gray-900 bg-opacity-95 px-3 pt-10 font-alegreya">
