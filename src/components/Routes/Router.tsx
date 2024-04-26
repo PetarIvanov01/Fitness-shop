@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { IsGuest, IsAuthenticatedUser } from './Guards/AuthGuard';
+import { SectionAccessControl } from './Guards/SectionAccessControl';
 
 import Main from '../Main/Main';
 import Catalog from '../Catalog/Catalog';
@@ -12,7 +13,6 @@ import CheckoutView from '../Checkout/CheckoutView';
 import ValidateProductViewRoute from './Guards/ValidateProductViewRoute';
 import NotFound from '../NotFound';
 import ProfileView from '../ProfileSection/ProfileView';
-import SectionAccessControl from './Guards/SectionAccessControl';
 
 export default function Router() {
     return (
