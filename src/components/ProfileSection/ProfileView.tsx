@@ -1,8 +1,9 @@
-import { useOutletContext } from 'react-router-dom';
 import AsideNav from './AsideNav/AsideNav';
 
+import { useSectionType } from '../Routes/Guards/SectionAccessControl';
+
 export default function ProfileView() {
-    const context = useOutletContext();
+    const context = useSectionType();
     const userId = context.userId;
     const type = context.type;
 
