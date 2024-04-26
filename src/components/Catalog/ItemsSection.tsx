@@ -2,11 +2,14 @@ import { toast } from 'sonner';
 
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { CatalogResultType } from '../../zustand/interfaces/CatalogSlice';
+
 import useStore from '../../zustand/store';
 
 import Card from './components/Card';
 
-export default function ItemsSection({ data }) {
+export default function ItemsSection({ data }: { data: CatalogResultType }) {
     const navigate = useNavigate();
 
     const addCartItemIntoStore = useStore(
@@ -14,7 +17,7 @@ export default function ItemsSection({ data }) {
     );
 
     const onClickAddItemToCart = useCallback(
-        (item) => {
+        (item: CatalogResultType[number]) => {
             return () => {
                 addCartItemIntoStore(item);
 
@@ -35,11 +38,11 @@ export default function ItemsSection({ data }) {
 
     return (
         <section className="flex flex-wrap justify-center gap-6 overflow-auto pt-5">
-            {data?.map((products) => (
+            {data.map((product) => (
                 <Card
-                    key={products.product_id}
-                    {...products}
-                    onClickAddCookieData={onClickAddItemToCart(products)}
+                    key={product.product_id}
+                    {...product}
+                    onClickAddCookieData={onClickAddItemToCart(product)}
                 />
             ))}
         </section>
