@@ -1,0 +1,60 @@
+[
+    {
+        "label": "Price",
+        "id": "sortByPrice",
+        "options": [
+            {
+                "value": "",
+                "label": "-- Select --"
+            },
+            {
+                "value": "high",
+                "label": "High"
+            },
+            {
+                "value": "low",
+                "label": "Low"
+            }
+        ]
+    },
+    {
+        "label": "Date",
+        "id": "sortByDate",
+        "options": [
+            {
+                "value": "",
+                "label": "-- Select --"
+            },
+            {
+                "value": "new",
+                "label": "Newest"
+            },
+            {
+                "value": "old",
+                "label": "Oldest"
+            }
+        ]
+    },
+    {
+        "label": "Status",
+        "id": "sortByStatus",
+        "options": [
+            {
+                "value": "",
+                "label": "-- Select --"
+            },
+            {
+                "value": "Canceled",
+                "label": "Canceled"
+            },
+            {
+                "value": "In Process",
+                "label": "In Process"
+            },
+            {
+                "value": "Finished",
+                "label": "Finished"
+            }
+        ]
+    }
+]
