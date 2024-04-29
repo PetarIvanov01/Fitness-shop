@@ -1,0 +1,58 @@
+[
+    [
+        "category",
+        {
+            "title": "Category",
+            "options": [
+                {
+                    "label": "",
+                    "value": "All Categories"
+                },
+                {
+                    "label": "machines",
+                    "value": "Machines"
+                },
+                {
+                    "label": "free-weights",
+                    "value": "Free-weights"
+                },
+                {
+                    "label": "cardio",
+                    "value": "Cardio"
+                }
+            ]
+        }
+    ],
+    [
+        "rating",
+        {
+            "title": "Rating",
+            "options": [
+                {
+                    "label": "",
+                    "value": "All Ratings"
+                },
+                {
+                    "label": "5",
+                    "value": "5"
+                }
+            ]
+        }
+    ],
+    [
+        "brand",
+        {
+            "title": "Brand",
+            "options": [
+                {
+                    "label": "",
+                    "value": "All Brands"
+                },
+                {
+                    "label": "brand1",
+                    "value": "Brand1"
+                }
+            ]
+        }
+    ]
+]
