@@ -9,7 +9,9 @@ export default function CartFooter() {
             <p className="text-gray-300">
                 Explore more fitness equipment and accessories.
                 <span className="ml-1 underline hover:no-underline">
-                    <CatalogLink>Go back to shopping</CatalogLink>
+                    <CatalogLink>
+                        <span>Go back to shopping</span>
+                    </CatalogLink>
                 </span>
                 .
             </p>

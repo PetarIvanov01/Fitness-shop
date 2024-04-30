@@ -58,12 +58,12 @@ export default function CheckoutSection() {
                     {cart.length && id ? (
                         allowedLink
                     ) : (
-                        <Link
+                        <button
                             {...handlersEffects}
                             className={`flex ${showAnimation} ${styleForUserCheckout} items-center justify-center gap-2 rounded-md px-4 py-2 text-white transition duration-300 `}
                         >
                             Checkout <GrLinkNext />
-                        </Link>
+                        </button>
                     )}
                     <button
                         onClick={onClickClearCart()}

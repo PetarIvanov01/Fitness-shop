@@ -1,11 +1,14 @@
-import { memo } from 'react';
+import { ProductInCart } from '../../../../zustand/interfaces/CartSlice';
 
+import { memo } from 'react';
 import useStore from '../../../../zustand/store';
 
 import { RiSubtractFill } from 'react-icons/ri';
 import { MdClear } from 'react-icons/md';
 import { FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+
+type OmitTypeInProductType = Omit<ProductInCart, 'type'>;
 
 const TableRow = memo(function TableRow({
     image,
@@ -14,28 +17,28 @@ const TableRow = memo(function TableRow({
     quantity = 1,
     product_id,
     type,
-}) {
-    const priceForAllProducts = Number(price) * Number(quantity);
+}: ProductInCart) {
+    const priceForAllProducts = price * quantity;
 
-    const removeCartItem = useStore((state) => state.removeCartItem);
     const addCartItemIntoStore = useStore(
         (state) => state.addCartItemIntoStore
     );
+    const removeCartItem = useStore((state) => state.removeCartItem);
     const clearCartItem = useStore((state) => state.clearCartItem);
 
-    const onClickRemoveProductFromCart = (productId) => {
+    const onClickRemoveProductFromCart = (productId: string) => {
         return () => {
             removeCartItem(productId);
         };
     };
-    const onClickAddProductToCart = (product) => {
+    const onClickAddProductToCart = (product: OmitTypeInProductType) => {
         return () => {
             addCartItemIntoStore(product);
         };
     };
-    const onClickClearTheProduct = (product_id) => {
+    const onClickClearTheProduct = (productId: string) => {
         return () => {
-            clearCartItem(product_id);
+            clearCartItem(productId);
         };
     };
 
