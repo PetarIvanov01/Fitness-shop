@@ -1,11 +1,19 @@
+import { ProductInCart } from '../../../../../zustand/interfaces/CartSlice';
+
 import { memo } from 'react';
+
 import TableRow from './TableRow';
 
-const OrderTable = memo(function OrderTable({ cart, totalPrice }) {
+type Props = {
+    cart: ProductInCart[];
+    totalPrice: number;
+};
+
+const OrderTable = memo(function OrderTable({ cart, totalPrice }: Props) {
     return (
         <div className="w-full text-white">
             <table className="w-full text-left">
-                <thead className="max-bil-s:text-sm border">
+                <thead className="border max-bil-s:text-sm">
                     <tr>
                         <th className="p-2">Product</th>
                         <th className="p-2">Subtotal</th>
@@ -28,7 +36,7 @@ const OrderTable = memo(function OrderTable({ cart, totalPrice }) {
                                 />
                             );
                         })}
-                    <tr className="max-bil-s:text-sm border text-left">
+                    <tr className="border text-left max-bil-s:text-sm">
                         <td className="p-2 font-semibold">
                             <span>Subtotal:</span>
                         </td>
@@ -37,7 +45,7 @@ const OrderTable = memo(function OrderTable({ cart, totalPrice }) {
                         </td>
                     </tr>
 
-                    <tr className="max-bil-s:text-sm border">
+                    <tr className="border max-bil-s:text-sm">
                         <td className="p-2 font-semibold">
                             <span>Shipping:</span>
                         </td>
@@ -46,7 +54,7 @@ const OrderTable = memo(function OrderTable({ cart, totalPrice }) {
                         </td>
                     </tr>
 
-                    <tr className="max-bil-s:text-sm border">
+                    <tr className="border max-bil-s:text-sm">
                         <td className="p-2 font-bold">
                             <span>Total:</span>
                         </td>
