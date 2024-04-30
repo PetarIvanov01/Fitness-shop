@@ -10,12 +10,19 @@ import { IoMdInformationCircleOutline } from 'react-icons/io';
 
 import ProfilePic from './components/ProfilePic';
 
-export default function AsideNav({ userId, type }) {
+type SectionType = 'info' | 'address' | 'orders' | 'pay-methods';
+
+type AsideProps = {
+    userId: string;
+    type: SectionType;
+};
+
+export default function AsideNav({ userId, type }: AsideProps) {
     const [active, setActive] = useState(type);
 
-    const onNavigateSetActive = (id) => {
+    const onNavigateSetActive = (sectionType: SectionType) => {
         return () => {
-            setActive(id);
+            setActive(sectionType);
         };
     };
 

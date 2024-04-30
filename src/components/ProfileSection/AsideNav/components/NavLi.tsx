@@ -1,6 +1,15 @@
+import { IconType } from 'react-icons';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
-export function NavLi({ children, Icon, active, id }) {
+type SectionType = 'info' | 'address' | 'orders' | 'pay-methods';
+
+type NavLiProps = {
+    children: JSX.Element;
+    Icon: IconType;
+    active: SectionType;
+    id: SectionType;
+};
+export function NavLi({ children, Icon, active, id }: NavLiProps) {
     const activeStyle =
         active === id
             ? 'bg-gradient-to-r from-[#5D6890] via-[#4E5C80] to-[#3F4D70] '
