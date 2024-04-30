@@ -1,14 +1,34 @@
-import useStore from '../../../../zustand/store';
 import { useState } from 'react';
+import useStore from '../../../../zustand/store';
 import { Link, useNavigate } from 'react-router-dom';
 
-import delay from '../../../../utils/withDelayPromise';
 import { createOrder } from '../../../../api/services/userService/orders';
+import delay from '../../../../utils/withDelayPromise';
 
 import ConfirmModal from '../../../ProfileSection/components/ConfirmModal';
 import ReceiveEmails from './components/ReceiveEmails';
 
-export default function FinishOrder({ orderData }) {
+type Props = {
+    finishedOrderData: {
+        orderInfo: {
+            totalPrice: number;
+            _userId: string;
+            orderAddress: {
+                address: string;
+                country: string;
+                city: string;
+                postcode: number;
+            };
+        };
+        orderProducts: {
+            _productId: string;
+            quantity: number;
+            subtotal: number;
+        }[];
+    };
+};
+
+export default function FinishOrder({ finishedOrderData }: Props) {
     const navigate = useNavigate();
     const [consentGiven, setConsentGiven] = useState(false);
     const clearCartItem = useStore((state) => state.clearCartItem);
@@ -17,7 +37,11 @@ export default function FinishOrder({ orderData }) {
         setConsentGiven(false);
         try {
             delay(800).then(async () => {
-                await createOrder(orderData.orderInfo._userId, orderData);
+                await createOrder(
+                    finishedOrderData.orderInfo._userId,
+                    finishedOrderData,
+                    new AbortController().signal
+                );
                 clearCartItem();
                 navigate('/', { replace: true });
             });
