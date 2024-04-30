@@ -1,9 +1,9 @@
 export interface QueryObjectType {
     category?: string;
-    page?: string;
-    perPage?: string;
-    from?: string;
-    to?: string;
+    page?: number;
+    perPage?: number;
+    from?: number;
+    to?: number;
     sort_by?: string;
 }
 
