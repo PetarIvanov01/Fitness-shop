@@ -1,3 +1,11 @@
+type Props = {
+    name: string;
+    value: string | number;
+    isEdit?: boolean;
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    width?: string | number;
+    placeholder?: string;
+};
 export default function Input({
     name,
     value,
@@ -5,7 +13,7 @@ export default function Input({
     handleOnChange,
     width = 200,
     placeholder,
-}) {
+}: Props) {
     const editStyles = `${isEdit ? 'text-blue-300 border-blue-300' : 'text-white focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300'}`;
     const customWidth =
         typeof width === 'number' ? `w-[${width}px] ` : `w-${width} `;

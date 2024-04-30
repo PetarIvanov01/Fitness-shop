@@ -1,4 +1,9 @@
-export default function Label({ children, id, isEdit = false }) {
+type Props = {
+    children: JSX.Element;
+    id?: string;
+    isEdit?: boolean;
+};
+export default function Label({ children, id, isEdit = false }: Props) {
     const editStyles = isEdit ? '' : '';
     return (
         <label

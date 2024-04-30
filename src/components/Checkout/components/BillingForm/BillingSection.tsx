@@ -14,10 +14,12 @@ import Label from './components/Label';
 import Input from './components/Input';
 
 export default function BillingSection() {
-    const user = useStore((state) => state.user);
+    const user = useStore(
+        (state) => state.user as NonNullable<typeof state.user>
+    );
     const fetchData = useStore((state) => state.fetchBillingData);
 
-    const { data } = useFetch(fetchData, user.id);
+    const { data } = useFetch(fetchData, user.id, {});
 
     const [personalState, setProfileInfo] = useState(
         initialProfileValue.personalInfo
@@ -27,27 +29,33 @@ export default function BillingSection() {
     );
 
     useEffect(() => {
-        if (data.personalInfo && data.shippingInfo) {
+        if ('personalInfo' in data && 'shippingInfo' in data) {
             setProfileInfo(data.personalInfo);
             setProfileAddress(data.shippingInfo);
         }
     }, [data]);
 
-    const handleOnChangePersonalInfo = useCallback((e) => {
-        e.preventDefault();
-        setProfileInfo((state) => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
-    }, []);
+    const handleOnChangePersonalInfo = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            e.preventDefault();
+            setProfileInfo((state) => ({
+                ...state,
+                [e.target.name]: e.target.value,
+            }));
+        },
+        []
+    );
 
-    const handleOnChangeShippingInfo = useCallback((e) => {
-        e.preventDefault();
-        setProfileAddress((state) => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
-    }, []);
+    const handleOnChangeShippingInfo = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            e.preventDefault();
+            setProfileAddress((state) => ({
+                ...state,
+                [e.target.name]: e.target.value,
+            }));
+        },
+        []
+    );
 
     const orderData = useMemo(() => {
         return {
@@ -78,7 +86,9 @@ export default function BillingSection() {
                     <div className="flex flex-wrap gap-6">
                         <div className="mr-auto">
                             <Label>
-                                First Name <GiPadlock color="#93c5fd" />
+                                <span>
+                                    First Name <GiPadlock color="#93c5fd" />
+                                </span>
                             </Label>
                             <Input
                                 isEdit={true}
@@ -89,7 +99,9 @@ export default function BillingSection() {
                         </div>
                         <div>
                             <Label>
-                                Last Name <GiPadlock color="#93c5fd" />
+                                <span>
+                                    Last Name <GiPadlock color="#93c5fd" />
+                                </span>
                             </Label>
                             <Input
                                 isEdit={true}
@@ -102,7 +114,9 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            Phone Number <GiPadlock color="#93c5fd" />
+                            <span>
+                                Phone Number <GiPadlock color="#93c5fd" />
+                            </span>
                         </Label>
                         <Input
                             isEdit={true}
@@ -117,7 +131,9 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            City / Town <LuAsterisk color="red" />
+                            <span>
+                                City / Town <LuAsterisk color="red" />
+                            </span>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -128,7 +144,9 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            Street address <LuAsterisk color="red" />
+                            <span>
+                                Street address <LuAsterisk color="red" />
+                            </span>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -140,7 +158,9 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            Country <LuAsterisk color="red" />
+                            <span>
+                                Country <LuAsterisk color="red" />
+                            </span>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -151,7 +171,9 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            Postcode / ZIP <LuAsterisk color="red" />
+                            <span>
+                                Postcode / ZIP <LuAsterisk color="red" />
+                            </span>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -164,7 +186,9 @@ export default function BillingSection() {
                 <article className="flex w-1/2 flex-col gap-6 pl-1 max-bil-s:w-full max-bil-s:flex-wrap">
                     <div>
                         <Label>
-                            Email address <GiPadlock />
+                            <span>
+                                Email address <GiPadlock />
+                            </span>
                         </Label>
                         <Input
                             width={'full'}
@@ -176,7 +200,9 @@ export default function BillingSection() {
                     </div>
 
                     <div className="max-bil-s:w-full">
-                        <Label>Extra Information (optional)</Label>
+                        <Label>
+                            <span>Extra Information (optional)</span>
+                        </Label>
                         <textarea className="h-[100px] w-full resize-none border bg-gray-800 p-1 focus:bg-slate-800 focus:opacity-95 focus:outline-none focus:ring-1 focus:ring-blue-300" />
                     </div>
                 </article>
