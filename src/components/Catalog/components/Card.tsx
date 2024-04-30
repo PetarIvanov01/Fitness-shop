@@ -1,4 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { CatalogResultType } from '../../../zustand/interfaces/CatalogSlice';
+
+type Props = CatalogResultType[number] & {
+    onClickAddCookieData: () => void;
+};
 
 export default function Card({
     product_id,
@@ -7,7 +12,7 @@ export default function Card({
     price,
     onClickAddCookieData,
     type,
-}) {
+}: Props) {
     const navigate = useNavigate();
 
     const onClickRedirectToProduct = () => {

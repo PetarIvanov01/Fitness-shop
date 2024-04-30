@@ -1,15 +1,33 @@
 import { RANGES } from '../../../../utils/priceRangeConstants';
 
+type Props = {
+    totalPrice: {
+        from: string | number;
+        to: string | number;
+    };
+    setPrice: React.Dispatch<
+        React.SetStateAction<{
+            from: string | number;
+            to: string | number;
+        }>
+    >;
+    invalidPriceRange: boolean;
+};
+
 export default function PriceRange({
     totalPrice,
     setPrice,
     invalidPriceRange,
-}) {
-    const handleStartPriceChange = (event) => {
+}: Props) {
+    const handleStartPriceChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         setPrice((prev) => ({ ...prev, from: Number(event.target.value) }));
     };
 
-    const handleEndPriceChange = (event) => {
+    const handleEndPriceChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         setPrice((prev) => ({ ...prev, to: Number(event.target.value) }));
     };
     return (

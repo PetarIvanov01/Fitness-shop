@@ -1,13 +1,17 @@
 import { MdOutlineClear } from 'react-icons/md';
 
 import { RANGES } from '../../../../utils/priceRangeConstants';
-import filters from '../../../../assets/utils/filterData';
+import filters from '../../../../assets/utils/filterData.json';
 import usePriceRange from '../../../../hooks/usePriceRange';
 
 import PriceRange from './PriceRange';
 import Filter from './ReusableFilter';
 
-export default function AsideFilters({ clearQueries }) {
+type Props = {
+    clearQueries: () => void;
+};
+
+export default function AsideFilters({ clearQueries }: Props) {
     const { setPrice, invalidPriceRange, totalPrice } = usePriceRange();
 
     const clearFilters = () => {
@@ -40,14 +44,16 @@ export default function AsideFilters({ clearQueries }) {
                 invalidPriceRange={invalidPriceRange}
             />
 
-            {filters.map(([type, component]) => (
-                <Filter
-                    key={type}
-                    title={component.title}
-                    options={component.options}
-                    id={type}
-                />
-            ))}
+            {filters.map(([type, component]: any) => {
+                return (
+                    <Filter
+                        key={type}
+                        title={component.title}
+                        options={component.options}
+                        id={type}
+                    />
+                );
+            })}
         </aside>
     );
 }

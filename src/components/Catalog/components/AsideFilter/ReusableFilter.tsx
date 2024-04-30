@@ -1,15 +1,28 @@
 import { useEffect, useState } from 'react';
 import useQuery from '../../../../hooks/useQuery';
+import { QueryObjectType } from '../../../../types/hooks/queryTypes';
 
-export default function Filter({ id, title, options }) {
+type Props = {
+    id: keyof QueryObjectType;
+    title: string;
+    options: {
+        value: string;
+        label: string;
+    }[];
+};
+
+export default function Filter({ id, title, options }: Props) {
     const { queryObj, handleQueryChange } = useQuery();
-    const [selectedOption, setSelectedOption] = useState(queryObj[id] || '');
+
+    const queryKey = queryObj[id] || '';
+
+    const [selectedOption, setSelectedOption] = useState(queryKey);
 
     useEffect(() => {
-        setSelectedOption(queryObj[id] || '');
+        setSelectedOption(queryKey);
     }, [queryObj, id]);
 
-    const onSelectChangeQuery = (e) => {
+    const onSelectChangeQuery = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const queryParam = e.target.id;
         const queryValue = e.target.value;
 

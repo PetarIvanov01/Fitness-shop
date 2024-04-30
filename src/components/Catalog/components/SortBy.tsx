@@ -20,7 +20,7 @@ export default function SortBy() {
         });
     }, [debouncedVal, handleQueryChange]);
 
-    const onSelectChangeQuery = (e) => {
+    const onSelectChangeQuery = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const queryValue = e.target.value;
         setSelectedOption(queryValue);
     };
