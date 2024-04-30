@@ -3,7 +3,7 @@ import { devtools } from 'zustand/middleware';
 
 import userSlice from './user/userStore';
 import catalogSlice from './products/catalogStore';
-import cartStore from './products/cartStore';
+import cartSlice from './products/cartStore';
 import productSlice from './products/productStore';
 
 import {
@@ -19,7 +19,7 @@ const useStore = create<
     devtools((...a) => ({
         ...userSlice(...a),
         ...catalogSlice(...a),
-        ...cartStore(...a),
+        ...cartSlice(...a),
         ...productSlice(...a),
     }))
 );
