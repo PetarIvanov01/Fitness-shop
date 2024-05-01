@@ -1,16 +1,20 @@
 import { StateCreator } from 'zustand';
+import { CartSliceInter } from '../interfaces';
+
 import { getCart } from '../../api/services/catalog';
+
+import {
+    NEW_CART,
+    STORAGE_NAME,
+    addCartToWebStorage,
+    clearCartWebStorage,
+    removeCartFromWebStorage,
+} from './cartStore.util';
 
 import {
     getFromBrowserStorage,
     setToBrowserStorage,
 } from '../../api/services/storage';
-import { CartSliceInter } from '../interfaces';
-
-const STORAGE_NAME = 'cart';
-const NEW_CART = { cart: [], length: 0 };
-
-// TODO - Create Cart interface and asign it where it's needed
 
 const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
     cart: [],
@@ -46,10 +50,14 @@ const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
         const storageCart = removeCartFromWebStorage(cartItemId);
         set((state) => {
             let cart = [...state.cart];
+
             const existingItem = cart.find(
                 (cartItem) => cartItem.product_id === cartItemId
             );
 
+            if (existingItem === undefined) {
+                return { cart };
+            }
             existingItem.quantity--;
 
             if (existingItem.quantity === 0) {
@@ -77,6 +85,11 @@ const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
                 (cartItem) => cartItem.product_id === productId
             );
 
+            if (existingItem === undefined) {
+                return {
+                    cart,
+                };
+            }
             let length = state.length - existingItem.quantity;
             cart = cart.filter((p) => p.product_id !== productId);
 
@@ -110,52 +123,3 @@ const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
 });
 
 export default cartStore;
-
-// TODO add interfaces and types for storageCart
-function removeCartFromWebStorage(cartItemId: string) {
-    const storageCart = getFromBrowserStorage(STORAGE_NAME);
-
-    const cartItems = storageCart.cartItems;
-
-    storageCart.length--;
-    cartItems[cartItemId]--;
-
-    if (cartItems[cartItemId] === 0) {
-        delete cartItems[cartItemId];
-    }
-
-    setToBrowserStorage(STORAGE_NAME, storageCart);
-    return storageCart;
-}
-
-function clearCartWebStorage(productId: string) {
-    const storageCart = getFromBrowserStorage(STORAGE_NAME);
-
-    if (storageCart.cartItems[productId]) {
-        storageCart.length -= storageCart.cartItems[productId];
-        delete storageCart.cartItems[productId];
-    }
-
-    setToBrowserStorage(STORAGE_NAME, storageCart);
-}
-
-function addCartToWebStorage(cartItemId: string) {
-    const storageCart = getFromBrowserStorage(STORAGE_NAME);
-
-    if (storageCart.length === 0) {
-        setToBrowserStorage(STORAGE_NAME, {
-            cartItems: { [cartItemId]: 1 },
-            length: 1,
-        });
-        return;
-    }
-
-    if (storageCart.cartItems[cartItemId]) {
-        storageCart.cartItems[cartItemId]++;
-    } else {
-        storageCart.cartItems[cartItemId] = 1;
-    }
-
-    storageCart.length++;
-    setToBrowserStorage(STORAGE_NAME, storageCart);
-}
