@@ -44,16 +44,19 @@ type Options = {
         Authorization?: string;
         'Content-Type'?: string;
     };
-    signal: AbortSignal;
+    signal?: AbortSignal;
     body?: string;
     credentials: 'include';
 };
 
-function createOptions(method = 'GET', data: any, signal: AbortSignal) {
+function createOptions(
+    method = 'GET',
+    data: any,
+    signal: AbortSignal | undefined
+) {
     const option: Options = {
         method,
         headers: {},
-        signal,
         credentials: 'include',
     };
 
@@ -73,18 +76,18 @@ function createOptions(method = 'GET', data: any, signal: AbortSignal) {
     return option;
 }
 
-export async function get(url: string, data: any, signal: AbortSignal) {
+export async function get(url: string, data: any, signal?: AbortSignal) {
     return await request(url, createOptions('GET', data, signal));
 }
 
-export async function post(url: string, data: any, signal: AbortSignal) {
+export async function post(url: string, data: any, signal?: AbortSignal) {
     return await request(url, createOptions('post', data, signal));
 }
 
-export async function put(url: string, data: any, signal: AbortSignal) {
+export async function put(url: string, data: any, signal?: AbortSignal) {
     return await request(url, createOptions('PUT', data, signal));
 }
 
-export async function del(url: string, signal: AbortSignal) {
+export async function del(url: string, signal?: AbortSignal) {
     return await request(url, createOptions('DELETE', null, signal));
 }
