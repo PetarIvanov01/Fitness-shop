@@ -1,3 +1,17 @@
+type InputProps = {
+    type: string;
+    name: string;
+    id: string;
+    placeholder?: string;
+    handler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    value: string | number;
+    pattern?: string;
+    title?: string;
+    onblur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onfocus?: () => void;
+    error: string | boolean | null;
+    isRequired?: boolean;
+};
 export default function Input({
     type,
     name,
@@ -5,13 +19,13 @@ export default function Input({
     placeholder,
     handler,
     value,
-    pattern = null,
+    pattern,
     title = 'Field is required',
     onblur,
     onfocus,
     error,
     isRequired = true,
-}) {
+}: InputProps) {
     /*   
      - Fix error prop to be object that have passError and otherFieldsErr 
     */

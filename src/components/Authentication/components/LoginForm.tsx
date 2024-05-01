@@ -11,6 +11,11 @@ import Button from './Tags/Button';
 import Heading from './Tags/Heading';
 import useForm from '../../../hooks/useForm';
 
+type LoginFormProps = {
+    email: string;
+    password: string;
+};
+
 const initialState = {
     email: '',
     password: '',
@@ -20,7 +25,7 @@ export default function LoginForm() {
     const navigate = useNavigate();
     const [isSubmit, setIsSubmit] = useState(false);
 
-    const onSubmit = async (values) => {
+    const onSubmit = async (values: LoginFormProps) => {
         setIsSubmit(true);
 
         const body = {

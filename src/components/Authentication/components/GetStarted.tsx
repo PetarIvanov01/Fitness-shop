@@ -1,7 +1,12 @@
 import { GrLinkNext } from 'react-icons/gr';
 import Heading from './Tags/Heading';
 
-export default function GetStarted({ handler, isGuest }) {
+type GetStartedProps = {
+    handler: () => void;
+    isGuest: boolean;
+};
+
+export default function GetStarted({ handler, isGuest }: GetStartedProps) {
     const message = isGuest ? 'Already an user' : 'Get Started';
     const width = isGuest ? 'w-full' : 'w-1/2';
 
