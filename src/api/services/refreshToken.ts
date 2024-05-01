@@ -4,7 +4,7 @@ import { removeFromBrowserStorage } from './storage';
 
 const path = '/users/refreshtoken';
 
-export async function handleRefreshingToken(HOST) {
+export async function handleRefreshingToken(HOST: string) {
     const endpoint = HOST + path;
     const response = await fetch(endpoint, {
         method: 'POST',

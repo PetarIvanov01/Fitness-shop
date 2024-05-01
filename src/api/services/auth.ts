@@ -11,28 +11,45 @@ const endpoints = {
     logout: '/users/logout',
 };
 
-export const sendUserRegistration = async (userData) => {
-    const user = await methods.post(endpoints.register, userData);
-    syncUserState(user);
+type LoginParamsType = {
+    email: string;
+    password: string;
+};
+type RegisterParamsType = {
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    phoneNumber: string;
+    rePassword: string;
+};
+export const sendUserRegistration = async (userData: RegisterParamsType) => {
+    const successResponse = await methods.post(endpoints.register, userData);
+    syncUserState(successResponse);
     return null;
 };
 
-export const sendUserLogin = async (userData) => {
-    const user = await methods.post(endpoints.login, userData);
+export const sendUserLogin = async (userData: LoginParamsType) => {
+    const successResponse = await methods.post(endpoints.login, userData);
 
-    syncUserState(user);
+    syncUserState(successResponse);
     return null;
 };
 
 export const sendUserLogout = async () => {
-    await methods.post(endpoints.logout);
+    await methods.post(endpoints.logout, null);
     clearUserInStore();
     return removeFromBrowserStorage('user');
 };
 
-export function syncUserState(user) {
-    if (user) {
-        const { payload } = user;
+export function syncUserState(response?: {
+    payload: {
+        id: string;
+        token: string;
+    };
+}) {
+    if (response) {
+        const { payload } = response;
         const storedInfo = {
             id: payload.id,
             token: payload.token,
