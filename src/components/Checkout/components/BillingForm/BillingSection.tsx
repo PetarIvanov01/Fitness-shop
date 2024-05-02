@@ -19,7 +19,7 @@ export default function BillingSection() {
     );
     const fetchData = useStore((state) => state.fetchBillingData);
 
-    const { data } = useFetch(fetchData, user.id, {});
+    const { data } = useFetch(fetchData, {}, user.id);
 
     const [personalState, setProfileInfo] = useState(
         initialProfileValue.personalInfo
