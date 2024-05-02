@@ -30,7 +30,7 @@ export default function Card({
             text-center font-bold text-white transition-colors duration-300 hover:text-gray-300 max-md:text-[0.8em] "
             >
                 <CatalogLink queryType="category" queryValue={path}>
-                    {buttonText}
+                    <span>{buttonText}</span>
                 </CatalogLink>
             </div>
         </div>
