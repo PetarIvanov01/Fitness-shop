@@ -10,12 +10,25 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:react/jsx-runtime',
         'plugin:react-hooks/recommended',
+        'plugin:@typescript-eslint/recommended',
     ],
     ignorePatterns: ['build', '.eslintrc.cjs', 'cypress*'],
+    parser: '@typescript-eslint/parser',
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
     settings: { react: { version: '18.2' } },
-    plugins: ['react-refresh', 'cypress'],
+    plugins: ['react-refresh', 'cypress', '@typescript-eslint'],
     rules: {
+        '@typescript-eslint/ban-types': [
+            'error',
+            {
+                extendDefaults: true,
+                types: {
+                    '{}': false,
+                },
+            },
+        ],
+        '@typescript-eslint/no-explicit-any': 'off',
+        'prefer-const': 'off',
         'react/prop-types': 'off',
         'react-refresh/only-export-components': [
             'warn',
