@@ -9,7 +9,10 @@ const VALID_ROUTES = {
 export default function ValidateProductViewRoute() {
     const { categoryType } = useParams();
 
-    if (VALID_ROUTES[categoryType]) {
+    if (
+        categoryType &&
+        VALID_ROUTES[categoryType as keyof typeof VALID_ROUTES]
+    ) {
         return <Outlet />;
     }
 

@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
-const path = '/catalog';
-const optionQueries = {
-    default: `${path}?from=0&to=10000&sort_by=asc`,
-    category: (val: string) =>
-        `${path}?from=0&to=10000&category=${val}&sort_by=asc`,
-};
-
 type CatalogParams = {
     queryType?: 'default' | 'category';
     queryValue?: string;
     children: JSX.Element;
     handler?: () => void;
+};
+
+const path = '/catalog';
+const optionQueries = {
+    default: `${path}?from=0&to=10000&sort_by=asc`,
+    category: (val: string) =>
+        `${path}?from=0&to=10000&category=${val}&sort_by=asc`,
 };
 
 export default function CatalogLink({
