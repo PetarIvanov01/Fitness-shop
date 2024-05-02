@@ -1,8 +1,15 @@
-import { Link, useNavigate } from 'react-router-dom';
-import useStore from '../../../zustand/store';
+import { OneProduct } from '../../../types/services/catalog';
 import { toast } from 'sonner';
 
-export default function ProductInformation({ product }) {
+import useStore from '../../../zustand/store';
+
+import { Link, useNavigate } from 'react-router-dom';
+
+export default function ProductInformation({
+    product,
+}: {
+    product: OneProduct;
+}) {
     const navigate = useNavigate();
 
     const addCartItemIntoStore = useStore(
@@ -39,7 +46,7 @@ export default function ProductInformation({ product }) {
                 </div>
             </div>
 
-            <div className="rounded-md border bg-slate-400/20 p-2 text-base text-white shadow-inner">
+            <div className="h-32 rounded-md border bg-slate-400/20 p-2 text-base text-white shadow-inner">
                 <p>{product.description}</p>
             </div>
 

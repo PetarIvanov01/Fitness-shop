@@ -7,7 +7,15 @@ export default function RelatedProducts() {
     const { categoryType } = useParams();
     const queryString = `category=${categoryType}&perPage=3`;
 
-    const { data } = useFetch(getCatalog, queryString);
+    const { data } = useFetch(
+        getCatalog,
+        {
+            itemsLng: 0,
+            result: [],
+        },
+        queryString
+    );
+
     const relatedItems = data.result;
 
     return (
@@ -23,7 +31,7 @@ export default function RelatedProducts() {
                     relatedItems.map((pr) => {
                         return (
                             <RelatedProduct
-                                type={categoryType}
+                                type={pr.type}
                                 key={pr.product_id}
                                 id={pr.product_id}
                                 title={pr.title}

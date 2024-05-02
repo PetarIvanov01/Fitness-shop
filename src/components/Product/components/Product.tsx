@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom';
 
-export default function RelatedProduct({ id, image, title, type }) {
+type RelatedProductType = {
+    id: string;
+    image: string;
+    title: string;
+    type: string;
+};
+
+export default function RelatedProduct({
+    id,
+    image,
+    title,
+    type,
+}: RelatedProductType) {
     return (
         <div className="flex flex-col items-center">
             <img
