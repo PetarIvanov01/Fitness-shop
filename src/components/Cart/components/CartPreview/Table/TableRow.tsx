@@ -1,7 +1,7 @@
-import { ProductInCart } from '../../../../zustand/interfaces/CartSlice';
+import { ProductInCart } from '../../../../../zustand/interfaces/CartSlice';
 
 import { memo } from 'react';
-import useStore from '../../../../zustand/store';
+import useStore from '../../../../../zustand/store';
 
 import { RiSubtractFill } from 'react-icons/ri';
 import { MdClear } from 'react-icons/md';

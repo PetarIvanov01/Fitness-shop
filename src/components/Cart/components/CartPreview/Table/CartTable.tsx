@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-import useStore from '../../../../zustand/store';
+import useStore from '../../../../../zustand/store';
 
 import TableHead from './TableHead';
 import TableRow from './TableRow';
 import ArrowSvg from './ArrowSvg';
-import CatalogLink from '../../../CatalogLink';
+import CatalogLink from '../../../../CatalogLink';
 
 export default function TableCart() {
     const cartItems = useStore((state) => state.cart);

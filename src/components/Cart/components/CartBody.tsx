@@ -1,5 +1,5 @@
 import CheckoutSection from './CheckoutSection';
-import TableCart from './Table/CartTable';
+import TableCart from './CartPreview/Table/CartTable';
 
 export default function CartBody() {
     return (
