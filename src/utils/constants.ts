@@ -3,7 +3,8 @@ export const initialProfileValue = {
         country: '',
         city: '',
         address: '',
-        postcode: '',
+        postcode: 0,
+        address_id: 0,
     },
     personalInfo: {
         firstName: '',

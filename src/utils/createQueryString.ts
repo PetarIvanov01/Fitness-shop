@@ -11,8 +11,7 @@ export default function createQueryString<T extends GeneralObject<T>>(
         .filter((key) => queryObj[key] !== null)
         .map(
             (key) =>
-                //@ts-ignore
-                `${encodeURIComponent(key)}=${encodeURIComponent(queryObj[key as keyof T])}`
+                `${encodeURIComponent(key as string)}=${encodeURIComponent(queryObj[key as keyof T])}`
         )
         .join('&');
     return string;

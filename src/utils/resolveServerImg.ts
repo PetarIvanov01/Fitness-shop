@@ -3,7 +3,7 @@ let HOST = import.meta.env.VITE_HOST_LOCAL;
 if (import.meta.env.MODE === 'production') {
     HOST = import.meta.env.VITE_HOST_PROD;
 }
-export default function resolveServerImg(image) {
+export default function resolveServerImg(image: string) {
     if (image) {
         return `${HOST}/uploads/` + image;
     }

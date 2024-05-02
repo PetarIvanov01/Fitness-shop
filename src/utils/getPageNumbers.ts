@@ -1,4 +1,7 @@
-export default function getPageNumbers(currentPage, totalPages) {
+export default function getPageNumbers(
+    currentPage: number,
+    totalPages: number
+) {
     const MAX_BUTTONS = 3;
     const halfNumButtons = Math.floor(MAX_BUTTONS / 2);
 
