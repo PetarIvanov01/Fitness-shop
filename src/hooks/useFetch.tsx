@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 export default function useFetch<
     T extends (args: F, signal: AbortSignal) => Promise<Awaited<ReturnType<T>>>,
-    F extends string,
     A,
->(callback: T, args: F, initialState: A) {
+    F extends string,
+>(callback: T, initialState: A, args?: F) {
     const [data, setData] = useState<Awaited<ReturnType<T>> | A>(initialState);
     const [isLoading, setLoading] = useState(false);
 
@@ -23,5 +23,5 @@ export default function useFetch<
         };
     }, [args, callback]);
 
-    return { data, isLoading };
+    return { data, isLoading } as const;
 }

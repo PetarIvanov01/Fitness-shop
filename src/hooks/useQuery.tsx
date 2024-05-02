@@ -26,7 +26,7 @@ export default function useQuery(): ReturnedValuesTypes {
                     }
                     const value = queryObj[typedKey];
                     if (value) {
-                        prev.set(typedKey, value);
+                        prev.set(typedKey, value.toString());
                     }
                     return prev;
                 });

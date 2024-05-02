@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useDebounce from './useDebounce';
 import useQuery from './useQuery';
 import { RANGES } from '../utils/priceRangeConstants';
@@ -28,6 +28,21 @@ export default function usePriceRange() {
         return state;
     });
 
+    const clearPriceRanges = useCallback(() => {
+        setPrice(() => ({
+            from: RANGES.from,
+            to: RANGES.to,
+        }));
+    }, []);
+
+    const changeStartPrice = useCallback((from: number) => {
+        setPrice((prev) => ({ ...prev, from }));
+    }, []);
+
+    const changeEndPrice = useCallback((to: number) => {
+        setPrice((prev) => ({ ...prev, to }));
+    }, []);
+
     const debouncedValues = useDebounce(totalPrice);
     const invalidPriceRange =
         Number(debouncedValues.from) > Number(debouncedValues.to);
@@ -46,6 +61,8 @@ export default function usePriceRange() {
     return {
         totalPrice,
         invalidPriceRange,
-        setPrice,
+        clearPriceRanges,
+        changeStartPrice,
+        changeEndPrice,
     };
 }

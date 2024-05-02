@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 
+type ReturnedCacheData<B extends (...args: any) => any> = Awaited<
+    ReturnType<B>
+>;
 type AsyncFunction<T, F extends (...args: any) => any> = (
     userId: T,
     signal: AbortSignal,
     ...args: string[]
-) => Promise<Awaited<ReturnType<F>>>;
+) => Promise<ReturnedCacheData<F>>;
 
 export default function useProfileCache<
     T,
@@ -41,6 +44,6 @@ export default function useProfileCache<
     return {
         emptyValue,
         isLoading,
-        data: { ...cachedData },
-    };
+        data: { ...cachedData } as ReturnedCacheData<B>,
+    } as const;
 }
