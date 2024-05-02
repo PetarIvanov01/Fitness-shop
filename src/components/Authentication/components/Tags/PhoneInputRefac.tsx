@@ -1,23 +1,30 @@
 import 'react-international-phone/style.css';
 import { PhoneInput } from 'react-international-phone';
 
+type PhoneProps = {
+    handleChangeValues: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleOnBlurValidation: (event: React.FocusEvent<HTMLInputElement>) => void;
+    phoneNumberErr: string | null;
+    phoneValue: string;
+};
+
 export default function PhoneInputRefac({
     handleChangeValues,
     handleOnBlurValidation,
     phoneNumberErr,
     phoneValue,
-}) {
-    const withDomEventHandler = (handler) => {
-        return (phone) => {
+}: PhoneProps) {
+    function withDomEventHandler<T>(handler: (event: T) => void) {
+        return (phone: string) => {
             let event = {
                 target: {
                     value: phone,
                     name: 'phoneNumber',
                 },
             };
-            handler(event);
+            handler(event as T);
         };
-    };
+    }
 
     return (
         <PhoneInput
@@ -25,7 +32,7 @@ export default function PhoneInputRefac({
             name="phoneNumber"
             defaultCountry="bg"
             value={phoneValue}
-            onBlur={withDomEventHandler(handleOnBlurValidation)}
+            onBlur={handleOnBlurValidation}
             onChange={withDomEventHandler(handleChangeValues)}
             countrySelectorStyleProps={{
                 dropdownStyleProps: {

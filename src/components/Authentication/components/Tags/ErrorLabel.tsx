@@ -1,4 +1,8 @@
-export default function ErrorLabel({ error, id = '' }) {
+type ErrorProps = {
+    error: string | null;
+    id: string;
+};
+export default function ErrorLabel({ error, id = '' }: ErrorProps) {
     if (!error) return null;
 
     return (

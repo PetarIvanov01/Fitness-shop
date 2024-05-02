@@ -91,8 +91,8 @@ export default function LoginForm() {
                 </div>
                 <div className="flex w-full items-center gap-5">
                     <Button
+                        error={requestErr}
                         text={'Sign In'}
-                        errors={error}
                         loadSpin={isSubmit}
                     />
                     {requestErr && (

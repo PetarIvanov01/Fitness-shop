@@ -1,14 +1,21 @@
 import { useState } from 'react';
 import { GrLinkNext } from 'react-icons/gr';
 
-export default function Button({ text, errors, loadSpin = false }) {
+type ButtonProps = {
+    text: string;
+    error: string | null;
+    loadSpin: boolean;
+};
+
+export default function Button({ text, error, loadSpin = false }: ButtonProps) {
     const [effect, setEffect] = useState(false);
 
     const handlersEffects = {
         onClick: () => setEffect(true),
         onAnimationEnd: () => setEffect(false),
     };
-    const showAnimation = effect && errors.requestErr && 'animate-wiggle';
+
+    const showAnimation = effect && error && 'animate-wiggle';
 
     return (
         <button

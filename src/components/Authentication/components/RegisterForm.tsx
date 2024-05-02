@@ -28,7 +28,7 @@ export default function RegsiterForm() {
     const [isSubmit, setIsSubmit] = useState(false);
     const navigate = useNavigate();
 
-    const onSubmit = async (values) => {
+    const onSubmit = async (values: typeof initialState) => {
         if (values.password !== values['re-password']) {
             throw new Error("Password doesn't matched!");
         }
@@ -187,7 +187,7 @@ export default function RegsiterForm() {
                 <div className="flex items-center gap-5">
                     <Button
                         text={'Sign Up'}
-                        errors={error}
+                        error={requestErr}
                         loadSpin={isSubmit}
                     />
                     <p data-test="error-fetch" className="text-lg text-red-500">
