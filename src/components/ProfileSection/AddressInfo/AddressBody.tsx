@@ -4,7 +4,7 @@ import FormSection from './components/FormSection';
 import Skeleton from '../PersonalInfo/components/Skeleton';
 import OtherAddresses from './OtherAddresses';
 
-export default function AddressBody({ userId }) {
+export default function AddressBody({ userId }: { userId: string }) {
     const fetchAddress = useStore((state) => state.fetchAddress);
     const shippingInfo = useStore((state) => state.shippingInfo);
 

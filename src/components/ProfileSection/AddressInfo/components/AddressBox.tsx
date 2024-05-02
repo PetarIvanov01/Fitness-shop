@@ -1,3 +1,9 @@
+import { AddressInfoReturnedType } from '../../../../zustand/interfaces/UserSlice';
+
+type AddressBoxProps = AddressInfoReturnedType & {
+    isDefault?: boolean;
+    onSetDefault?: () => void;
+};
 export default function AddressBox({
     country,
     city,
@@ -5,7 +11,7 @@ export default function AddressBox({
     address,
     isDefault = false,
     onSetDefault = () => {},
-}) {
+}: AddressBoxProps) {
     return (
         <div className="mx-4  rounded-md border border-r-4 border-t-2 border-black bg-gradient-to-b from-[#4b6fad] via-[#213b74] to-[#0e2350] p-4 shadow-md">
             <div className="mb-2 flex items-center justify-between">

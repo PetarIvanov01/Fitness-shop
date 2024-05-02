@@ -1,17 +1,28 @@
 import { useState } from 'react';
 import ConfirmModal from '../../components/ConfirmModal';
 
-export default function Controllers({ handleOnSubmit, hasChange }) {
+type ControllersProps = {
+    handleOnSubmit: () => Promise<void>;
+    hasChange: boolean | undefined;
+};
+export default function Controllers({
+    handleOnSubmit,
+    hasChange,
+}: ControllersProps) {
     const [showModal, setShowModal] = useState(false);
 
-    const toggleModal = (e) => {
+    const toggleModal = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault();
         if (hasChange) {
             setShowModal(!showModal);
         }
     };
 
-    const onAcceptCloseModal = (e) => {
+    const onAcceptCloseModal = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault();
         handleOnSubmit();
         setShowModal(false);

@@ -1,7 +1,15 @@
 import 'react-international-phone/style.css';
 import { PhoneInput } from 'react-international-phone';
 
-export default function PhoneComp({ phoneNumber, handlOnChange }) {
+type PhoneCompProps = {
+    phoneNumber: string;
+    handlOnChange: (phone: string) => void;
+};
+
+export default function PhoneComp({
+    phoneNumber,
+    handlOnChange,
+}: PhoneCompProps) {
     return (
         <div>
             <label htmlFor="phoneNumbee">Phone number</label>

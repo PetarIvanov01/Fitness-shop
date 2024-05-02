@@ -3,7 +3,7 @@ type ConfirmModalProps = {
     onAcceptCloseModal: (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => void;
-    text: string;
+    text: JSX.Element | string;
 };
 export default function ConfirmModal({
     toggleModal,

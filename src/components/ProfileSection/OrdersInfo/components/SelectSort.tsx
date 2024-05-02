@@ -1,4 +1,12 @@
-export default function SelectSort({ label, id, options }) {
+type Props = {
+    label: string;
+    id: string;
+    options: {
+        value: string;
+        label: string;
+    }[];
+};
+export default function SelectSort({ label, id, options }: Props) {
     return (
         <div className="flex flex-col items-center justify-center  px-1 py-2">
             <label htmlFor={id} className="sorting-title text-neutral-50">

@@ -5,19 +5,31 @@ import useStore from '../../../../zustand/store';
 
 import Field from '../../components/Field';
 import Controllers from '../../components/Controllers';
+import { AddressInfoReturnedType } from '../../../../zustand/interfaces/UserSlice';
 
-export default function FormSection({ userId, shippingInfo, emptyValue }) {
+type FormSectionProps = {
+    userId: string;
+    shippingInfo: AddressInfoReturnedType;
+    emptyValue: boolean;
+};
+
+export default function FormSection({
+    userId,
+    shippingInfo,
+    emptyValue,
+}: FormSectionProps) {
     const [addressState, setAddressInfo] = useState(() => {
         if (!emptyValue) {
             return shippingInfo;
         }
         return initialProfileValue.shippingInfo;
     });
+
     const updateUserAddress = useStore((state) => state.updateUserAddress);
-    const hasChange = useRef();
+    const hasChange = useRef<boolean>();
 
     const handleOnChangePersonalInfo = useCallback(
-        (e) => {
+        (e: React.ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
             hasChange.current = true;
             setAddressInfo((state) => ({
@@ -35,7 +47,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                 userId,
                 addressState,
                 controller.signal,
-                shippingInfo.address_id
+                shippingInfo.address_id.toString()
             );
             hasChange.current = false;
         }
@@ -52,7 +64,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'address'}
                             type={'text'}
                             label={'Address'}
-                            value={addressState.address || ''}
+                            value={addressState.address}
                         />
                     </div>
                     <div className="flex grow flex-col">
@@ -62,7 +74,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'country'}
                             type={'text'}
                             label={'Country'}
-                            value={addressState.country || ''}
+                            value={addressState.country}
                         />
                     </div>
                 </div>
@@ -74,7 +86,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'city'}
                             type={'text'}
                             label={'City'}
-                            value={addressState.city || ''}
+                            value={addressState.city}
                         />
                     </div>
                     <div className="flex grow flex-col">
@@ -84,7 +96,7 @@ export default function FormSection({ userId, shippingInfo, emptyValue }) {
                             name={'postcode'}
                             type={'text'}
                             label={'Postal Code'}
-                            value={addressState.postcode || ''}
+                            value={addressState.postcode}
                         />
                     </div>
                 </div>

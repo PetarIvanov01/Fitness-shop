@@ -1,8 +1,9 @@
-import { IoMdInformationCircleOutline } from 'react-icons/io';
-import Header from '../components/Header';
 import OrderBody from './OrderBody';
+import Header from '../components/Header';
 
-export default function OrderSection({ userId }) {
+import { IoMdInformationCircleOutline } from 'react-icons/io';
+
+export default function OrderSection({ userId }: { userId: string }) {
     return (
         <div className="flex h-full flex-col pb-5">
             <Header

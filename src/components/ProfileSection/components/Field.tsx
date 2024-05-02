@@ -2,7 +2,7 @@ import { GiPadlock } from 'react-icons/gi';
 import { CiUnlock } from 'react-icons/ci';
 
 type FieldProps = {
-    value: string;
+    value: string | number;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     label: string;
     name: string;

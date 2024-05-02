@@ -1,10 +1,11 @@
-import { IoMdInformationCircleOutline } from 'react-icons/io';
-import InfoBody from './InfoBody';
 import Header from '../components/Header';
 
-export default function PersonalInfoSection({ userId }) {
+import InfoBody from './InfoBody';
+import { IoMdInformationCircleOutline } from 'react-icons/io';
+
+export default function PersonalInfoSection({ userId }: { userId: string }) {
     return (
-        <div className="font-lora h-full pb-5">
+        <div className="h-full pb-5 font-lora">
             <Header
                 icon={<IoMdInformationCircleOutline className="size-8" />}
                 title={'Personal Information'}

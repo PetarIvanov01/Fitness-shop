@@ -1,24 +1,44 @@
-import { useCallback, useRef, useState } from 'react';
-import { initialProfileValue } from '../../../../utils/constants';
+import {
+    ChangeEvent,
+    MutableRefObject,
+    useCallback,
+    useRef,
+    useState,
+} from 'react';
 
 import useStore from '../../../../zustand/store';
+
+import { PersonalInfoReturnedType } from '../../../../zustand/interfaces/UserSlice';
+import { initialProfileValue } from '../../../../utils/constants';
 
 import PhoneComp from './PhoneComp';
 import Controllers from './Controllers';
 import Field from '../../components/Field';
 
-export default function FormSection({ userId, personalInfo, emptyValue }) {
-    const [personalState, setProfileInfo] = useState(() => {
-        if (!emptyValue) {
-            return personalInfo;
+type FormProps = {
+    userId: string;
+    personalInfo: PersonalInfoReturnedType | {};
+    emptyValue: boolean;
+};
+
+export default function FormSection({
+    userId,
+    personalInfo,
+    emptyValue,
+}: FormProps) {
+    const [personalState, setProfileInfo] = useState<PersonalInfoReturnedType>(
+        () => {
+            if (!emptyValue) {
+                return personalInfo as PersonalInfoReturnedType;
+            }
+            return initialProfileValue.personalInfo;
         }
-        return initialProfileValue.personalInfo;
-    });
+    );
     const updateUserProfile = useStore((state) => state.updateUserProfile);
-    const hasChange = useRef();
+    const hasChange: MutableRefObject<boolean | undefined> = useRef();
 
     const handleOnChangePersonalInfo = useCallback(
-        (e) => {
+        (e: ChangeEvent<HTMLInputElement>) => {
             e.preventDefault();
             hasChange.current = true;
             setProfileInfo((state) => ({
@@ -30,13 +50,17 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
     );
 
     const handleOnChangePhoneInput = useCallback(
-        (phone) => {
-            if (phone !== personalState.phoneNumber.replace(' ', '')) {
-                hasChange.current = true;
-                setProfileInfo((state) => ({
-                    ...state,
-                    phoneNumber: phone,
-                }));
+        (phone: string) => {
+            if (personalState.phoneNumber) {
+                if (phone !== personalState.phoneNumber.replace(' ', '')) {
+                    console.log('yes');
+
+                    hasChange.current = true;
+                    setProfileInfo((state) => ({
+                        ...state,
+                        phoneNumber: phone,
+                    }));
+                }
             }
         },
         [setProfileInfo, hasChange, personalState.phoneNumber]
@@ -98,9 +122,6 @@ export default function FormSection({ userId, personalInfo, emptyValue }) {
                 </p>
 
                 <Controllers
-                    text={
-                        'Are you sure you want to edit your personal information?'
-                    }
                     hasChange={hasChange.current}
                     handleOnSubmit={handleOnSubmit}
                 />

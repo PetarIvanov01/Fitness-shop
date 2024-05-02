@@ -4,11 +4,19 @@ const STATUS_COLORS = {
     Canceled: 'text-red-500',
     Finished: 'text-green-500',
     'In Process': 'text-orange-500',
-};
+} as const;
+
 const STATUSES = {
     1: 'In Process',
     2: 'Finished',
     3: 'Canceled',
+} as const;
+
+type OrderRowProps = {
+    order_id: string;
+    status_id: number;
+    order_date: Date;
+    total_price: string;
 };
 
 export default function OrderRow({
@@ -16,8 +24,8 @@ export default function OrderRow({
     status_id,
     order_date,
     total_price,
-}) {
-    const status = STATUSES[status_id];
+}: OrderRowProps) {
+    const status = STATUSES[status_id as keyof typeof STATUSES];
     const statusColor = STATUS_COLORS[status];
 
     const dateObject = new Date(order_date);
