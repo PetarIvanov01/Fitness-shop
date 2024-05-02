@@ -8,7 +8,17 @@ import { BiLogOutCircle } from 'react-icons/bi';
 import AsideUl from './components/AsideUl';
 import CatalogLink from '../CatalogLink';
 
-export default function AsideHeader({ visible, onClickClose, userId }) {
+type AsideHeaderProps = {
+    visible: boolean;
+    onClickClose: () => void;
+    userId: string | undefined;
+};
+
+export default function AsideHeader({
+    visible,
+    onClickClose,
+    userId,
+}: AsideHeaderProps) {
     const [isVisible, setVisible] = useState(false);
 
     const handleVisibility = () => {

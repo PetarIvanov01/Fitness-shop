@@ -2,7 +2,11 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import useStore from '../../../zustand/store';
 
-export default function CartDropdown({ onClickClose }) {
+export default function CartDropdown({
+    onClickClose,
+}: {
+    onClickClose?: () => void;
+}) {
     const cartLenght = useStore((state) => state.length);
 
     return (

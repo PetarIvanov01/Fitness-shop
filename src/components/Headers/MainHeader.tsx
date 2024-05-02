@@ -11,14 +11,11 @@ export default function Header() {
 
     const [isVisible, setIsVisible] = useState(false);
 
-    const handleVisibility = useCallback(
-        (val) => {
-            setIsVisible(val);
-        },
-        [setIsVisible]
-    );
+    const handleVisibility = useCallback((val: boolean) => {
+        setIsVisible(val);
+    }, []);
 
-    const { ref } = useCloseSection(handleVisibility);
+    const { ref } = useCloseSection<HTMLDivElement>(handleVisibility);
 
     const handleAsideVisible = useCallback(() => {
         setIsVisible((prev) => !prev);

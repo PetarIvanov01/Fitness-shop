@@ -14,9 +14,12 @@ const categories = [
         title: 'Free Weights',
         path: 'free-weights',
     },
-];
-
-export default function AsideUl({ isVisible, onClickClose }) {
+] as const;
+type AsideUlProps = {
+    isVisible: boolean;
+    onClickClose: () => void;
+};
+export default function AsideUl({ isVisible, onClickClose }: AsideUlProps) {
     return (
         <ul
             className={`${!isVisible && 'hidden'} flex w-full flex-col gap-2 pl-4 pt-5 max-[639px]:text-sm`}

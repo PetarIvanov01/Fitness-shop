@@ -5,11 +5,17 @@ import { FaRegUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import CartDropdown from './CartDropdown';
 
+type MainSectionProps = {
+    handleAsideVisible: () => void;
+    onClickClose: () => void;
+    userId: string | undefined;
+};
+
 export default function MainSection({
     handleAsideVisible,
     onClickClose,
     userId,
-}) {
+}: MainSectionProps) {
     return (
         <section className="flex h-16 items-center justify-between bg-[#4e4242] px-6 opacity-95">
             <button
