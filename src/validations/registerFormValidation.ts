@@ -1,5 +1,5 @@
 const REG_FIELDS = {
-    firstName: (value) => {
+    firstName: (value: string) => {
         if (!value.trim()) {
             return 'First name is required';
         }
@@ -8,7 +8,7 @@ const REG_FIELDS = {
         }
         return '';
     },
-    lastName: (value) => {
+    lastName: (value: string) => {
         if (!value.trim()) {
             return 'Last name is required';
         }
@@ -17,16 +17,16 @@ const REG_FIELDS = {
         }
         return '';
     },
-    phoneNumber: (value) => {
+    phoneNumber: (value: string) => {
         if (!value.trim()) {
             return 'Phone number is required';
         }
-        if (!/\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{4}/.test(value)) {
+        if (!/^\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{4}$/.test(value)) {
             return 'Please provide a valid phone number (e.g., +123 45 678 9012)';
         }
         return '';
     },
-    email: (value) => {
+    email: (value: string) => {
         if (!value.trim()) {
             return 'Email is required';
         }
@@ -36,7 +36,7 @@ const REG_FIELDS = {
         }
         return '';
     },
-    password: (value) => {
+    password: (value: string) => {
         if (!value.trim()) {
             return 'Password is required';
         }
@@ -49,18 +49,18 @@ const REG_FIELDS = {
         }
         return '';
     },
-    're-password': (value, password) => {
+    're-password': (value: string) => {
         if (!value.trim()) {
             return 'Repeat password is required';
         }
-        if (password && value !== password) {
-            return 'Passwords do not match';
-        }
         return '';
     },
-};
+} as const;
 
-export function registerFieldValidation(key, value) {
+export function registerFieldValidation(
+    key: keyof typeof REG_FIELDS,
+    value: string
+): string | null {
     const validatorFnc = REG_FIELDS[key];
 
     if (!validatorFnc) {
