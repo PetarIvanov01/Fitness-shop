@@ -1,6 +1,12 @@
 import getPageNumbers from '../../../utils/getPageNumbers';
 
-export default function ButtonPage({ pages, current }) {
+export default function ButtonPage({
+    pages,
+    current,
+}: {
+    pages: number;
+    current: number;
+}) {
     const pageArr = getPageNumbers(current, pages);
     return (
         <div className="flex items-center">

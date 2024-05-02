@@ -1,6 +1,5 @@
 import { MdOutlineClear } from 'react-icons/md';
 
-import { RANGES } from '../../../../utils/priceRangeConstants';
 import filters from '../../../../assets/utils/filterData.json';
 import usePriceRange from '../../../../hooks/usePriceRange';
 
@@ -12,15 +11,19 @@ type Props = {
 };
 
 export default function AsideFilters({ clearQueries }: Props) {
-    const { setPrice, invalidPriceRange, totalPrice } = usePriceRange();
+    const {
+        changeEndPrice,
+        changeStartPrice,
+        clearPriceRanges,
+        invalidPriceRange,
+        totalPrice,
+    } = usePriceRange();
 
     const clearFilters = () => {
-        setPrice(() => ({
-            from: RANGES.from,
-            to: RANGES.to,
-        }));
+        clearPriceRanges();
         clearQueries();
     };
+
     const asideMediaQueries = 'max-[600px]:self-center max-[600px]:border-none';
     return (
         <aside
@@ -40,7 +43,8 @@ export default function AsideFilters({ clearQueries }: Props) {
 
             <PriceRange
                 totalPrice={totalPrice}
-                setPrice={setPrice}
+                changeEndPrice={changeEndPrice}
+                changeStartPrice={changeStartPrice}
                 invalidPriceRange={invalidPriceRange}
             />
 

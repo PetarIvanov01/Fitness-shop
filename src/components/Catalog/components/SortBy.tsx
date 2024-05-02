@@ -3,13 +3,20 @@ import { useEffect, useState } from 'react';
 import useQuery from '../../../hooks/useQuery';
 import useDebounce from '../../../hooks/useDebounce';
 
+const VALID_SORT = {
+    desc: 'desc',
+    asc: 'asc',
+} as const;
+
+type ValidSortType = keyof typeof VALID_SORT;
+
 export default function SortBy() {
     const { queryObj, handleQueryChange } = useQuery();
-    const [selectedOption, setSelectedOption] = useState(() => {
-        if (queryObj.sort_by === 'desc') {
-            return 'desc';
+    const [selectedOption, setSelectedOption] = useState<ValidSortType>(() => {
+        if (queryObj.sort_by === VALID_SORT.desc) {
+            return VALID_SORT.desc;
         }
-        return 'asc';
+        return VALID_SORT.asc;
     });
 
     const debouncedVal = useDebounce(selectedOption, 700);
@@ -22,7 +29,9 @@ export default function SortBy() {
 
     const onSelectChangeQuery = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const queryValue = e.target.value;
-        setSelectedOption(queryValue);
+        if (VALID_SORT.asc === queryValue || VALID_SORT.desc === queryValue) {
+            setSelectedOption(queryValue);
+        }
     };
 
     return (

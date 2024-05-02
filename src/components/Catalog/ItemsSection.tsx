@@ -1,15 +1,15 @@
+import { CatalogProductArr } from '../../types/services/catalog';
+
 import { toast } from 'sonner';
 
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CatalogResultType } from '../../zustand/interfaces/CatalogSlice';
-
 import useStore from '../../zustand/store';
 
 import Card from './components/Card';
 
-export default function ItemsSection({ data }: { data: CatalogResultType }) {
+export default function ItemsSection({ data }: { data: CatalogProductArr }) {
     const navigate = useNavigate();
 
     const addCartItemIntoStore = useStore(
@@ -17,7 +17,7 @@ export default function ItemsSection({ data }: { data: CatalogResultType }) {
     );
 
     const onClickAddItemToCart = useCallback(
-        (item: CatalogResultType[number]) => {
+        (item: CatalogProductArr[number]) => {
             return () => {
                 addCartItemIntoStore(item);
 

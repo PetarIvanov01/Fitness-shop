@@ -5,30 +5,27 @@ type Props = {
         from: string | number;
         to: string | number;
     };
-    setPrice: React.Dispatch<
-        React.SetStateAction<{
-            from: string | number;
-            to: string | number;
-        }>
-    >;
+    changeEndPrice: (to: number) => void;
+    changeStartPrice: (from: number) => void;
     invalidPriceRange: boolean;
 };
 
 export default function PriceRange({
     totalPrice,
-    setPrice,
+    changeEndPrice,
+    changeStartPrice,
     invalidPriceRange,
 }: Props) {
     const handleStartPriceChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        setPrice((prev) => ({ ...prev, from: Number(event.target.value) }));
+        changeStartPrice(Number(event.target.value));
     };
 
     const handleEndPriceChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        setPrice((prev) => ({ ...prev, to: Number(event.target.value) }));
+        changeEndPrice(Number(event.target.value));
     };
     return (
         <div id="price-filter" className="pb-2">

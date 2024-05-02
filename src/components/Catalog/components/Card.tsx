@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import { CatalogResultType } from '../../../zustand/interfaces/CatalogSlice';
+import { CatalogProductArr } from '../../../types/services/catalog';
 
-type Props = CatalogResultType[number] & {
+import { useNavigate } from 'react-router-dom';
+
+type Props = CatalogProductArr[number] & {
     onClickAddCookieData: () => void;
 };
 

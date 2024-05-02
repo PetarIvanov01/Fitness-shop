@@ -20,7 +20,7 @@ export default function Filter({ id, title, options }: Props) {
 
     useEffect(() => {
         setSelectedOption(queryKey);
-    }, [queryObj, id]);
+    }, [queryKey, id]);
 
     const onSelectChangeQuery = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const queryParam = e.target.id;
