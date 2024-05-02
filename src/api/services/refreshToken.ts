@@ -1,5 +1,6 @@
 import { setUserInStore } from '../../zustand/user/authExternal';
 import { syncUserState } from './auth';
+
 import { removeFromBrowserStorage } from './storage';
 
 const path = '/users/refreshtoken';

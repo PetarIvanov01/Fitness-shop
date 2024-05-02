@@ -1,6 +1,6 @@
-import * as methods from '../../requester';
-
 import { PersonalInfoReturnedType } from '../../../zustand/interfaces/UserSlice';
+
+import * as methods from '../../requester';
 
 const endpoints = {
     getUser: (userId: string) => `/users/${userId}`,

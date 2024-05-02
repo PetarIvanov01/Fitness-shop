@@ -1,8 +1,12 @@
+import { LoginParamsType, RegisterParamsType } from '../../types/services/auth';
+
 import * as methods from '../requester';
+
 import {
     clearUserInStore,
     setUserInStore,
 } from '../../zustand/user/authExternal';
+
 import { removeFromBrowserStorage, setToBrowserStorage } from './storage';
 
 const endpoints = {
@@ -11,18 +15,6 @@ const endpoints = {
     logout: '/users/logout',
 };
 
-type LoginParamsType = {
-    email: string;
-    password: string;
-};
-type RegisterParamsType = {
-    email: string;
-    firstName: string;
-    lastName: string;
-    password: string;
-    phoneNumber: string;
-    rePassword: string;
-};
 export const sendUserRegistration = async (userData: RegisterParamsType) => {
     const successResponse = await methods.post(endpoints.register, userData);
     syncUserState(successResponse);

@@ -1,3 +1,8 @@
+import {
+    FullOrderType,
+    PartialOrderType,
+} from '../../../types/services/profile';
+
 import * as methods from '../../requester';
 
 const endpoints = {
@@ -6,38 +11,6 @@ const endpoints = {
     getAll: (userId: string) => `/users/${userId}/orders`,
     create: (userId: string) => `/users/${userId}/orders`,
 };
-
-type PartialOrderType = {
-    order_date: Date;
-    order_desc: string | null;
-    order_id: string;
-    status_id: number;
-    total_price: string;
-    user_id: string;
-}[];
-
-type OrderedProducts = {}[];
-
-interface FullOrderType {
-    orderInfo: {
-        orderId: string;
-        createdAt: Date;
-        status_name: string;
-        totalPrice: string;
-        userAddress: {
-            country: string;
-            city: string;
-            address: string;
-            postcode: number;
-        };
-        userProfile: {
-            fullName: string;
-            phoneNumber: string;
-            userId: string;
-        };
-    };
-    orderedProducts: OrderedProducts;
-}
 
 export const getPartialOrders = async (
     userId: string,

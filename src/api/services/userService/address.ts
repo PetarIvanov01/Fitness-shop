@@ -1,4 +1,4 @@
-import { AddressInfoReturnedType } from '../../../zustand/interfaces/UserSlice';
+import { GetAddressType } from '../../../types/services/profile';
 
 import * as methods from '../../requester';
 
@@ -10,10 +10,6 @@ const endpoints = {
     update: (userId: string, addressId: string) =>
         `/users/${userId}/addresses?addressId=${addressId}`,
 };
-
-type GetAddressType<T extends string | null> = T extends string
-    ? Promise<AddressInfoReturnedType>
-    : Promise<{ payload: AddressInfoReturnedType[] }>;
 
 export const getAddress = async <T extends string | null>(
     userId: string,

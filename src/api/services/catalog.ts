@@ -1,17 +1,6 @@
+import { CatalogProduct, OneProduct } from '../../types/services/catalog';
+
 import * as methods from '../requester';
-
-export interface CatalogProduct {
-    product_id: string;
-    category_id: string;
-    title: string;
-    price: string;
-    description: string;
-    image: string;
-    type: string;
-    quantity: number;
-}
-
-export type OneProduct = Omit<CatalogProduct, 'quantity' | 'type'>;
 
 const endpoints = {
     getByCategory: (category: string) => `/catalog?${category}`,
