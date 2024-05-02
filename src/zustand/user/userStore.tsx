@@ -1,27 +1,22 @@
 import { StateCreator } from 'zustand';
+import { UserSliceInter } from '../interfaces';
+
 import { getFromBrowserStorage } from '../../api/services/storage';
+
 import {
     updateUserInformation,
     getUserInformation,
-} from '../../api/services/user';
+} from '../../api/services/userService/profile';
+
 import {
     getAddress,
     updateAddress,
 } from '../../api/services/userService/address';
 
-import { initialProfileValue } from '../../utils/constants';
-import { UserSliceInter } from '../interfaces';
-
-/* 
-TODO:
-- Create proper user, personalInfo, 
-- shippingInfo and otherShippingAddressess interface
-*/
-
 const userSlice: StateCreator<UserSliceInter> = (set) => ({
     user: getFromBrowserStorage('user'),
-    personalInfo: initialProfileValue.personalInfo,
-    shippingInfo: initialProfileValue.shippingInfo,
+    personalInfo: {},
+    shippingInfo: {},
     otherShippingAddresses: [],
 
     fetchProfile: async (userId, signal) => {
@@ -30,19 +25,26 @@ const userSlice: StateCreator<UserSliceInter> = (set) => ({
         set(() => ({ personalInfo: data }));
         return data;
     },
-    fetchAddress: async (userId, signal, addressId = '') => {
-        const { payload } = await getAddress(userId, addressId, signal);
-        let state = {
-            ...payload[0],
-        };
+    fetchAddress: async (userId, signal, addressId) => {
+        let result;
+
+        if (addressId) {
+            result = await getAddress(userId, addressId, signal);
+        } else {
+            const { payload } = await getAddress(userId, null, signal);
+            result = payload[0];
+            set(() => ({
+                otherShippingAddresses: payload.slice(1).map((e) => ({
+                    ...e,
+                })),
+            }));
+        }
 
         set(() => ({
-            shippingInfo: state,
-            otherShippingAddresses: payload.slice(1).map((e: any) => ({
-                ...e,
-            })),
+            shippingInfo: result,
         }));
-        return state;
+
+        return result;
     },
     updateUserProfile: async (userId, profileState, signal) => {
         await updateUserInformation(
@@ -63,7 +65,7 @@ const userSlice: StateCreator<UserSliceInter> = (set) => ({
     },
     fetchBillingData: async (userId, signal) => {
         const data = await getUserInformation(userId, signal);
-        const { payload } = await getAddress(userId, '', signal);
+        const { payload } = await getAddress(userId, null, signal);
 
         return {
             personalInfo: data,
