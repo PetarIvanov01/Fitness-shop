@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import ProductInformation from './components/ProductInformation';
 import RelatedProducts from './components/RelatedProducts';
 import Spinner from '../Spinner';
+import Reviews from './components/ReviewsComponents/Reviews';
 
 export default function ProductView() {
     const { productId } = useParams();
@@ -23,6 +24,7 @@ export default function ProductView() {
 
                         <hr className="mt-2 border-t-2 border-black" />
 
+                        <Reviews />
                         <RelatedProducts />
                     </>
                 ) : (
