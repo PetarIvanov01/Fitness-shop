@@ -3,7 +3,7 @@ import { GrLinkNext } from 'react-icons/gr';
 
 type ButtonProps = {
     text: string;
-    error: string | null;
+    error: boolean;
     loadSpin: boolean;
 };
 
@@ -15,13 +15,13 @@ export default function Button({ text, error, loadSpin = false }: ButtonProps) {
         onAnimationEnd: () => setEffect(false),
     };
 
-    const showAnimation = effect && error && 'animate-wiggle';
+    const showAnimation = effect && error && 'animate-wiggle hover:bg-red-400';
 
     return (
         <button
             {...handlersEffects}
-            className={`${showAnimation} flex h-10 w-fit items-center gap-2 rounded-sm
-                 bg-white px-2 py-1 text-black opacity-65 hover:scale-105 hover:bg-blue-400`}
+            className={`bg-white ${showAnimation} flex h-10 w-fit items-center gap-2 rounded-sm
+                   px-2 py-1 text-black opacity-65 hover:scale-105 hover:bg-blue-400`}
             type="submit"
         >
             <div className="flex w-full items-center justify-center gap-1">
