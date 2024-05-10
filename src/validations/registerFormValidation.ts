@@ -6,7 +6,7 @@ const REG_FIELDS = {
         if (value.length < 2 || !/^[A-Z][a-z]*$/.test(value)) {
             return 'Should start with an uppercase letter and be at least 2 characters long';
         }
-        return '';
+        return null;
     },
     lastName: (value: string) => {
         if (!value.trim()) {
@@ -15,7 +15,7 @@ const REG_FIELDS = {
         if (value.length < 2 || !/^[A-Z][a-z]*$/.test(value)) {
             return 'Should start with an uppercase letter and be at least 2 characters long';
         }
-        return '';
+        return null;
     },
     phoneNumber: (value: string) => {
         if (!value.trim()) {
@@ -24,7 +24,7 @@ const REG_FIELDS = {
         if (!/^\+[0-9]{3}[0-9]{2}[0-9]{3}[0-9]{4}$/.test(value)) {
             return 'Please provide a valid phone number (e.g., +123 45 678 9012)';
         }
-        return '';
+        return null;
     },
     email: (value: string) => {
         if (!value.trim()) {
@@ -34,7 +34,7 @@ const REG_FIELDS = {
         if (!emailRegex.test(value)) {
             return 'Please provide a valid email address (e.g., example@email.com)';
         }
-        return '';
+        return null;
     },
     password: (value: string) => {
         if (!value.trim()) {
@@ -47,13 +47,13 @@ const REG_FIELDS = {
         ) {
             return 'At least 5 char long with at least one number and one letter';
         }
-        return '';
+        return null;
     },
     're-password': (value: string) => {
         if (!value.trim()) {
             return 'Repeat password is required';
         }
-        return '';
+        return null;
     },
 } as const;
 
