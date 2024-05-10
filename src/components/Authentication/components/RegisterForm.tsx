@@ -70,6 +70,11 @@ export default function RegsiterForm() {
     const visibleError = error.isVisible;
     const requestErr = error.requestErr;
 
+    const hasError =
+        Object.values(error).filter((e) => {
+            return typeof e === 'string';
+        }).length !== 0;
+
     return (
         <div className="flex w-full flex-col self-start pt-10 text-white">
             <Heading text={'Create a Profile'} />
@@ -187,7 +192,7 @@ export default function RegsiterForm() {
                 <div className="flex items-center gap-5">
                     <Button
                         text={'Sign Up'}
-                        error={requestErr}
+                        error={hasError}
                         loadSpin={isSubmit}
                     />
                     <p data-test="error-fetch" className="text-lg text-red-500">

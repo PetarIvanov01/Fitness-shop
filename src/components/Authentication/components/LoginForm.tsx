@@ -54,8 +54,9 @@ export default function LoginForm() {
         initialState,
         onSubmit
     );
-
     const requestErr = error.requestErr;
+    const hasError = !!requestErr;
+
     return (
         <div className="flex w-1/2 flex-col items-center px-6 text-white max-sm:w-full max-sm:p-0">
             <Heading text={'Registered User'} />
@@ -91,7 +92,7 @@ export default function LoginForm() {
                 </div>
                 <div className="flex w-full items-center gap-5">
                     <Button
-                        error={requestErr}
+                        error={hasError}
                         text={'Sign In'}
                         loadSpin={isSubmit}
                     />
