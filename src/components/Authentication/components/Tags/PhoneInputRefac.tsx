@@ -1,5 +1,6 @@
 import 'react-international-phone/style.css';
 import { PhoneInput } from 'react-international-phone';
+import { memo } from 'react';
 
 type PhoneProps = {
     handleChangeValues: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -8,7 +9,7 @@ type PhoneProps = {
     phoneValue: string;
 };
 
-export default function PhoneInputRefac({
+const PhoneInputRefac = memo(function PhoneInputRefac({
     handleChangeValues,
     handleOnBlurValidation,
     phoneNumberErr,
@@ -42,4 +43,5 @@ export default function PhoneInputRefac({
             inputClassName={`input-phone-normal ${phoneNumberErr && 'input-phone-invalid'}`}
         />
     );
-}
+});
+export default PhoneInputRefac;
