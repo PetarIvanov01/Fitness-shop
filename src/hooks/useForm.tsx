@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type ErrorType = {
     isVisible: boolean;
@@ -55,7 +55,18 @@ export default function useForm<
         async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             try {
-                if (error.requestErr === null) {
+                const initialKeys = Object.keys(initialState);
+
+                const hasErrorField = initialKeys.some((e) => {
+                    if (e in error === false) {
+                        return false;
+                    }
+
+                    const key = e as keyof typeof error;
+                    return error[key] !== null;
+                });
+
+                if (error.requestErr === null && hasErrorField === false) {
                     isTriggeredErrorOnChange.current = false;
                     await onSubmit(values);
                 }
@@ -68,8 +79,20 @@ export default function useForm<
                 }
             }
         },
-        [onSubmit, values, error.requestErr]
+        [onSubmit, values, error, initialState]
     );
+
+    const ref = useRef({
+        getValueFromClosure: (key: keyof T) => {
+            return values[key];
+        },
+    });
+
+    useEffect(() => {
+        ref.current.getValueFromClosure = (key: keyof T) => {
+            return values[key];
+        };
+    });
 
     const handleOnBlurValidation = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +100,9 @@ export default function useForm<
             isTriggeredErrorOnChange.current = false;
 
             if (typeof validation === 'function') {
-                const errorMessage = validation(key, values[key] as string);
+                const value = ref.current.getValueFromClosure(key);
+
+                const errorMessage = validation(key, value as string);
 
                 setError((prevState) => ({
                     ...prevState,
@@ -87,7 +112,7 @@ export default function useForm<
                 }));
             }
         },
-        [validation, values]
+        [validation]
     );
 
     return {
