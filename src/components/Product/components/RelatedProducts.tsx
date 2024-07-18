@@ -19,14 +19,14 @@ export default function RelatedProducts() {
     const relatedItems = data.result;
 
     return (
-        <div className="flex flex-col items-center gap-5 pt-4">
-            <header className="border-b border-neutral-400  text-neutral-200">
+        <div className="flex flex-col pt-4">
+            <header className="text-neutral-200">
                 <h1 className="text-center text-2xl font-bold text-stone-200">
                     Related Products
                 </h1>
             </header>
-
-            <div className="flex flex-wrap justify-center gap-8">
+            <span className="border-t border-neutral-400" />
+            <div className="flex flex-wrap justify-center gap-8 pt-2">
                 {relatedItems &&
                     relatedItems.map((pr) => {
                         return (
