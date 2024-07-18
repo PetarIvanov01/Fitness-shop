@@ -6,7 +6,7 @@ const endpoints = {
     getByCategory: (category: string) => `/catalog?${category}`,
     getAll: '/catalog',
     getCart: '/cart',
-    getById: (id: string) => `/catalog/${id}`,
+    getById: (id: string) => `/product/${id}`,
 };
 
 export const getCatalog = async (
