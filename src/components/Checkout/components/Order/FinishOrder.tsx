@@ -3,10 +3,10 @@ import useStore from '../../../../zustand/store';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { createOrder } from '../../../../api/services/userService/orders';
-import delay from '../../../../utils/withDelayPromise';
 
 import ConfirmModal from '../../../ProfileSection/components/ConfirmModal';
 import ReceiveEmails from './components/ReceiveEmails';
+import ErrorModal from '../../../ProfileSection/components/ErrorModal';
 
 type Props = {
     finishedOrderData: {
@@ -14,10 +14,10 @@ type Props = {
             totalPrice: number;
             _userId: string;
             orderAddress: {
-                address: string;
-                country: string;
-                city: string;
-                postcode: number;
+                address?: string;
+                country?: string;
+                city?: string;
+                postcode?: number;
             };
         };
         orderProducts: {
@@ -32,22 +32,22 @@ export default function FinishOrder({ finishedOrderData }: Props) {
     const navigate = useNavigate();
     const [consentGiven, setConsentGiven] = useState(false);
     const clearCartItem = useStore((state) => state.clearCartItem);
+    const [error, setError] = useState(null);
 
-    const handleSubmitConsent = () => {
+    const handleSubmitConsent = async () => {
         setConsentGiven(false);
         try {
-            delay(800).then(async () => {
-                await createOrder(
-                    finishedOrderData.orderInfo._userId,
-                    finishedOrderData,
-                    new AbortController().signal
-                );
-                clearCartItem();
-                navigate('/', { replace: true });
+            await createOrder(
+                finishedOrderData.orderInfo._userId,
+                finishedOrderData,
+                new AbortController().signal
+            ).catch((err) => {
+                throw err;
             });
-        } catch (error) {
-            console.log(error);
+            clearCartItem();
             navigate('/', { replace: true });
+        } catch (error: any) {
+            setError(error);
         }
     };
 
@@ -76,6 +76,10 @@ export default function FinishOrder({ finishedOrderData }: Props) {
                     toggleModal={handleModalClose}
                     text={textForModal}
                 />
+            )}
+
+            {error && (
+                <ErrorModal toggleModal={() => setError(null)} errors={error} />
             )}
         </section>
     );
