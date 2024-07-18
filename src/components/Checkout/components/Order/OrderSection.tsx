@@ -12,10 +12,10 @@ type Props = {
         orderInfo: {
             _userId: string;
             orderAddress: {
-                address: string;
-                country: string;
-                city: string;
-                postcode: number;
+                address?: string;
+                country?: string;
+                city?: string;
+                postcode?: number;
             };
         };
     };
