@@ -86,9 +86,10 @@ export default function BillingSection() {
                     <div className="flex flex-wrap gap-6">
                         <div className="mr-auto">
                             <Label>
-                                <span>
-                                    First Name <GiPadlock color="#93c5fd" />
-                                </span>
+                                <div className="flex items-center gap-2">
+                                    <span>First Name</span>
+                                    <GiPadlock color="#93c5fd" />
+                                </div>
                             </Label>
                             <Input
                                 isEdit={true}
@@ -99,9 +100,10 @@ export default function BillingSection() {
                         </div>
                         <div>
                             <Label>
-                                <span>
-                                    Last Name <GiPadlock color="#93c5fd" />
-                                </span>
+                                <div className="flex items-center gap-2">
+                                    <span>Last Name</span>
+                                    <GiPadlock color="#93c5fd" />
+                                </div>
                             </Label>
                             <Input
                                 isEdit={true}
@@ -114,9 +116,10 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            <span>
-                                Phone Number <GiPadlock color="#93c5fd" />
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <span>Phone Number</span>
+                                <GiPadlock color="#93c5fd" />
+                            </div>
                         </Label>
                         <Input
                             isEdit={true}
@@ -131,9 +134,10 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            <span>
-                                City / Town <LuAsterisk color="red" />
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <span>City / Town</span>
+                                <LuAsterisk color="red" />
+                            </div>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -144,9 +148,10 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            <span>
-                                Street address <LuAsterisk color="red" />
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <span>Street address</span>
+                                <LuAsterisk color="red" />
+                            </div>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -158,9 +163,10 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            <span>
-                                Country <LuAsterisk color="red" />
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <span>Country</span>
+                                <LuAsterisk color="red" />
+                            </div>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -171,9 +177,10 @@ export default function BillingSection() {
 
                     <div>
                         <Label>
-                            <span>
-                                Postcode / ZIP <LuAsterisk color="red" />
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <span>Postcode / ZIP</span>
+                                <LuAsterisk color="red" />
+                            </div>
                         </Label>
                         <Input
                             handleOnChange={handleOnChangeShippingInfo}
@@ -186,9 +193,9 @@ export default function BillingSection() {
                 <article className="flex w-1/2 flex-col gap-6 pl-1 max-bil-s:w-full max-bil-s:flex-wrap">
                     <div>
                         <Label>
-                            <span>
-                                Email address <GiPadlock />
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <span>Email address</span> <GiPadlock />
+                            </div>
                         </Label>
                         <Input
                             width={'full'}
