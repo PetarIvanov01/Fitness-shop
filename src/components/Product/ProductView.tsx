@@ -1,7 +1,7 @@
 import { OneProduct } from '../../types/services/catalog';
 
+import useSWR from 'swr';
 import useStore from '../../zustand/store';
-import useFetch from '../../hooks/useFetch';
 import { useParams } from 'react-router-dom';
 
 import ProductInformation from './components/ProductInformation';
@@ -11,14 +11,17 @@ import Reviews from './components/ReviewsComponents/Reviews';
 
 export default function ProductView() {
     const { productId } = useParams();
+
     const fetchProduct = useStore((state) => state.fetchProduct);
 
-    const { data, isLoading } = useFetch(fetchProduct, {}, productId);
+    const { data, isLoading } = useSWR(productId, () =>
+        fetchProduct(productId as string, new AbortController().signal)
+    );
 
     return (
         <div className="container min-h-full self-center px-3 font-alegreya">
             <section className="flex min-h-[800px] flex-col rounded-lg bg-gray-900 bg-opacity-95 p-4 text-white">
-                {isLoading ? (
+                {!isLoading ? (
                     <>
                         <ProductInformation product={data as OneProduct} />
 
