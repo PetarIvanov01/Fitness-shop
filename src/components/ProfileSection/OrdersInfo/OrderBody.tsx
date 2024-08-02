@@ -1,4 +1,4 @@
-import useFetch from '../../../hooks/useFetch';
+import useSWR from 'swr';
 
 import sortingMenus from '../../../assets/utils/orderSortMenus.json';
 import { getPartialOrders } from '../../../api/services/userService/orders';
@@ -11,7 +11,9 @@ import Skeleton from '../components/Skeleton';
  - Pass data length to Skeleton component
 */
 export default function OrderBody({ userId }: { userId: string }) {
-    const { data, isLoading } = useFetch(getPartialOrders, [], userId);
+    const { data, isLoading } = useSWR(`order-${userId}`, () =>
+        getPartialOrders(userId, new AbortController().signal)
+    );
 
     return (
         <section className="flex grow flex-col px-6 text-white">
@@ -21,7 +23,7 @@ export default function OrderBody({ userId }: { userId: string }) {
                 ))}
             </div>
             <div className="flex flex-col gap-5 pt-10 ">
-                {isLoading ? (
+                {!isLoading && data !== undefined ? (
                     data.map((e) => <OrderRow key={e.order_id} {...e} />)
                 ) : (
                     <Skeleton />
