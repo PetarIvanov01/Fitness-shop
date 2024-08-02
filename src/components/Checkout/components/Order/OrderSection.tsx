@@ -1,11 +1,11 @@
-import { memo, useEffect, useState } from 'react';
-import { ProductInCart } from '../../../../zustand/interfaces/CartSlice';
+import { memo } from 'react';
+import useSWR from 'swr';
 
 import useStore from '../../../../zustand/store';
 
+import { TbClipboardList } from 'react-icons/tb';
 import FinishOrder from './FinishOrder';
 import OrderTable from './components/OrderTable';
-import { TbClipboardList } from 'react-icons/tb';
 
 type Props = {
     orderData: {
@@ -23,22 +23,15 @@ type Props = {
 
 const OrderSection = memo(function OrderSection({ orderData }: Props) {
     const fetchCartData = useStore((state) => state.fetchCartData);
-    const [cart, setCart] = useState<ProductInCart[]>([]);
 
-    useEffect(() => {
-        const abortController = new AbortController();
-
-        fetchCartData(abortController.signal).then(setCart);
-
-        return () => {
-            abortController.abort();
-        };
-    }, [fetchCartData]);
+    const { data: cart } = useSWR('cart', () =>
+        fetchCartData(new AbortController().signal)
+    );
 
     const totalPrice =
-        cart.length === 0
+        cart === undefined || cart.length === 0
             ? 0
-            : cart.reduce((prev, curr) => {
+            : cart?.reduce((prev, curr) => {
                   return prev + Number(curr.price) * Number(curr.quantity);
               }, 0);
 
@@ -48,11 +41,13 @@ const OrderSection = memo(function OrderSection({ orderData }: Props) {
             ...orderData.orderInfo,
             totalPrice: Math.round(totalPrice * 100) / 100,
         },
-        orderProducts: cart.map((e) => ({
-            _productId: e.product_id,
-            quantity: e.quantity,
-            subtotal: Number(e.price),
-        })),
+        orderProducts: cart
+            ? cart?.map((e) => ({
+                  _productId: e.product_id,
+                  quantity: e.quantity,
+                  subtotal: Number(e.price),
+              }))
+            : [],
     };
 
     return (
@@ -61,10 +56,12 @@ const OrderSection = memo(function OrderSection({ orderData }: Props) {
                 <h2 className="text-xl font-semibold">Your Order</h2>
                 <TbClipboardList size={35} />
             </header>
-
-            <OrderTable cart={cart} totalPrice={totalPrice} />
-
-            <FinishOrder finishedOrderData={finishedOrderData} />
+            {cart !== undefined && (
+                <>
+                    <OrderTable cart={cart} totalPrice={totalPrice} />
+                    <FinishOrder finishedOrderData={finishedOrderData} />
+                </>
+            )}
         </section>
     );
 });
