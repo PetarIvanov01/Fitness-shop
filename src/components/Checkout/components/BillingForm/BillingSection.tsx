@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import useSWR from 'swr';
 import useStore from '../../../../zustand/store';
-import useFetch from '../../../../hooks/useFetch';
 
 import { initialProfileValue } from '../../../../utils/constants';
 
@@ -19,7 +19,9 @@ export default function BillingSection() {
     );
     const fetchData = useStore((state) => state.fetchBillingData);
 
-    const { data } = useFetch(fetchData, {}, user.id);
+    const { data } = useSWR('billingSection', () =>
+        fetchData(user.id, new AbortController().signal)
+    );
 
     const [personalState, setProfileInfo] = useState(
         initialProfileValue.personalInfo
@@ -29,7 +31,7 @@ export default function BillingSection() {
     );
 
     useEffect(() => {
-        if ('personalInfo' in data && 'shippingInfo' in data) {
+        if (data && 'personalInfo' in data && 'shippingInfo' in data) {
             setProfileInfo(data.personalInfo);
             setProfileAddress(data.shippingInfo);
         }
