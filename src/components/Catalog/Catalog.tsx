@@ -1,7 +1,7 @@
+import useSWR from 'swr';
+
 import useStore from '../../zustand/store';
 import useQuery from '../../hooks/useQuery';
-import useFetch from '../../hooks/useFetch';
-
 import createQueryString from '../../utils/createQueryString';
 
 import SortBy from './components/SortBy';
@@ -16,7 +16,9 @@ export default function Catalog() {
     const { queryObj, clearQueries } = useQuery();
     const querieString = createQueryString(queryObj);
 
-    const { data, isLoading } = useFetch(callCatalogSetStore, [], querieString);
+    const { data, isLoading } = useSWR('catalog', () =>
+        callCatalogSetStore(querieString, new AbortController().signal)
+    );
 
     return (
         <section className="mx-1 flex min-h-[900px] flex-1 rounded-lg bg-gray-900 bg-opacity-95 px-3 pt-10 font-alegreya">
@@ -27,7 +29,11 @@ export default function Catalog() {
                     <SortBy />
                     <hr className="mt-2 border-white" />
 
-                    {isLoading ? <ItemsSection data={data} /> : <Spinner />}
+                    {!isLoading && data !== undefined ? (
+                        <ItemsSection data={data} />
+                    ) : (
+                        <Spinner />
+                    )}
 
                     <Pagination />
                 </div>
