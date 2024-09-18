@@ -9,7 +9,6 @@ import {
 import useStore from '../../../../zustand/store';
 
 import { PersonalInfoReturnedType } from '../../../../zustand/interfaces/UserSlice';
-import { initialProfileValue } from '../../../../utils/constants';
 
 import PhoneComp from './PhoneComp';
 import Controllers from './Controllers';
@@ -17,23 +16,13 @@ import Field from '../../components/Field';
 
 type FormProps = {
     userId: string;
-    personalInfo: PersonalInfoReturnedType | {};
-    emptyValue: boolean;
+    personalInfo: PersonalInfoReturnedType;
 };
 
-export default function FormSection({
-    userId,
-    personalInfo,
-    emptyValue,
-}: FormProps) {
-    const [personalState, setProfileInfo] = useState<PersonalInfoReturnedType>(
-        () => {
-            if (!emptyValue) {
-                return personalInfo as PersonalInfoReturnedType;
-            }
-            return initialProfileValue.personalInfo;
-        }
-    );
+export default function FormSection({ userId, personalInfo }: FormProps) {
+    const [personalState, setProfileInfo] =
+        useState<PersonalInfoReturnedType>(personalInfo);
+
     const updateUserProfile = useStore((state) => state.updateUserProfile);
     const hasChange: MutableRefObject<boolean | undefined> = useRef();
 
