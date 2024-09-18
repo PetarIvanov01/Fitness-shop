@@ -14,10 +14,11 @@ export default function Catalog() {
     const callCatalogSetStore = useStore((state) => state.callCatalogSetStore);
 
     const { queryObj, clearQueries } = useQuery();
+
     const querieString = createQueryString(queryObj);
 
-    const { data, isLoading } = useSWR('catalog', () =>
-        callCatalogSetStore(querieString, new AbortController().signal)
+    const { data, isLoading } = useSWR(querieString, (query) =>
+        callCatalogSetStore(query, new AbortController().signal)
     );
 
     return (
