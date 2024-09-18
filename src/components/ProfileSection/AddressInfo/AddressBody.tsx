@@ -1,28 +1,29 @@
+import useSWR from 'swr';
 import useStore from '../../../zustand/store';
-import useProfileCache from '../../../hooks/useProfileCache';
 import FormSection from './components/FormSection';
 import Skeleton from '../PersonalInfo/components/Skeleton';
 import OtherAddresses from './OtherAddresses';
 
-export default function AddressBody({ userId }: { userId: string }) {
+export default function AddressBody({
+    userId,
+    type,
+}: {
+    userId: string;
+    type: string;
+}) {
     const fetchAddress = useStore((state) => state.fetchAddress);
-    const shippingInfo = useStore((state) => state.shippingInfo);
 
-    const { data, isLoading, emptyValue } = useProfileCache(
-        userId,
-        shippingInfo,
-        fetchAddress
+    const { data, isLoading } = useSWR(
+        `${userId}-${type}`,
+        () => fetchAddress(userId, new AbortController().signal, null),
+        { revalidateOnFocus: false }
     );
 
     return (
         <>
-            {isLoading ? (
+            {!isLoading && data !== undefined ? (
                 <>
-                    <FormSection
-                        emptyValue={emptyValue}
-                        shippingInfo={data}
-                        userId={userId}
-                    />
+                    <FormSection shippingInfo={data} userId={userId} />
                     <OtherAddresses />
                 </>
             ) : (

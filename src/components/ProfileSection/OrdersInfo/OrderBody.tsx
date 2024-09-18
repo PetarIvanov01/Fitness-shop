@@ -10,9 +10,17 @@ import Skeleton from '../components/Skeleton';
 /*
  - Pass data length to Skeleton component
 */
-export default function OrderBody({ userId }: { userId: string }) {
-    const { data, isLoading } = useSWR(`order-${userId}`, () =>
-        getPartialOrders(userId, new AbortController().signal)
+export default function OrderBody({
+    userId,
+    type,
+}: {
+    userId: string;
+    type: string;
+}) {
+    const { data, isLoading } = useSWR(
+        `${userId}-${type}`,
+        () => getPartialOrders(userId, new AbortController().signal),
+        { revalidateOnFocus: false }
     );
 
     return (
