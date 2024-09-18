@@ -3,7 +3,13 @@ import Header from '../components/Header';
 
 import { IoMdInformationCircleOutline } from 'react-icons/io';
 
-export default function OrderSection({ userId }: { userId: string }) {
+export default function OrderSection({
+    userId,
+    type,
+}: {
+    userId: string;
+    type: string;
+}) {
     return (
         <div className="flex h-full flex-col pb-5">
             <Header
@@ -14,7 +20,7 @@ export default function OrderSection({ userId }: { userId: string }) {
                 }
             />
 
-            <OrderBody userId={userId} />
+            <OrderBody userId={userId} type={type} />
         </div>
     );
 }
