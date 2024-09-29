@@ -1,22 +1,18 @@
-import RelatedProduct from './Product';
-import { getCatalog } from '../../../api/services/catalog';
+import useSWRImmutable from 'swr/immutable';
 import { useParams } from 'react-router-dom';
-import useFetch from '../../../hooks/useFetch';
+
+import { getCatalog } from '../../../api/services/catalog';
+
+import RelatedProduct from './Product';
 
 export default function RelatedProducts() {
     const { categoryType } = useParams();
     const queryString = `category=${categoryType}&perPage=3`;
 
-    const { data } = useFetch(
-        getCatalog,
-        {
-            itemsLng: 0,
-            result: [],
-        },
-        queryString
+    const { data } = useSWRImmutable(queryString, () =>
+        getCatalog(queryString, new AbortController().signal)
     );
-
-    const relatedItems = data.result;
+    const relatedItems = data?.result;
 
     return (
         <div className="flex flex-col pt-4">

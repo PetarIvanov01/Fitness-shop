@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import useSWR from 'swr';
 import useStore from '../../../../zustand/store';
-import useFetch from '../../../../hooks/useFetch';
+import { User } from '../../../../zustand/interfaces/UserSlice';
 
 import { initialProfileValue } from '../../../../utils/constants';
 
@@ -13,13 +14,12 @@ import OrderSection from '../Order/OrderSection';
 import Label from './components/Label';
 import Input from './components/Input';
 
-export default function BillingSection() {
-    const user = useStore(
-        (state) => state.user as NonNullable<typeof state.user>
-    );
+export default function BillingSection({ user }: { user: NonNullable<User> }) {
     const fetchData = useStore((state) => state.fetchBillingData);
 
-    const { data } = useFetch(fetchData, {}, user.id);
+    const { data } = useSWR('billingSection', () =>
+        fetchData(user.id, new AbortController().signal)
+    );
 
     const [personalState, setProfileInfo] = useState(
         initialProfileValue.personalInfo
@@ -29,7 +29,7 @@ export default function BillingSection() {
     );
 
     useEffect(() => {
-        if ('personalInfo' in data && 'shippingInfo' in data) {
+        if (data && 'personalInfo' in data && 'shippingInfo' in data) {
             setProfileInfo(data.personalInfo);
             setProfileAddress(data.shippingInfo);
         }

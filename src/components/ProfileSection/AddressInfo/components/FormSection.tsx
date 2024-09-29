@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from 'react';
-import { initialProfileValue } from '../../../../utils/constants';
 
 import useStore from '../../../../zustand/store';
 
@@ -10,20 +9,13 @@ import { AddressInfoReturnedType } from '../../../../zustand/interfaces/UserSlic
 type FormSectionProps = {
     userId: string;
     shippingInfo: AddressInfoReturnedType;
-    emptyValue: boolean;
 };
 
 export default function FormSection({
     userId,
     shippingInfo,
-    emptyValue,
 }: FormSectionProps) {
-    const [addressState, setAddressInfo] = useState(() => {
-        if (!emptyValue) {
-            return shippingInfo;
-        }
-        return initialProfileValue.shippingInfo;
-    });
+    const [addressState, setAddressInfo] = useState(shippingInfo);
 
     const updateUserAddress = useStore((state) => state.updateUserAddress);
     const hasChange = useRef<boolean>();

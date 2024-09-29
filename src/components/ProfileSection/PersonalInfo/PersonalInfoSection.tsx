@@ -3,7 +3,13 @@ import Header from '../components/Header';
 import InfoBody from './InfoBody';
 import { IoMdInformationCircleOutline } from 'react-icons/io';
 
-export default function PersonalInfoSection({ userId }: { userId: string }) {
+export default function PersonalInfoSection({
+    userId,
+    type,
+}: {
+    userId: string;
+    type: string;
+}) {
     return (
         <div className="h-full pb-5 font-lora">
             <Header
@@ -14,7 +20,7 @@ export default function PersonalInfoSection({ userId }: { userId: string }) {
                 }
             />
 
-            <InfoBody userId={userId} />
+            <InfoBody userId={userId} type={type} />
         </div>
     );
 }
