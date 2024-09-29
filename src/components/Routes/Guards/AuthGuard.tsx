@@ -16,7 +16,7 @@ export function IsAuthenticatedUser() {
     const user = useStore((state) => state.user);
 
     if (user && user.id) {
-        return <Outlet />;
+        return <Outlet context={user} />;
     }
 
     return <Navigate to={'/'} replace={true} />;
