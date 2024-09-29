@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
-import useStore from '../../../zustand/store';
 
-export default function CheckoutHeader() {
-    const userId = useStore((state) => state.user?.id);
-
+export default function CheckoutHeader({ userId }: { userId: string }) {
     return (
         <header className="flex flex-col gap-4 text-white">
             <h1 className=" border-b border-white text-3xl font-extrabold">
