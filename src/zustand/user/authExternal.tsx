@@ -10,16 +10,4 @@ export const setUserInStore = (userData: User) =>
 export const clearUserInStore = () =>
     useStore.setState({
         user: null,
-        personalInfo: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            phoneNumber: '',
-        },
-        shippingInfo: {
-            country: '',
-            city: '',
-            address: '',
-            postcode: '',
-        },
     });
