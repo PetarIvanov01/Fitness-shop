@@ -1,3 +1,4 @@
+import { mutate } from 'swr';
 import {
     ChangeEvent,
     MutableRefObject,
@@ -6,9 +7,8 @@ import {
     useState,
 } from 'react';
 
-import useStore from '../../../../zustand/store';
-
 import { PersonalInfoReturnedType } from '../../../../zustand/interfaces/UserSlice';
+import { updateUserInformation } from '../../../../api/services/userService/profile';
 
 import PhoneComp from './PhoneComp';
 import Controllers from './Controllers';
@@ -23,7 +23,6 @@ export default function FormSection({ userId, personalInfo }: FormProps) {
     const [personalState, setProfileInfo] =
         useState<PersonalInfoReturnedType>(personalInfo);
 
-    const updateUserProfile = useStore((state) => state.updateUserProfile);
     const hasChange: MutableRefObject<boolean | undefined> = useRef();
 
     const handleOnChangePersonalInfo = useCallback(
@@ -42,8 +41,6 @@ export default function FormSection({ userId, personalInfo }: FormProps) {
         (phone: string) => {
             if (personalState.phoneNumber) {
                 if (phone !== personalState.phoneNumber.replace(' ', '')) {
-                    console.log('yes');
-
                     hasChange.current = true;
                     setProfileInfo((state) => ({
                         ...state,
@@ -58,7 +55,12 @@ export default function FormSection({ userId, personalInfo }: FormProps) {
     const handleOnSubmit = async () => {
         if (hasChange.current) {
             const controller = new AbortController();
-            await updateUserProfile(userId, personalState, controller.signal);
+            await updateUserInformation(
+                userId,
+                { personalInfo: personalState },
+                controller.signal
+            );
+            mutate(`info/${userId}`);
             hasChange.current = false;
         }
     };

@@ -1,31 +1,23 @@
-import useStore from '../../../zustand/store';
+import { Suspense } from 'react';
+import { Await, useLoaderData } from 'react-router-dom';
+
+import { PersonalInfoReturnedType } from '../../../zustand/interfaces/UserSlice';
 
 import FormSection from './components/FormSection';
 import Skeleton from './components/Skeleton';
-import useSWR from 'swr';
 
-export default function InfoBody({
-    userId,
-    type,
-}: {
-    userId: string;
-    type: string;
-}) {
-    const fetchProfile = useStore((state) => state.fetchProfile);
-
-    const { data, isLoading } = useSWR(
-        `${userId}-${type}`,
-        () => fetchProfile(userId, new AbortController().signal),
-        { revalidateOnFocus: false }
-    );
+export default function InfoBody({ userId }: { userId: string }) {
+    const { data } = useLoaderData() as {
+        data: Promise<PersonalInfoReturnedType>;
+    };
 
     return (
-        <>
-            {!isLoading && data !== undefined ? (
-                <FormSection personalInfo={data} userId={userId} />
-            ) : (
-                <Skeleton />
-            )}
-        </>
+        <Suspense fallback={<Skeleton />}>
+            <Await resolve={data}>
+                {(resolve) => (
+                    <FormSection personalInfo={resolve} userId={userId} />
+                )}
+            </Await>
+        </Suspense>
     );
 }

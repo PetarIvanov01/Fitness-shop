@@ -1,34 +1,34 @@
-import useSWR from 'swr';
-import useStore from '../../../zustand/store';
+import { Suspense } from 'react';
+import { Await, useLoaderData } from 'react-router-dom';
+
+import { AddressInfoReturnedType } from '../../../zustand/interfaces/UserSlice';
+
 import FormSection from './components/FormSection';
-import Skeleton from '../PersonalInfo/components/Skeleton';
 import OtherAddresses from './OtherAddresses';
+import Skeleton from '../components/Skeleton';
 
-export default function AddressBody({
-    userId,
-    type,
-}: {
-    userId: string;
-    type: string;
-}) {
-    const fetchAddress = useStore((state) => state.fetchAddress);
-
-    const { data, isLoading } = useSWR(
-        `${userId}-${type}`,
-        () => fetchAddress(userId, new AbortController().signal, null),
-        { revalidateOnFocus: false }
-    );
+export default function AddressBody({ userId }: { userId: string }) {
+    const { data } = useLoaderData() as {
+        data: Promise<{
+            payload: AddressInfoReturnedType;
+        }>;
+    };
 
     return (
-        <>
-            {!isLoading && data !== undefined ? (
-                <>
-                    <FormSection shippingInfo={data} userId={userId} />
-                    <OtherAddresses />
-                </>
-            ) : (
-                <Skeleton />
-            )}
-        </>
+        <Suspense fallback={<Skeleton />}>
+            <Await resolve={data}>
+                {(payload) => {
+                    return (
+                        <>
+                            <FormSection
+                                shippingInfo={payload}
+                                userId={userId}
+                            />
+                            <OtherAddresses />
+                        </>
+                    );
+                }}
+            </Await>
+        </Suspense>
     );
 }
