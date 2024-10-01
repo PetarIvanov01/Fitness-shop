@@ -2,13 +2,7 @@ import { LuMapPin } from 'react-icons/lu';
 import AddressBody from './AddressBody';
 import Header from '../components/Header';
 
-export default function AddressSection({
-    userId,
-    type,
-}: {
-    userId: string;
-    type: string;
-}) {
+export default function AddressSection({ userId }: { userId: string }) {
     return (
         <div className="h-full">
             <Header
@@ -19,7 +13,7 @@ export default function AddressSection({
                 }
             />
 
-            <AddressBody userId={userId} type={type} />
+            <AddressBody userId={userId} />
         </div>
     );
 }
