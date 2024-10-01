@@ -1,14 +1,17 @@
 import { Toaster } from 'sonner';
+import { Outlet } from 'react-router-dom';
+
 import Footer from './components/Footer/Footer';
 import Header from './components/Headers/MainHeader';
-import Router from './components/Routes/Router';
 
 export default function App() {
     return (
         <div className="flex flex-col bg-fitnes-img bg-cover bg-center bg-no-repeat object-contain">
             <Header />
 
-            <Router />
+            <div className="flex min-h-screen flex-col py-8 ">
+                <Outlet />
+            </div>
 
             <Footer />
 
