@@ -7,7 +7,6 @@ import Catalog from './components/Catalog/Catalog';
 import Cart from './components/Cart/Cart';
 import ProductView from './components/Product/ProductView';
 import AuthenticationSection from './components/Authentication/AuthenticationSection';
-import Logout from './components/Authentication/components/Logout';
 
 import CheckoutView from './components/Checkout/CheckoutView';
 import NotFound from './components/NotFound';
@@ -48,10 +47,6 @@ export const router = createBrowserRouter([
                         path: '/cart/checkout',
                         element: <CheckoutView />,
                         loader: checkoutLoader,
-                    },
-                    {
-                        path: '/logout',
-                        element: <Logout />,
                     },
                 ],
             },
