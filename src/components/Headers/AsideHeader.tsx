@@ -6,6 +6,7 @@ import { GrLinkNext } from 'react-icons/gr';
 import { BiLogOutCircle } from 'react-icons/bi';
 
 import AsideUl from './components/AsideUl';
+import LogoutBtn from '../Authentication/components/LogoutBtn';
 import CatalogLink from '../CatalogLink';
 
 type AsideHeaderProps = {
@@ -59,9 +60,9 @@ export default function AsideHeader({
 
             <div className="absolute bottom-5 flex w-full justify-between px-4">
                 {userId ? (
-                    <Link onClick={onClickClose} to={'/logout'}>
+                    <LogoutBtn>
                         <BiLogOutCircle className="size-6 hover:scale-110" />
-                    </Link>
+                    </LogoutBtn>
                 ) : (
                     <Link onClick={onClickClose} to={'/login'}>
                         <FaRegUserCircle className="size-6 hover:scale-110" />
