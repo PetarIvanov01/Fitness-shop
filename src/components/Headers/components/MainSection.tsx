@@ -1,9 +1,12 @@
-import { BiLogOutCircle } from 'react-icons/bi';
 import menu from '../../../assets/menu.svg';
 import logo from '../../../assets/logo.svg';
-import { FaRegUserCircle } from 'react-icons/fa';
+
 import { Link } from 'react-router-dom';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { BiLogOutCircle } from 'react-icons/bi';
+
 import CartDropdown from './CartDropdown';
+import LogoutBtn from '../../Authentication/components/LogoutBtn';
 
 type MainSectionProps = {
     handleAsideVisible: () => void;
@@ -17,16 +20,16 @@ export default function MainSection({
     userId,
 }: MainSectionProps) {
     return (
-        <section className="flex h-16 items-center justify-between bg-[#4e4242] px-6 opacity-95">
+        <section className="flex h-16 items-center justify-between bg-stone-800/75 px-6">
             <button
                 data-cy="aside-nav"
                 onClick={handleAsideVisible}
-                className="w-8 hover:scale-110"
+                className="w-8 hover:scale-110 max-sm:w-6"
             >
                 <img className="w-auto" src={menu} alt="menu" />
             </button>
 
-            <div className="absolute left-1/2 w-20 -translate-x-1/2 cursor-pointer hover:scale-105">
+            <div className="hover:scale-15 absolute left-1/2 w-20 -translate-x-1/2 cursor-pointer max-sm:w-14">
                 <Link onClick={onClickClose} to="/">
                     <img
                         src={logo}
@@ -44,15 +47,11 @@ export default function MainSection({
                             onClick={onClickClose}
                             to={`/profile/info/${userId}`}
                         >
-                            <FaRegUserCircle className="size-6" />
+                            <FaRegUserCircle className="size-7 max-sm:size-5" />
                         </Link>
-                        <Link
-                            className="hover:scale-110"
-                            onClick={onClickClose}
-                            to={'/logout'}
-                        >
-                            <BiLogOutCircle className="size-7" />
-                        </Link>
+                        <LogoutBtn className="hover:scale-110">
+                            <BiLogOutCircle className="size-7 max-sm:size-5" />
+                        </LogoutBtn>
                     </>
                 ) : (
                     <Link
@@ -60,7 +59,7 @@ export default function MainSection({
                         onClick={onClickClose}
                         to={'/login'}
                     >
-                        <FaRegUserCircle className="size-6" />
+                        <FaRegUserCircle className="size-6 max-sm:size-4" />
                     </Link>
                 )}
             </div>
