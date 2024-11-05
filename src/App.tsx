@@ -6,10 +6,10 @@ import Header from './components/Headers/MainHeader';
 
 export default function App() {
     return (
-        <div className="flex flex-col bg-fitnes-img bg-cover bg-center bg-no-repeat object-contain">
+        <div className="flex flex-col bg-gray-500 bg-fitnes-img bg-cover bg-center bg-no-repeat object-contain bg-blend-multiply">
             <Header />
 
-            <div className="flex min-h-screen flex-col py-8 ">
+            <div className="flex min-h-screen flex-col py-8">
                 <Outlet />
             </div>
 
