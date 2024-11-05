@@ -7,6 +7,7 @@ import { createOrder } from '../../../../api/services/userService/orders';
 import ConfirmModal from '../../../ProfileSection/components/ConfirmModal';
 import ReceiveEmails from './components/ReceiveEmails';
 import ErrorModal from '../../../ProfileSection/components/ErrorModal';
+import { mutate } from 'swr';
 
 type Props = {
     finishedOrderData: {
@@ -44,6 +45,7 @@ export default function FinishOrder({ finishedOrderData }: Props) {
             ).catch((err) => {
                 throw err;
             });
+            mutate(`orders/${finishedOrderData.orderInfo._userId}`);
             clearCartItem();
             navigate('/', { replace: true });
         } catch (error: any) {
