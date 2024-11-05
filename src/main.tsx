@@ -7,7 +7,7 @@ import { router } from './router';
 
 // eslint-disable-next-line react-refresh/only-export-components
 const StrictModeWrapper =
-    import.meta.env.VITE_ENV === 'testing' ? React.Fragment : React.Fragment;
+    import.meta.env.VITE_ENV === 'testing' ? React.Fragment : React.StrictMode;
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <StrictModeWrapper>
