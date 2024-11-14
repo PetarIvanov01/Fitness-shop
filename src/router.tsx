@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import App from './App';
+import MainLayout from './MainLayout';
 
 import Main from './components/Main/Main';
 import Catalog from './components/Catalog/Catalog';
@@ -24,7 +24,7 @@ import { checkoutLoader } from './components/Checkout/loader';
 
 export const router = createBrowserRouter([
     {
-        element: <App />,
+        element: <MainLayout />,
         children: [
             {
                 path: '/',
