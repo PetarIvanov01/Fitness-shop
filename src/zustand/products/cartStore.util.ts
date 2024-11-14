@@ -3,20 +3,28 @@ import {
     setToBrowserStorage,
 } from '../../api/services/storage';
 
+export interface ClientCartStorage {
+    cart: Record<string, number>;
+    length: number;
+}
+
 const STORAGE_NAME = 'cart';
-const NEW_CART = { cart: [], length: 0 };
+const NEW_CART = {
+    cart: [],
+    length: 0,
+};
 
 // TODO add interfaces and types for storageCart
 function removeCartFromWebStorage(cartItemId: string) {
     const storageCart = getFromBrowserStorage(STORAGE_NAME);
 
-    const cartItems = storageCart.cartItems;
+    const cart = storageCart.cart;
 
     storageCart.length--;
-    cartItems[cartItemId]--;
+    cart[cartItemId]--;
 
-    if (cartItems[cartItemId] === 0) {
-        delete cartItems[cartItemId];
+    if (cart[cartItemId] === 0) {
+        delete cart[cartItemId];
     }
 
     setToBrowserStorage(STORAGE_NAME, storageCart);
@@ -26,9 +34,9 @@ function removeCartFromWebStorage(cartItemId: string) {
 function clearCartWebStorage(productId: string) {
     const storageCart = getFromBrowserStorage(STORAGE_NAME);
 
-    if (storageCart.cartItems[productId]) {
-        storageCart.length -= storageCart.cartItems[productId];
-        delete storageCart.cartItems[productId];
+    if (storageCart.cart[productId]) {
+        storageCart.length -= storageCart.cart[productId];
+        delete storageCart.cart[productId];
     }
 
     setToBrowserStorage(STORAGE_NAME, storageCart);
@@ -39,16 +47,16 @@ function addCartToWebStorage(cartItemId: string) {
 
     if (storageCart.length === 0) {
         setToBrowserStorage(STORAGE_NAME, {
-            cartItems: { [cartItemId]: 1 },
+            cart: { [cartItemId]: 1 },
             length: 1,
         });
         return;
     }
 
-    if (storageCart.cartItems[cartItemId]) {
-        storageCart.cartItems[cartItemId]++;
+    if (storageCart.cart[cartItemId]) {
+        storageCart.cart[cartItemId]++;
     } else {
-        storageCart.cartItems[cartItemId] = 1;
+        storageCart.cart[cartItemId] = 1;
     }
 
     storageCart.length++;

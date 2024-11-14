@@ -4,6 +4,7 @@ import { CartSliceInter } from '../interfaces';
 import { getCart } from '../../api/services/catalog';
 
 import {
+    ClientCartStorage,
     NEW_CART,
     STORAGE_NAME,
     addCartToWebStorage,
@@ -18,12 +19,6 @@ import {
 
 const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
     cart: [],
-    shouldFetchCart: () => {
-        const storageCart = getFromBrowserStorage(STORAGE_NAME);
-        const cartStoreLength = get().cart.length;
-
-        return storageCart.length !== cartStoreLength;
-    },
     length: (() => {
         try {
             const storageCart = getFromBrowserStorage(STORAGE_NAME);
@@ -38,12 +33,29 @@ const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
         }
     })(),
     fetchCartData: async (signal) => {
-        const storageCart = getFromBrowserStorage(STORAGE_NAME);
-        if (storageCart.length === 0) return NEW_CART;
+        const clientCartStorage = getFromBrowserStorage(
+            STORAGE_NAME
+        ) as ClientCartStorage | null;
 
-        const data = await getCart(storageCart, signal);
+        const currentCart = get().cart;
+
+        if (!clientCartStorage) return NEW_CART;
+        if (clientCartStorage.length === 0) return NEW_CART;
+
+        const clientCart = clientCartStorage.cart;
+
+        const needsRevalidation = currentCart.every(
+            (e) => clientCart[e.product_id] === undefined
+        );
+
+        if (!needsRevalidation) {
+            return currentCart;
+        }
+
+        const data = await getCart(clientCartStorage, signal);
 
         set({ cart: data.cart });
+
         return data.cart;
     },
     removeCartItem: (cartItemId) => {
@@ -70,10 +82,10 @@ const cartStore: StateCreator<CartSliceInter> = (set, get) => ({
             };
         });
     },
-    clearCartItem: (productId = undefined) => {
-        if (productId === undefined) {
+    clearCartItem: (productId) => {
+        if (!productId) {
             setToBrowserStorage(STORAGE_NAME, NEW_CART);
-            set(NEW_CART);
+            set({ cart: [], length: 0 });
             return;
         }
 
