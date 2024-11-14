@@ -1,4 +1,5 @@
 import { CatalogProduct, OneProduct } from '../../types/services/catalog';
+import { ClientCartStorage } from '../../zustand/products/cartStore.util';
 
 import * as methods from '../requester';
 
@@ -26,8 +27,14 @@ export const getCatalog = async (
     return await methods.get(endpoints.getAll, undefined, signal);
 };
 
-export const getCart = async (data = null, signal: AbortSignal) => {
-    return await methods.post(endpoints.getCart, data, signal);
+export const getCart = async (data: ClientCartStorage, signal: AbortSignal) => {
+    return await methods.post(
+        endpoints.getCart,
+        {
+            cartItems: data.cart,
+        },
+        signal
+    );
 };
 
 export const getProduct = async (
