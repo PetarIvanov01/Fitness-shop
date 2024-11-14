@@ -28,7 +28,7 @@ export default function PriceRange({
         changeEndPrice(Number(event.target.value));
     };
     return (
-        <div id="price-filter" className="pb-2">
+        <div id="price-filter" className="pb-2 text-lg max-s:text-base">
             <p className="text-white">Price Range</p>
             <div className="mt-2 flex justify-between text-white">
                 <span className={`${invalidPriceRange && 'text-red-500'}`}>

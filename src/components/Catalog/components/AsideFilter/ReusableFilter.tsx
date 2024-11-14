@@ -40,7 +40,7 @@ export default function Filter({ id, title, options }: Props) {
                 id={id}
                 value={selectedOption}
                 onChange={onSelectChangeQuery}
-                className="w-full rounded bg-gray-800 p-1 text-white"
+                className="w-full rounded bg-gray-800 px-1 py-2 text-white"
             >
                 {options.map((option) => (
                     <option key={option.value} value={option.label}>

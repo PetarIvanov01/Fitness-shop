@@ -1,6 +1,7 @@
-import { CatalogProductArr } from '../../../types/services/catalog';
-
 import { useNavigate } from 'react-router-dom';
+
+import { CatalogProductArr } from '../../../types/services/catalog';
+import { truncateWords } from '../../../utils/stringOps';
 
 type Props = CatalogProductArr[number] & {
     onClickAddCookieData: () => void;
@@ -39,8 +40,8 @@ export default function Card({
                 />
             </div>
 
-            <div className="max-w-32 text-wrap text-center text-xl font-bold text-neutral-200">
-                {title}
+            <div className="max-w-32 text-wrap text-center text-xl font-bold text-stone-200">
+                {truncateWords(title)}
             </div>
 
             <div className="flex flex-col items-center gap-2 text-neutral-200">
