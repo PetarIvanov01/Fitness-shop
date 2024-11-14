@@ -1,29 +1,20 @@
-import { useEffect } from 'react';
-
 import useStore from '../../../../../zustand/store';
 
 import TableHead from './TableHead';
 import TableRow from './TableRow';
 import ArrowSvg from './ArrowSvg';
 import CatalogLink from '../../../../CatalogLink';
+import { useEffect } from 'react';
 
 export default function TableCart() {
     const cartItems = useStore((state) => state.cart);
     const cartLengthInWebStorage = useStore((state) => state.length);
+
     const fetchCartData = useStore((state) => state.fetchCartData);
-    const shouldFetchCart = useStore((state) => state.shouldFetchCart);
 
     useEffect(() => {
-        const abortController = new AbortController();
-
-        if (shouldFetchCart()) {
-            fetchCartData(abortController.signal);
-        }
-
-        return () => {
-            abortController.abort();
-        };
-    }, [fetchCartData, shouldFetchCart]);
+        fetchCartData(new AbortController().signal);
+    }, [fetchCartData]);
 
     return (
         <div className="px-4">
