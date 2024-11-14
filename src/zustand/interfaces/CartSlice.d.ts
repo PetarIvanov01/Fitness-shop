@@ -14,7 +14,6 @@ export interface ProductInCart {
 
 export interface CartSliceInter {
     cart: ProductInCart[];
-    shouldFetchCart: () => boolean;
     length: number;
     fetchCartData: GetCartDataType;
     removeCartItem: RemoveCartItemType;
