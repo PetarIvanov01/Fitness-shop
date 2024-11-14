@@ -17,9 +17,16 @@ export const getAddress = async <T extends string | null>(
     signal: AbortSignal
 ): Promise<GetAddressType<T>> => {
     if (addressId !== null) {
-        return methods.get(endpoints.getOne(userId, addressId), null, signal);
+        let res = await methods.get(
+            endpoints.getOne(userId, addressId),
+            null,
+            signal
+        );
+        return res.payload;
     }
-    return methods.get(endpoints.getAll(userId), null, signal);
+
+    let res = await methods.get(endpoints.getAll(userId), null, signal);
+    return res.payload[0];
 };
 
 export const createAddress = async (
@@ -41,14 +48,16 @@ export const updateAddress = async (
     userId: string,
     addressId: string,
     data: {
-        shippingInfo?: {
-            city?: string;
-            address?: string;
-            country?: string;
-            postcode?: number;
-        };
+        city?: string;
+        address?: string;
+        country?: string;
+        postcode?: number;
     },
     signal: AbortSignal
 ) => {
-    return methods.put(endpoints.update(userId, addressId), data, signal);
+    return methods.put(
+        endpoints.update(userId, addressId),
+        { shippingInfo: data },
+        signal
+    );
 };

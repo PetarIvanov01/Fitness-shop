@@ -15,7 +15,7 @@ export default function ProfileView() {
                 <AsideNav userId={userId} type={type} />
 
                 <section className="w-full rounded-md border-2 border-black bg-[#1B263E] bg-opacity-65">
-                    <RenderedSection userId={context.userId} type={type} />
+                    <RenderedSection userId={context.userId} />
                 </section>
             </div>
         </section>

@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
+
 import './index.css';
+import { router } from './router';
 
 // eslint-disable-next-line react-refresh/only-export-components
 const StrictModeWrapper =
@@ -10,8 +11,6 @@ const StrictModeWrapper =
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <StrictModeWrapper>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <RouterProvider router={router} />
     </StrictModeWrapper>
 );

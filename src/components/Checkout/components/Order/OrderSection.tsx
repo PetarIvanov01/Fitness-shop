@@ -24,8 +24,10 @@ type Props = {
 const OrderSection = memo(function OrderSection({ orderData }: Props) {
     const fetchCartData = useStore((state) => state.fetchCartData);
 
-    const { data: cart } = useSWR('cart', () =>
-        fetchCartData(new AbortController().signal)
+    const { data: cart } = useSWR(
+        'cart',
+        () => fetchCartData(new AbortController().signal),
+        { revalidateOnFocus: false }
     );
 
     const totalPrice =

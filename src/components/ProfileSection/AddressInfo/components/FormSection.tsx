@@ -1,10 +1,11 @@
+import { mutate } from 'swr';
 import { useCallback, useRef, useState } from 'react';
 
-import useStore from '../../../../zustand/store';
+import { AddressInfoReturnedType } from '../../../../zustand/interfaces/UserSlice';
+import { updateAddress } from '../../../../api/services/userService/address';
 
 import Field from '../../components/Field';
 import Controllers from '../../components/Controllers';
-import { AddressInfoReturnedType } from '../../../../zustand/interfaces/UserSlice';
 
 type FormSectionProps = {
     userId: string;
@@ -17,7 +18,6 @@ export default function FormSection({
 }: FormSectionProps) {
     const [addressState, setAddressInfo] = useState(shippingInfo);
 
-    const updateUserAddress = useStore((state) => state.updateUserAddress);
     const hasChange = useRef<boolean>();
 
     const handleOnChangePersonalInfo = useCallback(
@@ -35,12 +35,15 @@ export default function FormSection({
     const handleOnSubmit = async () => {
         if (hasChange.current) {
             const controller = new AbortController();
-            await updateUserAddress(
+
+            await updateAddress(
                 userId,
+                shippingInfo.address_id.toString(),
                 addressState,
-                controller.signal,
-                shippingInfo.address_id.toString()
+                controller.signal
             );
+
+            mutate(`address/${userId}`);
             hasChange.current = false;
         }
     };

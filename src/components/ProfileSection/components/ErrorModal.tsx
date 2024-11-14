@@ -28,7 +28,6 @@ export default function ErrorModal({ toggleModal, errors }: ErrorModalProps) {
                         </h2>
                         <ul className="list-inside list-disc space-y-2">
                             {Object.entries(errors.fields).map(
-                                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                                 ([, errorArray]) =>
                                     errorArray.map((error, index) => (
                                         <li

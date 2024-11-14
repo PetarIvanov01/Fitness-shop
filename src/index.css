@@ -1,9 +1,10 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-
-table,th,td { 
+table,
+th,
+td {
     border: 1px solid white;
     background-color: #192339;
     /* border-collapse: separate */
@@ -15,12 +16,12 @@ table,th,td {
 .react-international-phone-input-container {
     border-color: '#ef4444' !important ;
 }
-.input-phone-number input:focus{
-    background-color: #2d3748 !important; 
-    opacity: 0.65 !important; 
+.input-phone-number input:focus {
+    background-color: #2d3748 !important;
+    opacity: 0.65 !important;
     outline: none !important;
-    border-color: #90cdf4 !important; 
-    box-shadow: 0 0 0 1px #90cdf4 !important;  
+    border-color: #90cdf4 !important;
+    box-shadow: 0 0 0 1px #90cdf4 !important;
 }
 
 .input-phone-invalid {
@@ -36,7 +37,7 @@ table,th,td {
 }
 
 .input-phone-number input:hover {
-    opacity: 0.65 !important; 
+    opacity: 0.65 !important;
 }
 
 .input-phone-number button {
@@ -48,14 +49,14 @@ table,th,td {
     background-color: #b6c1cf !important;
 }
 
-.country-container li:hover ,
-.react-international-phone-country-selector-dropdown__list-item--selected{
+.country-container li:hover,
+.react-international-phone-country-selector-dropdown__list-item--selected {
     background-color: rgb(144, 153, 202) !important;
 }
 
-
-input, label {
-    font-family: "Lora", serif;
+input,
+label {
+    font-family: 'Lora', serif;
 }
 
 input:-webkit-autofill,
@@ -64,5 +65,4 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: white;
-
 }
